@@ -6,6 +6,7 @@ import CardComponent from "../../components/cardComponent/CardComponent";
 import CarouselReview from "../../components/carouselReview/CarouselReview";
 import reviews from "../../utils/reviews";
 import Footer from "../../components/footer/Footer";
+import Divider from "../../components/divider/Divider";
 
 function FrontPage() {
   // Sign in button clicked...
@@ -78,6 +79,7 @@ function FrontPage() {
               text="24/7 Service"
             />
           </div>
+          <Divider />
           <div className="front-page-reviews">
             <CarouselReview reviews={reviews} />
           </div>
