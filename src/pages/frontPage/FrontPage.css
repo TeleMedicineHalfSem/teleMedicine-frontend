@@ -1,4 +1,29 @@
+:root {
+  --height-header: 18vh;
+}
+
 .front-page {
   background-color: whitesmoke;
   height: 100vh;
+}
+.front-page-background {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 0;
+}
+.front-page-view {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+.front-page-header {
+  border: solid black;
+  height: var(--height-header);
+  width: 100%;
+}
+.front-page-body {
+  border: solid red;
+  width: 100%;
+  height: calc(100vh - var(--height-header));
 }

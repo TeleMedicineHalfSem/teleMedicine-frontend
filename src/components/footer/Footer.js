@@ -8,25 +8,31 @@ function Footer() {
         <div className="row">
           {/* Column1 */}
           <div className="col">
-            <h4>EasyCare</h4>
-            <h2 className="list-unstyled">
+            <h5>
+              <b>EasyCare</b>
+            </h5>
+            <p className="list-unstyled">
               <li>A telemedicine solution</li>
               <li>Application for virtual doctor consultancy</li>
-            </h2>
+            </p>
           </div>
           {/* Column2 */}
           <div className="col">
-            <h5>Why Us</h5>
-            <ui className="list-unstyled">
+            <h5>
+              <b>Why Us</b>
+            </h5>
+            <p className="list-unstyled">
               <li>Cost efficient</li>
               <li>24*7 services available</li>
               <li>Virtual Consultancy</li>
-            </ui>
+            </p>
           </div>
           {/* Column3 */}
           <div className="col">
-            <h5>Terms and Conditions</h5>
-            <ui className="list-unstyled">
+            <h5>
+              <b>Terms and Conditions</b>
+            </h5>
+            <p className="list-unstyled">
               <li>
                 All information received by us from your registration on
                 business-standard.com
@@ -38,7 +44,7 @@ function Footer() {
                 by Business Standard in accordance with our Privacy Policy.{" "}
               </li>
               <li>Kindly read the below mentioned details.</li>
-            </ui>
+            </p>
           </div>
         </div>
         <div className="row">
