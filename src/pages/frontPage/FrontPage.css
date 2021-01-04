@@ -1,11 +1,6 @@
 :root {
   --height-header: 18vh;
 }
-
-.front-page {
-  background-color: whitesmoke;
-  height: 100vh;
-}
 .front-page-background {
   width: 100%;
   height: 100vh;
@@ -47,7 +42,29 @@
   width: 100%;
   height: calc(100vh - var(--height-header));
 }
-.front-page-body-text-1 {
+.front-page-body-text {
   font-family: var(--primary-font);
-  font-size: 250%;
+  font-size: 220%;
+}
+.front-page-feature-text {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 180%;
+}
+.front-page-feature-text-1 {
+  font-family: var(--primary-font);
+}
+.front-page-feature-text-2 {
+  color: var(--primary-color);
+}
+.front-page-feature-cards {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: center;
+}
+.front-page-reviews {
+  margin-top: 100px;
+  margin-bottom: 30px;
+  text-align: center;
 }

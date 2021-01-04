@@ -1,7 +1,11 @@
 .caption-color {
   color: black;
+  font-size: 130%;
 }
 .custom-tag {
   max-width: 100%;
   height: 200px;
+}
+.carousel-review-header {
+  font-family: var(--primary-font);
 }
