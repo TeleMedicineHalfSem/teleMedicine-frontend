@@ -51,7 +51,7 @@ const CarouselReview = ({ reviews }) => {
 
   return (
     <div>
-      <h3>What our users have to say</h3>
+      <h3 className="carousel-review-header">Reviews are in</h3>
       <Carousel activeIndex={activeIndex} next={next} previous={previous}>
         <CarouselIndicators
           items={reviews}
