@@ -1,9 +1,8 @@
 .custom-link {
-  color: white;
   margin-right: 10px;
   margin-top: 5px;
   cursor: pointer;
-  transition: 2s;
+  transition: 0.2s;
 }
 .custom-link:hover {
   text-decoration: underline;
