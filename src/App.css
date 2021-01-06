@@ -5,15 +5,19 @@
   --secondary-background: #bfcce7;
   --primary-font: "Open Sans", sans-serif;
   --secondary-font: "Nunito", sans-serif;
+  --font-color: #3f3f3f;
 }
 body {
   font-family: "Source Sans Pro", sans-serif;
   background-color: var(--primary-background);
-  color: #3f3f3f;
+  color: var(--font-color);
 }
 button:active {
   box-shadow: none;
 }
 button:focus {
+  outline: none;
+}
+input:focus {
   outline: none;
 }
