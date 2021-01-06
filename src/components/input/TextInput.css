@@ -1,0 +1,18 @@
+.custom-text-input {
+  border: none;
+  border-bottom: 1px solid;
+  border-color: #c5c5c5;
+  color: var(--font-color);
+  background: transparent;
+  padding: 8px 0 10px 0;
+  transition: 0.3s;
+}
+
+.custom-text-input:focus {
+  border-color: var(--font-color);
+}
+
+.custom-text-input::placeholder {
+  color: #c5c5c5;
+  font-family: var(--secondary-font);
+}

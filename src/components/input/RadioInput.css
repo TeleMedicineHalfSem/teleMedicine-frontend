@@ -1,0 +1,21 @@
+.custom-radio {
+  cursor: pointer;
+}
+.custom-radio-input {
+  height: 13px;
+  width: 13px;
+  cursor: pointer;
+}
+.custom-radio-span {
+  margin-left: 5px;
+  margin-right: 30px;
+  color: #949494;
+  transition: 0.2s;
+}
+.custom-radio-span:hover {
+  color: var(--font-color);
+}
+
+.custom-radio-input:checked ~ .custom-radio-span {
+  color: var(--font-color);
+}
