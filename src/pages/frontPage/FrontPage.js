@@ -1,6 +1,6 @@
 import React from "react";
 import "./FrontPage.css";
-import CustomButton from "../../components/button/CustomButton";
+import Button from "../../components/button/Button";
 import CustomLink from "../../components/link/CustomLink";
 import CardComponent from "../../components/cardComponent/CardComponent";
 import CarouselReview from "../../components/carouselReview/CarouselReview";
@@ -38,7 +38,9 @@ function FrontPage() {
           <div className="front-page-header-right">
             <div style={{ display: "flex", float: "right" }}>
               <CustomLink onClick={onClickSignIn}>Sign in</CustomLink>
-              <CustomButton onClick={onClickSignUp}>Sign up</CustomButton>
+              <Button b_style="custom" onClick={onClickSignUp}>
+                Sign up
+              </Button>
             </div>
           </div>
         </div>
@@ -50,9 +52,9 @@ function FrontPage() {
             <h5>Now consult with a doctor from anywhere anytime...</h5>
             <br />
             <br />
-            <CustomButton onClick={onClickSignIn} size="large">
+            <Button onClick={onClickSignIn} b_style="custom" size="large">
               Ask a doctor now
-            </CustomButton>
+            </Button>
           </div>
         </div>
         <div className="front-page-content">

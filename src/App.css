@@ -11,3 +11,9 @@ body {
   background-color: var(--primary-background);
   color: #3f3f3f;
 }
+button:active {
+  box-shadow: none;
+}
+button:focus {
+  outline: none;
+}
