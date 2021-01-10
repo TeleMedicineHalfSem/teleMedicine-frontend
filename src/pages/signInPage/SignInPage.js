@@ -1,5 +1,5 @@
 import React from "react";
-import SignInView from "../../components/signin/signinView";
+import SignInView from "./signinView";
 
 function SignInPage() {
   return (
