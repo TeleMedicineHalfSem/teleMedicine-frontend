@@ -20,7 +20,7 @@ class SignUpPage extends Component {
       registration_year:""
     };
      this.DOCTOR="Doctor";
-     this.PAITENT="Paitent";
+     this.PATIENT="Patient";
     
      //binding all the events
     this.handleSelectOption = this.handleSelectOption.bind(this);
@@ -120,7 +120,7 @@ class SignUpPage extends Component {
             <TextInput placeholder={"Email"} size={"medium"} type={"email"} onChange={this.handleEmail} /><br/>
             <TextInput placeholder={"Password"} size={"medium"} type={"password"} onChange={this.handlePassword}/><br/>          
             <TextInput placeholder={"Confirm Password"} size={"medium"} type={"password"} onChange={this.handleConfirmPassword}/><br/>
-            <RadioInput name={"Paitent"} children={"Paitent"} checked={this.state.selectedOption===this.PAITENT} onChange={this.handleSelectOption} value={"Paitent"} />
+            <RadioInput name={"Patient"} children={"Patient"} checked={this.state.selectedOption===this.PATIENT} onChange={this.handleSelectOption} value={"Patient"} />
             <RadioInput name={"Doctor"} children={"Doctor"} checked={this.state.selectedOption===this.DOCTOR} onChange={this.handleSelectOption} value={"Doctor"} /><br/>
             {(this.state.selectedOption==="Doctor")?this.forDoctor():null}
           </div>
