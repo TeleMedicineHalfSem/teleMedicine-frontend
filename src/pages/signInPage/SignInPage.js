@@ -1,16 +1,11 @@
 import React from "react";
-import TextInput from "../../components/input/TextInput";
+import SignInView from "../../components/signin/signinView";
 
 function SignInPage() {
   return (
-    <div>
-    <div>
-      <TextInput type="text" placeholder="Email" className="sign-in-email"/>
-    </div>
-    <div>
-        <TextInput type="password" placeholder="Password" className="sign-in-password"/>
-    </div>
-    </div>
+    
+      <SignInView />
+    
   );
 }
 
