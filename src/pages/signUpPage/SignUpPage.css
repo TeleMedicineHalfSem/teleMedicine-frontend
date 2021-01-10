@@ -1,0 +1,19 @@
+.body-format {
+    text-align: center;
+}
+
+.button-align {
+    margin-top: 40px;
+}
+
+.head-color {
+    color: var(--primary-color);
+}
+
+.input-margin {
+    line-height: 50px;
+}
+
+.content-color {
+    color: var(--font-color);
+}

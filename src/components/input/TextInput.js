@@ -12,6 +12,9 @@ function TextInput({ placeholder, size, onChange, type }) {
     case "text":
       inputType = "text";
       break;
+    case "email":
+      inputType = "email";
+      break;
     default:
       inputType = "text";
   }
