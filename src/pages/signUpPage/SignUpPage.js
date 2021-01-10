@@ -4,7 +4,7 @@ import "../../App.css"
 import Button from "../../components/button/Button";
 import TextInput from "../../components/input/TextInput";
 import RadioInput from "../../components/input/RadioInput";
-class SignupPage extends Component {
+class SignUpPage extends Component {
   
   constructor() {
     super();
@@ -15,10 +15,14 @@ class SignupPage extends Component {
       confirmPassword:"",
       selectedOption:"",
       specialisation:"",
+      registration_number:"",
+      registration_council:"",
+      registration_year:""
     };
      this.DOCTOR="Doctor";
      this.PAITENT="Paitent";
     
+     //binding all the events
     this.handleSelectOption = this.handleSelectOption.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFullName = this.handleFullName.bind(this);
@@ -27,18 +31,12 @@ class SignupPage extends Component {
     this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
     this.forDoctor=this.forDoctor.bind(this);
     this.handleSpecialisation=this.handleSpecialisation.bind(this);
-    //this.abc = this.abc.bind(this);
+    this.handleRegistrationNumber=this.handleRegistrationNumber.bind(this);
+    this.handleRegistrationCouncil=this.handleRegistrationCouncil.bind(this);
+    this.handleRegistrationYear=this.handleRegistrationYear.bind(this);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    alert('FullName: ' + this.state.fullName + '\nEmail:' +this.state.email+ '\nPassword:'+this.state.password+'\nConfirm Password:'+this.state.confirmPassword+'\nwho are you? '+this.state.selectedOption+'\nSpecialisation:'+this.state.specialisation);
-  }
-  handleSpecialisation(event){
-    this.setState({
-      specialisation:event.target.value
-    });
-  }
+  //all handler functions
   handleFullName(event){
     this.setState({
       fullName:event.target.value
@@ -68,10 +66,44 @@ class SignupPage extends Component {
       selectedOption: event.target.value
     });
   }
+
+  handleSpecialisation(event){
+    this.setState({
+      specialisation:event.target.value
+    });
+  }
+
+  handleRegistrationNumber(event){
+    this.setState({
+      registration_number:event.target.value
+    });
+  }
+
+  handleRegistrationCouncil(event){
+    this.setState({
+      registration_council:event.target.value
+    });
+  }
+
+  handleRegistrationYear(event){
+    this.setState({
+      registration_year:event.target.value
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    alert('FullName: ' + this.state.fullName + '\nEmail:' +this.state.email+ '\nPassword:'+this.state.password+'\nConfirm Password:'+this.state.confirmPassword+'\nwho are you? '+this.state.selectedOption+'\nSpecialisation:'+this.state.specialisation+'\nRegistration Number :'+this.state.registration_number+'\nRegistrationCouncil :'+this.state.registration_council+'\nRegistration Year :'+this.state.registration_year);
+  }
+  
+  //when doctor is selected
   forDoctor(event){
     return(
       <div>
         <TextInput placeholder={"Specialisation"} size={"medium"} type={"text"} onChange={this.handleSpecialisation}/><br/>
+        <TextInput placeholder={"Registration Number"} size={"medium"} type={"text"} onChange={this.handleRegistrationNumber}/><br/>
+        <TextInput placeholder={"Registration Council"} size={"medium"} type={"text"} onChange={this.handleRegistrationCouncil}/><br/>
+        <TextInput placeholder={"Registration Year"} size={"medium"} type={"text"} onChange={this.handleRegistrationYear}/><br/>
       </div>
     );
   }
@@ -93,7 +125,7 @@ class SignupPage extends Component {
             {(this.state.selectedOption==="Doctor")?this.forDoctor():null}
           </div>
           <div className="button-align">
-            <Button children={"Submit"} color={"primary"} type={"submit"} size={"large"}/>
+            <Button children={"Sign Up  "} color={"primary"} type={"submit"} size={"large"}/>
           </div>
         </form>
         
@@ -104,15 +136,6 @@ class SignupPage extends Component {
 
     );
   }
-  /*return (
-    <div className="body-format">
-        
-        {// TODO: Abhishek write here...
-        // To see this page goto http://localhost:3000/signup
-        }
-
-    </div>
-  );*/
 }
 
-export default SignupPage;
+export default SignUpPage;
