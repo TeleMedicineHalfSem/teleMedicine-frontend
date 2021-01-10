@@ -1,12 +1,15 @@
 import React from "react";
+import TextInput from "../../components/input/TextInput";
 
 function SignInPage() {
   return (
     <div>
-      {
-        // TODO: Anugya Write here...
-        // To see this page goto http://localhost:3000/signin
-      }
+    <div>
+      <TextInput type="text" placeholder="Email" className="sign-in-email"/>
+    </div>
+    <div>
+        <TextInput type="password" placeholder="Password" className="sign-in-password"/>
+    </div>
     </div>
   );
 }
