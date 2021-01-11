@@ -3,7 +3,7 @@ import "./SignUpPage.css";
 import Button from "../../components/button/Button";
 import TextInput from "../../components/input/TextInput";
 import RadioInput from "../../components/input/RadioInput";
-import { Form, FormGroup,FormFeedback} from 'reactstrap';
+import { Form, FormGroup } from "reactstrap";
 export class SignUpView extends Component {
   constructor() {
     super();
@@ -13,12 +13,12 @@ export class SignUpView extends Component {
       password: "",
       confirmPassword: "",
       selectedOption: "",
-      specialisation: "",
+      specialization: "",
       registration_number: "",
       registration_council: "",
       registration_year: "",
       fields: {},
-      errors: {}
+      errors: {},
     };
     this.DOCTOR = "Doctor";
     this.PATIENT = "Patient";
@@ -31,7 +31,7 @@ export class SignUpView extends Component {
     this.handlePassword = this.handlePassword.bind(this);
     this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
     this.forDoctor = this.forDoctor.bind(this);
-    this.handleSpecialisation = this.handleSpecialisation.bind(this);
+    this.handleSpecialization = this.handleSpecialization.bind(this);
     this.handleRegistrationNumber = this.handleRegistrationNumber.bind(this);
     this.handleRegistrationCouncil = this.handleRegistrationCouncil.bind(this);
     this.handleRegistrationYear = this.handleRegistrationYear.bind(this);
@@ -44,9 +44,8 @@ export class SignUpView extends Component {
     let fields = this.state.fields;
     fields[e.target.name] = e.target.value;
     this.setState({
-      fields
+      fields,
     });
-
   }
 
   handleFullName(event) {
@@ -62,7 +61,8 @@ export class SignUpView extends Component {
     let fields = this.state.fields;
     fields[event.target.name] = event.target.value;
     this.setState({
-      ...fields,email: event.target.value,
+      ...fields,
+      email: event.target.value,
     });
   }
 
@@ -70,7 +70,8 @@ export class SignUpView extends Component {
     let fields = this.state.fields;
     fields[event.target.name] = event.target.value;
     this.setState({
-      ...fields,password: event.target.value,
+      ...fields,
+      password: event.target.value,
     });
   }
 
@@ -78,7 +79,8 @@ export class SignUpView extends Component {
     let fields = this.state.fields;
     fields[event.target.name] = event.target.value;
     this.setState({
-      ...fields,confirmPassword: event.target.value,
+      ...fields,
+      confirmPassword: event.target.value,
     });
   }
 
@@ -88,9 +90,9 @@ export class SignUpView extends Component {
     });
   }
 
-  handleSpecialisation(event) {
+  handleSpecialization(event) {
     this.setState({
-      specialisation: event.target.value,
+      specialization: event.target.value,
     });
   }
 
@@ -113,40 +115,18 @@ export class SignUpView extends Component {
   }
 
   //validation
-
   handleSubmit(event) {
     event.preventDefault();
-    /*alert(
-      "FullName: " +
-        this.state.fullName +
-        "\nEmail:" +
-        this.state.email +
-        "\nPassword:" +
-        this.state.password +
-        "\nConfirm Password:" +
-        this.state.confirmPassword +
-        "\nwho are you? " +
-        this.state.selectedOption +
-        "\nSpecialisation:" +
-        this.state.specialisation +
-        "\nRegistration Number :" +
-        this.state.registration_number +
-        "\nRegistrationCouncil :" +
-        this.state.registration_council +
-        "\nRegistration Year :" +
-        this.state.registration_year
-    );*/
     if (this.validateForm()) {
       let fields = {};
       fields["email"] = "";
       fields["password"] = "";
-      this.setState({fields:fields});
+      this.setState({ fields: fields });
       alert("Form submitted");
     }
   }
 
   validateForm() {
-
     let fields = this.state.fields;
     let errors = {};
     let formIsValid = true;
@@ -158,7 +138,9 @@ export class SignUpView extends Component {
 
     if (typeof fields["email"] !== "undefined") {
       //regular expression for email validation
-      var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+      var pattern = new RegExp(
+        /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+      );
       if (!pattern.test(fields["email"])) {
         formIsValid = false;
         errors["email"] = "*Please enter valid email-ID.";
@@ -171,68 +153,65 @@ export class SignUpView extends Component {
     }
 
     if (typeof fields["password"] !== "undefined") {
-      if (fields["password"].length<8) {
+      if (fields["password"].length < 8) {
         formIsValid = false;
         errors["password"] = "*Your password should be of 8 or more characters";
       }
     }
-    if(fields["confirmPassword"]!=fields["password"]){
+    if (fields["confirmPassword"] !== fields["password"]) {
       formIsValid = false;
-      errors["confirmPassword"] ="*Both Password should be same";
+      errors["confirmPassword"] = "*Both Password should be same";
     }
 
     this.setState({
-      errors: errors
+      errors: errors,
     });
     return formIsValid;
-
-
   }
 
   //when doctor is selected
   forDoctor(event) {
     return (
       <div>
-      <Form>
-        <FormGroup>
-          <TextInput
-            placeholder={"Specialisation"}
-            size={"medium"}
-            type={"text"}
-            onChange={this.handleSpecialisation}
-          />
-        </FormGroup>
-        <FormGroup>
-          <TextInput
-            placeholder={"Registration Number"}
-            size={"medium"}
-            type={"number"}
-            onChange={this.handleRegistrationNumber}
-          />
-        </FormGroup>
-        <FormGroup>
-          <TextInput
-            placeholder={"Registration Council"}
-            size={"medium"}
-            type={"text"}
-            onChange={this.handleRegistrationCouncil}
-          />
-        </FormGroup>
-        <FormGroup>
-          <TextInput
-            placeholder={"Registration Year"}
-            size={"medium"}
-            type={"number"}
-            onChange={this.handleRegistrationYear}
-          />
-        </FormGroup>
-      </Form>
+        <Form>
+          <FormGroup>
+            <TextInput
+              placeholder={"Specialization"}
+              size={"medium"}
+              type={"text"}
+              onChange={this.handleSpecialization}
+            />
+          </FormGroup>
+          <FormGroup>
+            <TextInput
+              placeholder={"Registration Number"}
+              size={"medium"}
+              type={"number"}
+              onChange={this.handleRegistrationNumber}
+            />
+          </FormGroup>
+          <FormGroup>
+            <TextInput
+              placeholder={"Registration Council"}
+              size={"medium"}
+              type={"text"}
+              onChange={this.handleRegistrationCouncil}
+            />
+          </FormGroup>
+          <FormGroup>
+            <TextInput
+              placeholder={"Registration Year"}
+              size={"medium"}
+              type={"number"}
+              onChange={this.handleRegistrationYear}
+            />
+          </FormGroup>
+        </Form>
       </div>
     );
   }
 
   render() {
-    
     return (
       <div>
         <div className="body">
@@ -240,14 +219,13 @@ export class SignUpView extends Component {
         </div>
         <Form onSubmit={this.handleSubmit}>
           <FormGroup>
-          <TextInput
+            <TextInput
               name={"fullName"}
               placeholder={"Full Name"}
               size={"medium"}
               type={"text"}
               onChange={this.handleFullName}
-          />
-          
+            />
           </FormGroup>
           <FormGroup>
             <TextInput
@@ -264,7 +242,6 @@ export class SignUpView extends Component {
               name={"password"}
               size={"medium"}
               type={"password"}
-              name={"password"}
               onChange={this.handlePassword}
             />
             <div className="errorMsg">{this.state.errors.password}</div>
@@ -293,7 +270,7 @@ export class SignUpView extends Component {
               checked={this.state.selectedOption === this.DOCTOR}
               onChange={this.handleSelectOption}
               value={"Doctor"}
-            />            
+            />
           </FormGroup>
           <FormGroup>
             {this.state.selectedOption === "Doctor" ? this.forDoctor() : null}

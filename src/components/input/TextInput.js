@@ -1,9 +1,7 @@
 import React from "react";
 import "./TextInput.css";
 
-
-
-function TextInput({ placeholder, size, onChange, type}) {
+function TextInput({ placeholder, size, onChange, type }) {
   let inputType = "";
   let width = "";
 
