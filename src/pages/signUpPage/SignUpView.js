@@ -3,7 +3,7 @@ import "./SignUpPage.css";
 import Button from "../../components/button/Button";
 import TextInput from "../../components/input/TextInput";
 import RadioInput from "../../components/input/RadioInput";
-
+import { Form, FormGroup,FormFeedback} from 'reactstrap';
 export class SignUpView extends Component {
   constructor() {
     super();
@@ -17,6 +17,8 @@ export class SignUpView extends Component {
       registration_number: "",
       registration_council: "",
       registration_year: "",
+      fields: {},
+      errors: {}
     };
     this.DOCTOR = "Doctor";
     this.PATIENT = "Patient";
@@ -33,30 +35,50 @@ export class SignUpView extends Component {
     this.handleRegistrationNumber = this.handleRegistrationNumber.bind(this);
     this.handleRegistrationCouncil = this.handleRegistrationCouncil.bind(this);
     this.handleRegistrationYear = this.handleRegistrationYear.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   //all handler functions
-  handleFullName(event) {
+
+  handleChange(e) {
+    let fields = this.state.fields;
+    fields[e.target.name] = e.target.value;
     this.setState({
+      fields
+    });
+
+  }
+
+  handleFullName(event) {
+    let fields = this.state.fields;
+    fields[event.target.name] = event.target.value;
+    this.setState({
+      ...fields,
       fullName: event.target.value,
     });
   }
 
   handleEmail(event) {
+    let fields = this.state.fields;
+    fields[event.target.name] = event.target.value;
     this.setState({
-      email: event.target.value,
+      ...fields,email: event.target.value,
     });
   }
 
   handlePassword(event) {
+    let fields = this.state.fields;
+    fields[event.target.name] = event.target.value;
     this.setState({
-      password: event.target.value,
+      ...fields,password: event.target.value,
     });
   }
 
   handleConfirmPassword(event) {
+    let fields = this.state.fields;
+    fields[event.target.name] = event.target.value;
     this.setState({
-      confirmPassword: event.target.value,
+      ...fields,confirmPassword: event.target.value,
     });
   }
 
@@ -90,9 +112,11 @@ export class SignUpView extends Component {
     });
   }
 
+  //validation
+
   handleSubmit(event) {
     event.preventDefault();
-    alert(
+    /*alert(
       "FullName: " +
         this.state.fullName +
         "\nEmail:" +
@@ -111,81 +135,151 @@ export class SignUpView extends Component {
         this.state.registration_council +
         "\nRegistration Year :" +
         this.state.registration_year
-    );
+    );*/
+    if (this.validateForm()) {
+      let fields = {};
+      fields["email"] = "";
+      fields["password"] = "";
+      this.setState({fields:fields});
+      alert("Form submitted");
+    }
+  }
+
+  validateForm() {
+
+    let fields = this.state.fields;
+    let errors = {};
+    let formIsValid = true;
+
+    if (!fields["email"]) {
+      formIsValid = false;
+      errors["email"] = "*Please enter your email-ID.";
+    }
+
+    if (typeof fields["email"] !== "undefined") {
+      //regular expression for email validation
+      var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+      if (!pattern.test(fields["email"])) {
+        formIsValid = false;
+        errors["email"] = "*Please enter valid email-ID.";
+      }
+    }
+
+    if (!fields["password"]) {
+      formIsValid = false;
+      errors["password"] = "*Please enter your password.";
+    }
+
+    if (typeof fields["password"] !== "undefined") {
+      if (fields["password"].length<8) {
+        formIsValid = false;
+        errors["password"] = "*Your password should be of 8 or more characters";
+      }
+    }
+    if(fields["confirmPassword"]!=fields["password"]){
+      formIsValid = false;
+      errors["confirmPassword"] ="*Both Password should be same";
+    }
+
+    this.setState({
+      errors: errors
+    });
+    return formIsValid;
+
+
   }
 
   //when doctor is selected
   forDoctor(event) {
     return (
       <div>
-        <TextInput
-          placeholder={"Specialisation"}
-          size={"medium"}
-          type={"text"}
-          onChange={this.handleSpecialisation}
-        />
-        <br />
-        <TextInput
-          placeholder={"Registration Number"}
-          size={"medium"}
-          type={"text"}
-          onChange={this.handleRegistrationNumber}
-        />
-        <br />
-        <TextInput
-          placeholder={"Registration Council"}
-          size={"medium"}
-          type={"text"}
-          onChange={this.handleRegistrationCouncil}
-        />
-        <br />
-        <TextInput
-          placeholder={"Registration Year"}
-          size={"medium"}
-          type={"text"}
-          onChange={this.handleRegistrationYear}
-        />
-        <br />
+      <Form>
+        <FormGroup>
+          <TextInput
+            placeholder={"Specialisation"}
+            size={"medium"}
+            type={"text"}
+            onChange={this.handleSpecialisation}
+          />
+        </FormGroup>
+        <FormGroup>
+          <TextInput
+            placeholder={"Registration Number"}
+            size={"medium"}
+            type={"number"}
+            onChange={this.handleRegistrationNumber}
+          />
+        </FormGroup>
+        <FormGroup>
+          <TextInput
+            placeholder={"Registration Council"}
+            size={"medium"}
+            type={"text"}
+            onChange={this.handleRegistrationCouncil}
+          />
+        </FormGroup>
+        <FormGroup>
+          <TextInput
+            placeholder={"Registration Year"}
+            size={"medium"}
+            type={"number"}
+            onChange={this.handleRegistrationYear}
+          />
+        </FormGroup>
+      </Form>
       </div>
     );
   }
 
   render() {
+    
     return (
       <div>
         <div className="body">
           <h3 className="head-color">Sign Up</h3>
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <div className="input-margin content-color">
-            <TextInput
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup>
+          <TextInput
+              name={"fullName"}
               placeholder={"Full Name"}
               size={"medium"}
               type={"text"}
               onChange={this.handleFullName}
-            />
-            <br />
+          />
+          
+          </FormGroup>
+          <FormGroup>
             <TextInput
+              name={"email"}
               placeholder={"Email"}
               size={"medium"}
-              type={"email"}
               onChange={this.handleEmail}
             />
-            <br />
+            <div className="errorMsg">{this.state.errors.email}</div>
+          </FormGroup>
+          <FormGroup>
             <TextInput
               placeholder={"Password"}
+              name={"password"}
               size={"medium"}
               type={"password"}
+              name={"password"}
               onChange={this.handlePassword}
             />
-            <br />
+            <div className="errorMsg">{this.state.errors.password}</div>
+          </FormGroup>
+          <FormGroup>
             <TextInput
               placeholder={"Confirm Password"}
               size={"medium"}
               type={"password"}
+              name={"confirmPassword"}
               onChange={this.handleConfirmPassword}
             />
-            <br />
+            <div className="errorMsg">{this.state.errors.confirmPassword}</div>
+          </FormGroup>
+          <FormGroup>
             <RadioInput
               name={"Patient"}
               children={"Patient"}
@@ -199,19 +293,20 @@ export class SignUpView extends Component {
               checked={this.state.selectedOption === this.DOCTOR}
               onChange={this.handleSelectOption}
               value={"Doctor"}
-            />
-            <br />
+            />            
+          </FormGroup>
+          <FormGroup>
             {this.state.selectedOption === "Doctor" ? this.forDoctor() : null}
-          </div>
-          <div className="button-align">
+          </FormGroup>
+          <FormGroup>
             <Button
               children={"Sign Up  "}
               color={"primary"}
               type={"submit"}
               size={"large"}
             />
-          </div>
-        </form>
+          </FormGroup>
+        </Form>
         <div></div>
       </div>
     );
