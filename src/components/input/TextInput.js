@@ -3,7 +3,7 @@ import "./TextInput.css";
 
 
 
-function TextInput({/*name,*/ placeholder, size, onChange, type}) {
+function TextInput({ placeholder, size, onChange, type}) {
   let inputType = "";
   let width = "";
 
@@ -14,9 +14,6 @@ function TextInput({/*name,*/ placeholder, size, onChange, type}) {
     case "text":
       inputType = "text";
       break;
-    /*case "number":
-      inputType = "number";
-      break;*/
     default:
       inputType = "text";
   }
@@ -41,7 +38,6 @@ function TextInput({/*name,*/ placeholder, size, onChange, type}) {
       placeholder={placeholder}
       type={inputType}
       onChange={onChange}
-      /*name={name}*/
     />
   );
 }
