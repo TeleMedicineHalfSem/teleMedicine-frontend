@@ -17,3 +17,7 @@
 .content-color {
     color: var(--font-color);
 }
+
+.errorMsg {
+    color: red;
+}

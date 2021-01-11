@@ -1,7 +1,9 @@
 import React from "react";
 import "./TextInput.css";
 
-function TextInput({ placeholder, size, onChange, type }) {
+
+
+function TextInput({/*name,*/ placeholder, size, onChange, type}) {
   let inputType = "";
   let width = "";
 
@@ -12,9 +14,9 @@ function TextInput({ placeholder, size, onChange, type }) {
     case "text":
       inputType = "text";
       break;
-    case "email":
-      inputType = "email";
-      break;
+    /*case "number":
+      inputType = "number";
+      break;*/
     default:
       inputType = "text";
   }
@@ -39,6 +41,7 @@ function TextInput({ placeholder, size, onChange, type }) {
       placeholder={placeholder}
       type={inputType}
       onChange={onChange}
+      /*name={name}*/
     />
   );
 }
