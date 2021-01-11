@@ -1,14 +1,16 @@
 import React from "react";
+import SignUpView from "./SignUpView";
 
-function SignupPage() {
+function SignUpPage() {
   return (
     <div>
       {
-        // TODO: Abhishek write here...
-        // To see this page goto http://localhost:3000/signup
+        // TODO: Abhishek Write here...
+        // To see this page goto http://localhost:3000/signin
       }
+      <SignUpView />
     </div>
   );
 }
 
-export default SignupPage;
+export default SignUpPage;
