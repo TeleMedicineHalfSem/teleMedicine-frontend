@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./src/components/navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import SignInView from "./signinView";
 
 function SignInPage() {
@@ -9,6 +9,7 @@ function SignInPage() {
         // TODO: Anugya write here...
         // To see this page goto http://localhost:3000/signup
       }
+      <Navbar />
       <SignInView />
     </div>
   );

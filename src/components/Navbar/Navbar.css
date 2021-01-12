@@ -1,17 +1,28 @@
 nav{
-    background-color: white;
+    background-color: #fff;
     display:flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 100%;
 }
 .navbar-name{
     color: var(--primary-color);
+    margin-left: 5px;
 }
 .navbar-head{
     display:flex;
 }
 .navbar-sign{
     list-style:none;
-    margin-right: 20px;
+    margin-right: 50px;
+    margin-top: 15px;
     color: var(--primary-color);
+}
+.navbar-signup-button{
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+.navbar-signIn-button{
+    background-color: transparent;
+    border: transparent;
 }

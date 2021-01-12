@@ -5,8 +5,9 @@ const Nav =()=>{
         <nav>
             <div className="logo"><h1 className="navbar-name">EasyCare</h1></div>
             <ul className="navbar-head">
-                <li className="navbar-sign">Sign In</li>
-                <li className="navbar-sign">Sign Up</li>
+                <li className="navbar-sign"><button className="navbar-signIn-button">Sign In</button></li>
+                <li className="navbar-sign"><button className="navbar-signup-button">Sign Up</button></li>
+                
             </ul>
         </nav>
     )
