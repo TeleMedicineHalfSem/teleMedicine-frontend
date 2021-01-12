@@ -14,9 +14,9 @@ function CustomLink({ children, onClick, color }) {
   }
 
   return (
-    <p style={{ color: color }} className="custom-link" onClick={onClick}>
+    <span style={{ color: color }} className="custom-link" onClick={onClick}>
       {children}
-    </p>
+    </span>
   );
 }
 
