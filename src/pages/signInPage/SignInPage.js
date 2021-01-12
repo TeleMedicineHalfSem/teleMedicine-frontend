@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "./src/components/navbar/Navbar";
 import SignInView from "./signinView";
 
 function SignInPage() {

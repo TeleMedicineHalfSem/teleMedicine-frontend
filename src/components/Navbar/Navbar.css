@@ -4,14 +4,14 @@ nav{
     justify-content: space-evenly;
     width: 100%;
 }
-h1{
+.navbar-name{
     color: var(--primary-color);
 }
-ul{
+.navbar-head{
     display:flex;
 }
-li{
+.navbar-sign{
     list-style:none;
-    margin-right: 320px;
+    margin-right: 20px;
     color: var(--primary-color);
 }
