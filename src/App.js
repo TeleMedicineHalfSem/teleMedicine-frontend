@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+
 import FrontPage from "./pages/frontPage/FrontPage";
 import SignUpPage from "./pages/signUpPage/SignUpPage";
 import SignInPage from "./pages/signInPage/SignInPage";

@@ -1,0 +1,24 @@
+.navbar {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  height: 11vh;
+}
+.navbar-logo {
+  color: var(--primary-color);
+  font-family: var(--secondary-font);
+  margin-left: 60px;
+  font-size: xx-large;
+}
+.navbar-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 70px;
+}
+.navbar-signIn {
+  margin-top: 7px;
+  margin-right: 20px;
+}
