@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./SignInPage.css";
 import TextInput from "../../components/input/TextInput";
 import Button from "../../components/button/Button";
 import CustomLink from "../../components/link/CustomLink";
@@ -35,14 +36,12 @@ function SignInView() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <br />
-      <br />
-      <div>
+      <div className="sign-in-button">
         <Button size="medium" onClick={onClickSignin}>
           Sign in
         </Button>
       </div>
-      <div>
+      <div className="sign-in-link">
         New User?{" "}
         <CustomLink color="secondary" onClick={onClickSignup}>
           Sign up

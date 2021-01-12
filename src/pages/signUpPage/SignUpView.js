@@ -3,6 +3,7 @@ import "./SignUpPage.css";
 import Button from "../../components/button/Button";
 import TextInput from "../../components/input/TextInput";
 import RadioInput from "../../components/input/RadioInput";
+import CustomLink from "../../components/link/CustomLink";
 import { Form, FormGroup } from "reactstrap";
 export class SignUpView extends Component {
   constructor() {
@@ -36,10 +37,10 @@ export class SignUpView extends Component {
     this.handleRegistrationCouncil = this.handleRegistrationCouncil.bind(this);
     this.handleRegistrationYear = this.handleRegistrationYear.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSignInLinkClick = this.handleSignInLinkClick.bind(this);
   }
 
-  //all handler functions
-
+  // all handler functions
   handleChange(e) {
     let fields = this.state.fields;
     fields[e.target.name] = e.target.value;
@@ -112,6 +113,11 @@ export class SignUpView extends Component {
     this.setState({
       registration_year: event.target.value,
     });
+  }
+
+  handleSignInLinkClick() {
+    // TODO: Redirect to sign in page...
+    console.log("Hello");
   }
 
   //validation
@@ -213,78 +219,84 @@ export class SignUpView extends Component {
 
   render() {
     return (
-      <div>
-        <div className="body">
-          <h3 className="head-color">Sign Up</h3>
+      <div className="sign-up-view">
+        <div>
+          <div className="body">
+            <h3 className="head-color">Sign Up</h3>
+          </div>
+          <Form onSubmit={this.handleSubmit}>
+            <FormGroup>
+              <TextInput
+                name={"fullName"}
+                placeholder={"Full Name"}
+                size={"medium"}
+                type={"text"}
+                onChange={this.handleFullName}
+              />
+            </FormGroup>
+            <FormGroup>
+              <TextInput
+                name={"email"}
+                placeholder={"Email"}
+                size={"medium"}
+                onChange={this.handleEmail}
+              />
+              <div className="errorMsg">{this.state.errors.email}</div>
+            </FormGroup>
+            <FormGroup>
+              <TextInput
+                placeholder={"Password"}
+                name={"password"}
+                size={"medium"}
+                type={"password"}
+                onChange={this.handlePassword}
+              />
+              <div className="errorMsg">{this.state.errors.password}</div>
+            </FormGroup>
+            <FormGroup>
+              <TextInput
+                placeholder={"Confirm Password"}
+                size={"medium"}
+                type={"password"}
+                name={"confirmPassword"}
+                onChange={this.handleConfirmPassword}
+              />
+              <div className="errorMsg">
+                {this.state.errors.confirmPassword}
+              </div>
+            </FormGroup>
+            <FormGroup>
+              <RadioInput
+                name={"Patient"}
+                children={"Patient"}
+                checked={this.state.selectedOption === this.PATIENT}
+                onChange={this.handleSelectOption}
+                value={"Patient"}
+              />
+              <RadioInput
+                name={"Doctor"}
+                children={"Doctor"}
+                checked={this.state.selectedOption === this.DOCTOR}
+                onChange={this.handleSelectOption}
+                value={"Doctor"}
+              />
+            </FormGroup>
+            <FormGroup>
+              {this.state.selectedOption === "Doctor" ? this.forDoctor() : null}
+            </FormGroup>
+            <FormGroup>
+              <Button color={"primary"} type={"submit"} size={"large"}>
+                Sign Up
+              </Button>
+            </FormGroup>
+          </Form>
+          <div>
+            Already a User? {"   "}
+            <CustomLink onClick={this.handleSignInLinkClick} color="secondary">
+              Sign In
+            </CustomLink>
+          </div>
         </div>
-        <Form onSubmit={this.handleSubmit}>
-          <FormGroup>
-            <TextInput
-              name={"fullName"}
-              placeholder={"Full Name"}
-              size={"medium"}
-              type={"text"}
-              onChange={this.handleFullName}
-            />
-          </FormGroup>
-          <FormGroup>
-            <TextInput
-              name={"email"}
-              placeholder={"Email"}
-              size={"medium"}
-              onChange={this.handleEmail}
-            />
-            <div className="errorMsg">{this.state.errors.email}</div>
-          </FormGroup>
-          <FormGroup>
-            <TextInput
-              placeholder={"Password"}
-              name={"password"}
-              size={"medium"}
-              type={"password"}
-              onChange={this.handlePassword}
-            />
-            <div className="errorMsg">{this.state.errors.password}</div>
-          </FormGroup>
-          <FormGroup>
-            <TextInput
-              placeholder={"Confirm Password"}
-              size={"medium"}
-              type={"password"}
-              name={"confirmPassword"}
-              onChange={this.handleConfirmPassword}
-            />
-            <div className="errorMsg">{this.state.errors.confirmPassword}</div>
-          </FormGroup>
-          <FormGroup>
-            <RadioInput
-              name={"Patient"}
-              children={"Patient"}
-              checked={this.state.selectedOption === this.PATIENT}
-              onChange={this.handleSelectOption}
-              value={"Patient"}
-            />
-            <RadioInput
-              name={"Doctor"}
-              children={"Doctor"}
-              checked={this.state.selectedOption === this.DOCTOR}
-              onChange={this.handleSelectOption}
-              value={"Doctor"}
-            />
-          </FormGroup>
-          <FormGroup>
-            {this.state.selectedOption === "Doctor" ? this.forDoctor() : null}
-          </FormGroup>
-          <FormGroup>
-            <Button
-              children={"Sign Up  "}
-              color={"primary"}
-              type={"submit"}
-              size={"large"}
-            />
-          </FormGroup>
-        </Form>
-        <div></div>
       </div>
     );
   }
