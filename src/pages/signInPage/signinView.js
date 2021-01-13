@@ -23,7 +23,7 @@ function SignInView() {
       <form className="sign-in-form" onSubmit={onClickSignIn}>
         <div>
           <TextInput
-            type="text"
+            type="email"
             placeholder="Email"
             className="sign-in-email"
             onChange={(e) => setEmail(e.target.value)}

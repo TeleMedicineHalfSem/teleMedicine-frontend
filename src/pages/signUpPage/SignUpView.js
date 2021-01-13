@@ -69,7 +69,7 @@ function SignUpView() {
         <TextInput
           placeholder={"Registration Year"}
           size={"medium"}
-          type={"number"}
+          type={"year"}
           onChange={(e) => handleRegistrationYear(e.target.value)}
         />
       </div>
@@ -86,11 +86,13 @@ function SignUpView() {
               placeholder={"Full Name"}
               size={"medium"}
               onChange={(e) => handleFullName(e.target.value)}
+              type={"name"}
             />
           </div>
           <div>
             <TextInput
               placeholder={"Email"}
+              type={"email"}
               size={"medium"}
               onChange={(e) => handleEmail(e.target.value)}
             />
@@ -108,6 +110,7 @@ function SignUpView() {
               placeholder={"Confirm Password"}
               size={"medium"}
               type={"password"}
+              confirm={password}
               onChange={(e) => handleConfirmPassword(e.target.value)}
             />
           </div>

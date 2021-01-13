@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./TextInput.css";
+import {
+  validateEmail,
+  validateName,
+  validatePassword,
+  validateConfirmPassword,
+  validateYear,
+} from "../../utils/validations";
 
-function TextInput({ placeholder, size, onChange, type }) {
+function TextInput({ placeholder, size, onChange, type, confirm }) {
+  const inputRef = useRef(null);
+  const target = inputRef.current ? inputRef.current : null;
+  let validInput = true;
+  let errorString = null;
   let inputType = "";
   let width = "";
+  let style = {};
 
   switch (type) {
+    case "name":
+      inputType = "text";
+      break;
+    case "year":
+      inputType = "number";
+      break;
     case "number":
       inputType = "number";
       break;
@@ -32,14 +50,51 @@ function TextInput({ placeholder, size, onChange, type }) {
     default:
       width = "250px";
   }
+
+  //style...
+  style = { width: width };
+
+  //Validations...
+  if (target) {
+    const value = target.value;
+    if (type === "name") {
+      const { valid, error } = validateName(value);
+      validInput = valid;
+      errorString = error;
+    } else if (type === "email") {
+      const { valid, error } = validateEmail(value);
+      validInput = valid;
+      errorString = error;
+    } else if (type === "password" && confirm !== undefined) {
+      const { valid, error } = validateConfirmPassword(confirm, value);
+      validInput = valid;
+      errorString = error;
+    } else if (type === "password") {
+      const { valid, error } = validatePassword(value);
+      validInput = valid;
+      errorString = error;
+    } else if (type === "year") {
+      const { valid, error } = validateYear(value);
+      validInput = valid;
+      errorString = error;
+    }
+    if (!validInput) {
+      style = { ...style, borderColor: "red" };
+    }
+  }
+
   return (
-    <input
-      style={{ width: width }}
-      className="custom-text-input"
-      placeholder={placeholder}
-      type={inputType}
-      onChange={onChange}
-    />
+    <>
+      <input
+        ref={inputRef}
+        style={style}
+        className="custom-text-input"
+        placeholder={placeholder}
+        type={inputType}
+        onChange={onChange}
+      />
+      <p>{errorString}</p>
+    </>
   );
 }
 
