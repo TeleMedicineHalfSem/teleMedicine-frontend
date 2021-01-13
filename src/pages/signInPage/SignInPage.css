@@ -20,11 +20,11 @@
   color: var(--primary-color);
   font-family: var(--primary-font);
   font-size: 200%;
-  margin-bottom: 40px;
 }
-.sign-in-button {
-  margin-top: 60px;
+.sign-in-form {
+  margin-top: 40px;
+  margin-bottom: 10px;
 }
-.sign-in-link {
-  margin-top: 10px;
+.sign-in-form div {
+  margin-top: 20px;
 }

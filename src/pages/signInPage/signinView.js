@@ -8,7 +8,8 @@ function SignInView() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const onClickSignin = () => {
+  const onClickSignIn = (event) => {
+    event.preventDefault();
     console.log(email, password);
   };
 
@@ -19,28 +20,28 @@ function SignInView() {
   return (
     <div>
       <div className="sign-in-heading">Sign in to EasyCare</div>
-      <div>
-        <TextInput
-          type="text"
-          placeholder="Email"
-          className="sign-in-email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <br />
-      <div>
-        <TextInput
-          type="password"
-          placeholder="Password"
-          className="sign-in-password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <div className="sign-in-button">
-        <Button size="medium" onClick={onClickSignin}>
-          Sign in
-        </Button>
-      </div>
+      <form className="sign-in-form" onSubmit={onClickSignIn}>
+        <div>
+          <TextInput
+            type="text"
+            placeholder="Email"
+            className="sign-in-email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <TextInput
+            type="password"
+            placeholder="Password"
+            className="sign-in-password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <br />
+        <div>
+          <Button size="medium">Sign in</Button>
+        </div>
+      </form>
       <div className="sign-in-link">
         New User?{" "}
         <CustomLink color="secondary" onClick={onClickSignup}>

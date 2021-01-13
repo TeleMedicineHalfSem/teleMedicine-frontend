@@ -1,10 +1,142 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./SignUpPage.css";
 import Button from "../../components/button/Button";
 import TextInput from "../../components/input/TextInput";
 import RadioInput from "../../components/input/RadioInput";
 import CustomLink from "../../components/link/CustomLink";
-import { Form, FormGroup } from "reactstrap";
+
+function SignUpView() {
+  // Constants...
+  const PATIENT = "patient";
+  const DOCTOR = "doctor";
+
+  // Initializations...
+  const [fullName, handleFullName] = useState(null);
+  const [email, handleEmail] = useState(null);
+  const [password, handlePassword] = useState(null);
+  const [confirmPassword, handleConfirmPassword] = useState(null);
+  const [selectedOption, handleSelectOption] = useState(null);
+  const [specialization, handleSpecialization] = useState(null);
+  const [registrationNumber, handleRegistrationNumber] = useState(null);
+  const [registrationCouncil, handleRegistrationCouncil] = useState(null);
+  const [registrationYear, handleRegistrationYear] = useState(null);
+
+  // onClick Submit button...
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Submit the code....
+  };
+
+  // onClick sign in link...
+  const handleSignInLink = () => {
+    // Redirect to sign in page...
+  };
+
+  // Doctor's details view....
+  const doctorDetailView = (
+    <div>
+      <div>
+        <TextInput
+          placeholder={"Specialization"}
+          size={"medium"}
+          onChange={(e) => handleSpecialization(e.target.value)}
+        />
+      </div>
+      <div>
+        <TextInput
+          placeholder={"Registration Number"}
+          size={"medium"}
+          onChange={(e) => handleRegistrationNumber(e.target.value)}
+        />
+      </div>
+      <div>
+        <TextInput
+          placeholder={"Registration Council"}
+          size={"medium"}
+          onChange={(e) => handleRegistrationCouncil(e.target.value)}
+        />
+      </div>
+      <div>
+        <TextInput
+          placeholder={"Registration Year"}
+          size={"medium"}
+          type={"number"}
+          onChange={(e) => handleRegistrationYear(e.target.value)}
+        />
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="sign-up-view">
+      <div>
+        <h3 className="sign-up-view-head">Sign Up</h3>
+        <form className="sign-up-view-form" onSubmit={handleSubmit}>
+          <div>
+            <TextInput
+              placeholder={"Full Name"}
+              size={"medium"}
+              onChange={(e) => handleFullName(e.target.value)}
+            />
+          </div>
+          <div>
+            <TextInput
+              placeholder={"Email"}
+              size={"medium"}
+              onChange={(e) => handleEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <TextInput
+              placeholder={"Password"}
+              size={"medium"}
+              type={"password"}
+              onChange={(e) => handlePassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <TextInput
+              placeholder={"Confirm Password"}
+              size={"medium"}
+              type={"password"}
+              onChange={(e) => handleConfirmPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <RadioInput
+              checked={selectedOption === PATIENT}
+              onChange={(e) => handleSelectOption(e.target.value)}
+              value={PATIENT}
+            >
+              Patient
+            </RadioInput>
+            <RadioInput
+              checked={selectedOption === DOCTOR}
+              onChange={(e) => handleSelectOption(e.target.value)}
+              value={DOCTOR}
+            >
+              Doctor
+            </RadioInput>
+          </div>
+          <div>{selectedOption === DOCTOR ? doctorDetailView : null}</div>
+          <Button color={"primary"} type={"submit"} size={"large"}>
+            Sign Up
+          </Button>
+        </form>
+        <div className="sign-up-view-link">
+          Already a User? {"   "}
+          <CustomLink onClick={handleSignInLink} color="secondary">
+            Sign In
+          </CustomLink>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default SignUpView;
+
+/*
 export class SignUpView extends Component {
   constructor() {
     super();
@@ -303,3 +435,4 @@ export class SignUpView extends Component {
 }
 
 export default SignUpView;
+*/
