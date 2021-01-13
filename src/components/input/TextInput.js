@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./TextInput.css";
 import {
   validateEmail,
@@ -10,6 +10,7 @@ import {
 
 function TextInput({ placeholder, size, onChange, type, confirm }) {
   const inputRef = useRef(null);
+  const [focused, setFocus] = useState(false);
   const target = inputRef.current ? inputRef.current : null;
   let validInput = true;
   let errorString = null;
@@ -17,6 +18,7 @@ function TextInput({ placeholder, size, onChange, type, confirm }) {
   let width = "";
   let style = {};
 
+  // Type...
   switch (type) {
     case "name":
       inputType = "text";
@@ -37,6 +39,7 @@ function TextInput({ placeholder, size, onChange, type, confirm }) {
       inputType = "text";
   }
 
+  // Size...
   switch (size) {
     case "small":
       width = "100px";
@@ -55,7 +58,7 @@ function TextInput({ placeholder, size, onChange, type, confirm }) {
   style = { width: width };
 
   //Validations...
-  if (target) {
+  if (target && focused) {
     const value = target.value;
     if (type === "name") {
       const { valid, error } = validateName(value);
@@ -78,7 +81,7 @@ function TextInput({ placeholder, size, onChange, type, confirm }) {
       validInput = valid;
       errorString = error;
     }
-    if (!validInput) {
+    if (!validInput && errorString) {
       style = { ...style, borderColor: "red" };
     }
   }
@@ -92,6 +95,7 @@ function TextInput({ placeholder, size, onChange, type, confirm }) {
         placeholder={placeholder}
         type={inputType}
         onChange={onChange}
+        onFocus={() => setFocus(true)}
       />
       <p>{errorString}</p>
     </>
