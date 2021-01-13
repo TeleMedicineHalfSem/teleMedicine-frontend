@@ -72,10 +72,18 @@ const validateYear = (value) => {
   return { valid: true, error: null };
 };
 
+const validateText = (value) => {
+  if (!value && value === "") {
+    return { valid: false, error: null };
+  }
+  return { valid: true, error: null };
+};
+
 export {
   validateEmail,
   validateName,
   validatePassword,
   validateConfirmPassword,
   validateYear,
+  validateText,
 };
