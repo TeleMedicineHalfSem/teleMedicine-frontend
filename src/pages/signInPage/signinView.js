@@ -3,22 +3,41 @@ import "./SignInPage.css";
 import TextInput from "../../components/input/TextInput";
 import Button from "../../components/button/Button";
 import CustomLink from "../../components/link/CustomLink";
+import { Alert } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { validateEmail, validatePassword } from "../../utils/validations";
 
 function SignInView() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [alertVisible, setAlertVisible] = useState(false);
+  let history = useHistory();
+  let alertMessage = "Required input not satisfied.";
 
   const onClickSignIn = (event) => {
     event.preventDefault();
-    console.log(email, password);
+    const validated =
+      validateEmail(email).valid && validatePassword(password).valid;
+    if (!validated) {
+      setAlertVisible(true);
+      return;
+    }
+    // TODO: Write from here...
   };
 
   const onClickSignup = () => {
-    //TODO: Here we have to write code to redirect this page to sing up page...
+    history.push("/signup");
   };
 
   return (
     <div>
+      <Alert
+        color="danger"
+        isOpen={alertVisible}
+        toggle={() => setAlertVisible(false)}
+      >
+        {alertMessage}
+      </Alert>
       <div className="sign-in-heading">Sign in to EasyCare</div>
       <form className="sign-in-form" onSubmit={onClickSignIn}>
         <div>
