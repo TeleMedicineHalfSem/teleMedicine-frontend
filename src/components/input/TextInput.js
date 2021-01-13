@@ -6,6 +6,9 @@ function TextInput({ placeholder, size, onChange, type }) {
   let width = "";
 
   switch (type) {
+    case "number":
+      inputType = "number";
+      break;
     case "password":
       inputType = "password";
       break;

@@ -11,25 +11,34 @@ function SignUpView() {
   const DOCTOR = "doctor";
 
   // Initializations...
-  const [fullName, handleFullName] = useState(null);
-  const [email, handleEmail] = useState(null);
-  const [password, handlePassword] = useState(null);
-  const [confirmPassword, handleConfirmPassword] = useState(null);
-  const [selectedOption, handleSelectOption] = useState(null);
-  const [specialization, handleSpecialization] = useState(null);
-  const [registrationNumber, handleRegistrationNumber] = useState(null);
-  const [registrationCouncil, handleRegistrationCouncil] = useState(null);
-  const [registrationYear, handleRegistrationYear] = useState(null);
+  const [fullName, handleFullName] = useState("");
+  const [email, handleEmail] = useState("");
+  const [password, handlePassword] = useState("");
+  const [confirmPassword, handleConfirmPassword] = useState("");
+  const [selectedOption, handleSelectOption] = useState(PATIENT);
+  const [specialization, handleSpecialization] = useState("");
+  const [registrationNumber, handleRegistrationNumber] = useState("");
+  const [registrationCouncil, handleRegistrationCouncil] = useState("");
+  const [registrationYear, handleRegistrationYear] = useState("");
 
   // onClick Submit button...
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Submit the code....
+    console.log(
+      fullName,
+      email,
+      password,
+      confirmPassword,
+      specialization,
+      registrationNumber,
+      registrationCouncil,
+      registrationYear
+    );
   };
 
   // onClick sign in link...
   const handleSignInLink = () => {
-    // Redirect to sign in page...
+    //TODO: Here we have to write code to redirect this page to sign in page...
   };
 
   // Doctor's details view....
