@@ -7,18 +7,19 @@ import CarouselReview from "../../components/carouselReview/CarouselReview";
 import reviews from "../../utils/reviews";
 import Footer from "../../components/footer/Footer";
 import Divider from "../../components/divider/Divider";
+import { useHistory } from "react-router-dom";
 
 function FrontPage() {
+  let history = useHistory();
+
   // Sign in button clicked...
   const onClickSignIn = () => {
-    console.log("Sign in clicked...");
-    // TODO: fill this function...
+    history.push("/signin");
   };
 
   // Sign up button clicked...
   const onClickSignUp = () => {
-    console.log("Sign up clicked...");
-    // TODO: fill this function...
+    history.push("/signup");
   };
 
   return (

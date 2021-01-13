@@ -1,10 +1,14 @@
+:root {
+  --height-navbar: 11vh;
+}
+
 .navbar {
   background-color: #fff;
   display: flex;
   justify-content: space-between;
   width: 100%;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-  height: 11vh;
+  height: var(--height-navbar);
 }
 .navbar-logo {
   color: var(--primary-color);
@@ -19,6 +23,5 @@
   margin-right: 70px;
 }
 .navbar-signIn {
-  margin-top: 7px;
   margin-right: 20px;
 }

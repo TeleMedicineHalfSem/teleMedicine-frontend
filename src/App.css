@@ -21,3 +21,13 @@ button:focus {
 input:focus {
   outline: none;
 }
+
+/* Removing Arrow/Spinner from input*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}

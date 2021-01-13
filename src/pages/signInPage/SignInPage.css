@@ -1,0 +1,30 @@
+.sign-in-body {
+  height: calc(100vh - var(--height-navbar));
+  display: flex;
+}
+.sign-in-body-left {
+  width: 50%;
+  height: 100%;
+  text-align: right;
+}
+.sign-in-body-right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*SignInView.css*/
+.sign-in-heading {
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+  font-size: 200%;
+}
+.sign-in-form {
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+.sign-in-form div {
+  margin-top: 20px;
+}
