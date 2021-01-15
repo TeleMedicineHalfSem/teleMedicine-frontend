@@ -1,0 +1,12 @@
+img {
+    border-radius: 50%;
+}
+
+.detail-font-1 {
+    font-family: var(--primary-font);
+    color: var(--primary-color);
+}
+
+.detail-font-2 {
+    color: var(--secondary-color);
+}
