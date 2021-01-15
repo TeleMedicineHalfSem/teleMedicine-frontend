@@ -1,5 +1,7 @@
-img {
+.img-style {
     border-radius: 50%;
+    width: 100x;
+    height: 100px;
 }
 
 .detail-font-1 {
