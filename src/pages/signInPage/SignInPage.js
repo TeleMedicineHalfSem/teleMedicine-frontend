@@ -1,6 +1,6 @@
 import React from "react";
 import "./SignInPage.css";
-import NavBar from "../../components/navbar/Navbar";
+import NavBar from "../../components/Navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import SignInView from "./signinView";
 
