@@ -66,7 +66,7 @@ const validateYear = (value) => {
   }
 
   if (value.length !== 4) {
-    return { valid: false, error: "Non valid Year" };
+    return { valid: false, error: "Invalid Year" };
   }
 
   return { valid: true, error: null };

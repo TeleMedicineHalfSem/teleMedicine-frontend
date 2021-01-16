@@ -1,4 +1,5 @@
 import React from "react";
+import "./PatientPage.css";
 import DocList from "../../components/docList/DoctorCard";
 function PatientPage() {
   return (
