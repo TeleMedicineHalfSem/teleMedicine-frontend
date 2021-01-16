@@ -1,0 +1,46 @@
+.doctor-card {
+  width: 65%;
+}
+.doctor-card-main {
+  display: flex;
+  height: 23vh;
+}
+.doctor-card-image-container {
+  width: 20%;
+  height: 100%;
+  text-align: center;
+}
+.doctor-card-image {
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.doctor-card-specs {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  padding-top: 10px;
+}
+.doctor-card-specs-name {
+  color: var(--primary-color);
+  font-size: x-large;
+}
+.doctor-card-specs-spec {
+  color: var(--secondary-color);
+  font-size: medium;
+}
+.doctor-card-specs-exp {
+  padding-top: 10px;
+  color: #747474;
+  font-size: medium;
+}
+.doctor-card-button {
+  display: flex;
+  align-items: center;
+}
+.doctor-card-button {
+  width: 20%;
+  height: 100%;
+}
