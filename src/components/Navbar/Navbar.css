@@ -21,7 +21,45 @@
   justify-content: center;
   align-items: center;
   margin-right: 70px;
+  height: 100%;
 }
 .navbar-signIn {
   margin-right: 20px;
+}
+.navbar-profile {
+  color: var(--primary-color);
+  font-size: 130%;
+  cursor: pointer;
+  height: 100%;
+  border: none;
+  background-color: white;
+}
+.dropdown-card {
+  width: 18%;
+  position: absolute;
+  right: 0;
+  background: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.dropdown-detail {
+  padding: 15px 15px 0 15px;
+}
+.dropdown-name {
+  font-size: 130%;
+}
+.dropdown-email {
+  font-size: 80%;
+  margin-bottom: 10px;
+}
+.dropdown-button {
+  padding: 12px;
+  font-family: var(--secondary-font);
+  cursor: pointer;
+}
+.dropdown-button:hover {
+  box-shadow: 0 0px 2px 3px rgba(0, 0, 0, 0.1);
+}
+.dropdown-button:active {
+  box-shadow: none;
+  background-color: rgb(211, 211, 211);
 }
