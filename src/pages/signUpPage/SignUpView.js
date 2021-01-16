@@ -34,9 +34,8 @@ function SignUpView() {
   let alertMessage = "Please fulfill all input conditions.";
   let history = useHistory();
 
-  // onClick Submit button...
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // Validations...
+  const validations = () => {
     let validated =
       validateName(fullName).valid &&
       validateEmail(email).valid &&
@@ -48,12 +47,14 @@ function SignUpView() {
         validateText(specialization).valid &&
         validateYear(registrationYear).valid;
     }
-    if (!validated) {
-      setAlertVisible(true);
-      return;
-    }
     console.log(registrationCouncil, registrationNumber);
-    // TODO: Do the works here...
+    return validated;
+  };
+
+  // onClick Submit button...
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!validations()) return;
   };
 
   // onClick sign in link...
