@@ -14,8 +14,10 @@ import {
   validateYear,
   validateText,
 } from "../../utils/validations";
+import { connect } from "react-redux";
+import { signUp } from "../../actions/authActions";
 
-function SignUpView() {
+function SignUpView({ signUp }) {
   // Constants...
   const PATIENT = "patient";
   const DOCTOR = "doctor";
@@ -47,7 +49,6 @@ function SignUpView() {
         validateText(specialization).valid &&
         validateYear(registrationYear).valid;
     }
-    console.log(registrationCouncil, registrationNumber);
     return validated;
   };
 
@@ -55,6 +56,18 @@ function SignUpView() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!validations()) return;
+
+    const isDoctor = selectedOption === DOCTOR ? true : false;
+    signUp({
+      fullName,
+      email,
+      password,
+      isDoctor,
+      specialization,
+      registrationCouncil,
+      registrationNumber,
+      registrationYear,
+    });
   };
 
   // onClick sign in link...
@@ -174,4 +187,4 @@ function SignUpView() {
   );
 }
 
-export default SignUpView;
+export default connect(null, { signUp })(SignUpView);

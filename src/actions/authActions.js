@@ -50,3 +50,61 @@ export const signOut = () => {
       });
   };
 };
+
+export const signUp = ({
+  fullName,
+  email,
+  password,
+  isDoctor,
+  specialization,
+  registrationNumber,
+  registrationCouncil,
+  registrationYear,
+}) => {
+  return (dispatch, getState, { getFirestore, getFirebase }) => {
+    const firebase = getFirebase();
+    const firestore = getFirestore();
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((resp) => {
+        // Deriving first name, last name and initials....
+        const name = fullName.split(" ");
+        const firstName = name[0];
+        let lastName = "";
+        if (name[1]) {
+          lastName = name[1];
+        }
+        const initials = name[0][0];
+
+        // Checking if doctor...
+        if (isDoctor) {
+          return firestore.collection("doctors").doc(resp.user.uid).set({
+            name: fullName,
+            firstName: firstName,
+            lastName: lastName,
+            initials: initials,
+            specialization: specialization,
+            registrationCouncil: registrationCouncil,
+            registrationNumber: registrationNumber,
+            registrationYear: registrationYear,
+          });
+        } else {
+          return firestore.collection("patients").doc(resp.user.uid).set({
+            name: fullName,
+            firstName: firstName,
+            lastName: lastName,
+            initials: initials,
+          });
+        }
+      })
+      .then(() => {
+        dispatch(authSuccess());
+        console.log("Signed up Success");
+      })
+      .catch((error) => {
+        dispatch(authFailure(error));
+        console.log("signing up failed");
+      });
+  };
+};
