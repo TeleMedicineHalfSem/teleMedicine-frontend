@@ -32,3 +32,21 @@ export const signIn = ({ email, password }) => {
       });
   };
 };
+
+export const signOut = () => {
+  return (dispatch, getState, { getFirebase }) => {
+    dispatch(authRequest());
+    const firebase = getFirebase();
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        dispatch(authSuccess());
+        console.log("logged out");
+      })
+      .catch((error) => {
+        dispatch(authFailure(error));
+        console.log("logging out failed");
+      });
+  };
+};

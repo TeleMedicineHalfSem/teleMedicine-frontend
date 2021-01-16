@@ -4,14 +4,19 @@ import CustomLink from "../link/CustomLink";
 import "./Navbar.css";
 import { useHistory } from "react-router-dom";
 import Dropdown from "./Dropdown";
+import { connect } from "react-redux";
 
-function Nav() {
+function Nav({ auth }) {
   const [dropDownVisible, setDropDownVisible] = useState(false);
   const username = "Slokha"; // Get these data from database...
   const email = "slokhaiyer@gmail.com"; // Get these data from database...
-  const loggedIn = false; // Get this from cookie...
-
+  let loggedIn = false;
   let history = useHistory();
+
+  // Checking if user is signed in or not...
+  if (auth !== undefined && auth.uid) {
+    loggedIn = true;
+  }
 
   const onClickSignIn = () => {
     history.push("/signin");
@@ -61,4 +66,11 @@ function Nav() {
   );
 }
 
-export default Nav;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+export default connect(mapStateToProps)(Nav);

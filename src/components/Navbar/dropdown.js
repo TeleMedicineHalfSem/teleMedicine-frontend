@@ -1,10 +1,11 @@
 import React from "react";
 import "./Navbar.css";
+import { connect } from "react-redux";
+import { signOut } from "../../actions/authActions";
 
-function Dropdown({ username, email }) {
+function Dropdown({ username, email, signOut }) {
   const onClickLogOut = () => {
-    // TODO: Logout...
-    console.log("dada");
+    signOut();
   };
 
   return (
@@ -21,5 +22,4 @@ function Dropdown({ username, email }) {
     </div>
   );
 }
-
-export default Dropdown;
+export default connect(null, { signOut })(Dropdown);
