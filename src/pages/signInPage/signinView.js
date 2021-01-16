@@ -6,8 +6,10 @@ import CustomLink from "../../components/link/CustomLink";
 import { Alert } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { validateEmail, validatePassword } from "../../utils/validations";
+import { connect } from "react-redux";
+import { signIn } from "../../actions/authActions";
 
-function SignInView() {
+function SignInView({ signIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alertVisible, setAlertVisible] = useState(false);
@@ -22,7 +24,7 @@ function SignInView() {
       setAlertVisible(true);
       return;
     }
-    // TODO: Write from here...
+    signIn({ email, password });
   };
 
   const onClickSignup = () => {
@@ -71,4 +73,4 @@ function SignInView() {
   );
 }
 
-export default SignInView;
+export default connect(null, { signIn })(SignInView);

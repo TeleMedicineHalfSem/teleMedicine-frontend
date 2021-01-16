@@ -18,7 +18,7 @@ const doctorFailure = (error) => {
 
 export const addDoctor = (data) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    dispatch(doctorRequest);
+    dispatch(doctorRequest());
     const firestore = getFirestore();
     firestore
       .collection("doctors")
