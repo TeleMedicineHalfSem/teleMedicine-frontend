@@ -1,11 +1,16 @@
-import React from 'react'
-import DocList from "../../components/docList/DocList"
+import React from "react";
+import DocList from "../../components/docList/DoctorCard";
 function PatientPage() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return (
+    <div>
+      <DocList
+        src="/images/card-img1.jpg"
+        name="Mayur"
+        specialization="Dentist"
+        experience="5"
+      />
+    </div>
+  );
 }
 
-export default PatientPage
+export default PatientPage;
