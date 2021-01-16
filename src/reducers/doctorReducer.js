@@ -4,7 +4,7 @@ const initialState = {
   error: null,
 };
 
-export const doctorReducer = (state = initialState, action) => {
+const doctorReducer = (state = initialState, action) => {
   switch (action.type) {
     case "DOCTOR_LOADING":
       return {
@@ -28,3 +28,5 @@ export const doctorReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default doctorReducer;
