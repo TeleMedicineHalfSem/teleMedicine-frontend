@@ -82,7 +82,14 @@ function FrontPage() {
               text="24/7 Service"
             />
           </div>
-          <Divider />
+          <Divider
+            margin={{
+              top: "100px",
+              bottom: "30px",
+              left: "70px",
+              right: "70px",
+            }}
+          />
           <div className="front-page-reviews">
             <CarouselReview reviews={reviews} />
           </div>

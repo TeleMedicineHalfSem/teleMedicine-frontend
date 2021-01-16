@@ -1,9 +1,5 @@
 .divider-horizontal {
-  margin-top: 100px;
-  margin-bottom: 30px;
   border: solid #b9b9b9;
   border-width: 1px 0 0 0;
   border-radius: 50px;
-  margin-left: 70px;
-  margin-right: 70px;
 }
