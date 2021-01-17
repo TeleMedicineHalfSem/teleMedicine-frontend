@@ -47,11 +47,9 @@
   display: flex;
 }
 .dropdown-name {
-  margin-left: 10px;
   font-size: 130%;
 }
 .dropdown-email {
-  margin-left: 10px;
   font-size: 80%;
   margin-bottom: 10px;
 }
