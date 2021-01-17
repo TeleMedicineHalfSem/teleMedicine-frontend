@@ -74,26 +74,17 @@ export const signUp = ({
         }
         const initials = name[0][0];
 
-        // Checking if doctor...
-        if (isDoctor) {
-          return firestore.collection("doctors").doc(resp.user.uid).set({
-            name: fullName,
-            firstName: firstName,
-            lastName: lastName,
-            initials: initials,
-            specialization: specialization,
-            registrationCouncil: registrationCouncil,
-            registrationNumber: registrationNumber,
-            registrationYear: registrationYear,
-          });
-        } else {
-          return firestore.collection("patients").doc(resp.user.uid).set({
-            name: fullName,
-            firstName: firstName,
-            lastName: lastName,
-            initials: initials,
-          });
-        }
+        // Setting all user data...
+        return firestore.collection("users").doc(resp.user.uid).set({
+          fullName: fullName,
+          firstName: firstName,
+          lastName: lastName,
+          initials: initials,
+          isDoctor: isDoctor,
+          email: email,
+        });
+
+        // TODO: Have to put doctors and patient data separately...
       })
       .then(() => {
         dispatch(authSuccess("Successfully Signed up"));

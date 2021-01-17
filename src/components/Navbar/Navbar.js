@@ -6,16 +6,24 @@ import { useHistory } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import { connect } from "react-redux";
 
-function Nav({ auth }) {
+function Nav({ auth, profile }) {
   const [dropDownVisible, setDropDownVisible] = useState(false);
-  const username = "Slokha"; // Get these data from database...
-  const email = "slokhaiyer@gmail.com"; // Get these data from database...
+  let firstName = "";
+  let email = "";
+  let username = "";
   let loggedIn = false;
   let history = useHistory();
 
   // Checking if user is signed in or not...
   if (auth !== undefined && auth.uid) {
     loggedIn = true;
+  }
+
+  // Getting data from database...
+  if (!profile.isEmpty) {
+    firstName = profile.firstName;
+    email = profile.email;
+    username = profile.fullName;
   }
 
   const onClickSignIn = () => {
@@ -40,8 +48,11 @@ function Nav({ auth }) {
   );
 
   const profileView = (
-    <button onClick={() => setDropDownVisible(true)} className="navbar-profile">
-      <b>{username}</b>
+    <button
+      onClick={() => setDropDownVisible(!dropDownVisible)}
+      className="navbar-profile"
+    >
+      <b>{firstName}</b>
       <img
         src="/images/arrow-down.svg"
         alt=""
@@ -71,6 +82,7 @@ function Nav({ auth }) {
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
+    profile: state.firebase.profile,
   };
 };
 
