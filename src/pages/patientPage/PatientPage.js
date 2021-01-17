@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PatientPage.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import { SearchBar } from "../../components/input/inputs";
 import DoctorList from "./DoctorList";
 function PatientPage() {
+  const [searchText, setSearchText] = useState("");
+
   return (
     <div className="patient-page">
       <div className="patient-page-header">
@@ -12,11 +14,14 @@ function PatientPage() {
       </div>
       <div className="patient-page-body">
         <div className="patient-page-search">
-          <SearchBar placeholder="Search for a specialization..." />
+          <SearchBar
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder="Search for a specialization..."
+          />
         </div>
         <p className="patient-page-text">Select a doctor to chat</p>
         <div className="patient-page-card-container">
-          <DoctorList />
+          <DoctorList searchText={searchText} />
         </div>
         <br />
         <br />

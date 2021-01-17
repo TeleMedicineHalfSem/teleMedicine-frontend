@@ -15,7 +15,6 @@ const getRandomColor = () => {
   while (randomIndex < 0 || randomIndex >= 10) {
     randomIndex = Math.floor(Math.random() * 10 + 1) - 1;
   }
-  console.log(randomIndex);
   return colors[randomIndex];
 };
 export default getRandomColor;
