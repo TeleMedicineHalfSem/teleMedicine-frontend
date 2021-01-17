@@ -16,7 +16,7 @@ function DoctorCard({ name, src, specialization, experience, initials }) {
     <div className="doctor-card">
       <div className="doctor-card-main">
         <div className="doctor-card-display-pic">
-          <DisplayPicture initials={initials} />
+          <DisplayPicture height="130px" width="130px" initials={initials} />
         </div>
         <div className="doctor-card-specs">
           <div>

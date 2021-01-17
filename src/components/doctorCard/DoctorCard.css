@@ -3,7 +3,7 @@
 }
 .doctor-card-main {
   display: flex;
-  height: 23vh;
+  height: 20vh;
 }
 .doctor-card-display-pic {
   width: 20%;
