@@ -1,15 +1,17 @@
 import React from "react";
 import "./PatientPage.css";
-import DocList from "../../components/docList/DoctorCard";
+import Navbar from "../../components/navbar/Navbar";
+import Footer from "../../components/footer/Footer";
 function PatientPage() {
   return (
-    <div>
-      <DocList
-        src="/images/card-img1.jpg"
-        name="Mayur"
-        specialization="Dentist"
-        experience="5"
-      />
+    <div className="patient-page">
+      <div className="patient-page-header">
+        <Navbar />
+      </div>
+      <div className="patient-page-body"></div>
+      <div className="patient-page-footer">
+        <Footer />
+      </div>
     </div>
   );
 }
