@@ -3,9 +3,10 @@ const authRequest = () => {
     type: "AUTH_LOADING",
   };
 };
-const authSuccess = () => {
+const authSuccess = (data) => {
   return {
     type: "AUTH_SUCCESS",
+    payload: data,
   };
 };
 const authFailure = (error) => {
@@ -23,12 +24,10 @@ export const signIn = ({ email, password }) => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        console.log("login success");
-        dispatch(authSuccess());
+        dispatch(authSuccess("Successfully Logged in"));
       })
       .catch((error) => {
-        console.log("login failed");
-        dispatch(authFailure(error));
+        dispatch(authFailure("Login Failed"));
       });
   };
 };
@@ -41,12 +40,10 @@ export const signOut = () => {
       .auth()
       .signOut()
       .then(() => {
-        dispatch(authSuccess());
-        console.log("logged out");
+        dispatch(authSuccess("Logged Out"));
       })
       .catch((error) => {
-        dispatch(authFailure(error));
-        console.log("logging out failed");
+        dispatch(authFailure("Logging out failed"));
       });
   };
 };
@@ -99,12 +96,10 @@ export const signUp = ({
         }
       })
       .then(() => {
-        dispatch(authSuccess());
-        console.log("Signed up Success");
+        dispatch(authSuccess("Successfully Signed up"));
       })
       .catch((error) => {
-        dispatch(authFailure(error));
-        console.log("signing up failed");
+        dispatch(authFailure("Signing up failed"));
       });
   };
 };

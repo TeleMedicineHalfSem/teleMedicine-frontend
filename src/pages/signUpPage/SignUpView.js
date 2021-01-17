@@ -17,7 +17,7 @@ import {
 import { connect } from "react-redux";
 import { signUp } from "../../actions/authActions";
 
-function SignUpView({ signUp }) {
+function SignUpView({ signUp, authData }) {
   // Constants...
   const PATIENT = "patient";
   const DOCTOR = "doctor";
@@ -32,9 +32,29 @@ function SignUpView({ signUp }) {
   const [registrationNumber, handleRegistrationNumber] = useState("");
   const [registrationCouncil, handleRegistrationCouncil] = useState("");
   const [registrationYear, handleRegistrationYear] = useState("");
-  const [alertVisible, setAlertVisible] = useState(false);
-  let alertMessage = "Please fulfill all input conditions.";
+  const [alertState, setAlertState] = useState({
+    alertMessage: "",
+    alertVisible: false,
+    alertColor: "danger",
+  });
   let history = useHistory();
+
+  // Destructuring data...
+  let { alertMessage, alertVisible, alertColor } = alertState;
+
+  // Checking if signing up gave an error...
+  if (authData.error) {
+    alertVisible = true;
+    alertMessage = authData.error;
+    alertColor = "danger";
+  }
+
+  // Checking if signed up successfully...
+  if (authData.success) {
+    alertVisible = true;
+    alertMessage = authData.success;
+    alertColor = "success";
+  }
 
   // Validations...
   const validations = () => {
@@ -55,9 +75,19 @@ function SignUpView({ signUp }) {
   // onClick Submit button...
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!validations()) return;
 
-    const isDoctor = selectedOption === DOCTOR ? true : false;
+    // Checking validations...
+    if (!validations()) {
+      setAlertState({
+        alertMessage: "Please fulfill all input criteria.",
+        alertVisible: true,
+        alertColor: "danger",
+      });
+      return;
+    }
+
+    // Signing up...
+    const isDoctor = selectedOption === DOCTOR;
     signUp({
       fullName,
       email,
@@ -114,9 +144,9 @@ function SignUpView({ signUp }) {
     <div className="sign-up-view">
       <div>
         <Alert
-          color="danger"
+          color={alertColor}
           isOpen={alertVisible}
-          toggle={() => setAlertVisible(false)}
+          toggle={() => setAlertState({ ...alertState, alertVisible: false })}
         >
           {alertMessage}
         </Alert>
@@ -187,4 +217,10 @@ function SignUpView({ signUp }) {
   );
 }
 
-export default connect(null, { signUp })(SignUpView);
+const mapStateToProps = (state) => {
+  return {
+    authData: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, { signUp })(SignUpView);

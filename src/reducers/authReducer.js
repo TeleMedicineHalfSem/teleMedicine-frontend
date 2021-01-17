@@ -7,9 +7,14 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case "AUTH_REQUEST":
-      return { ...state, loading: true };
+      return { ...state, loading: true, error: false, success: false };
     case "AUTH_SUCCESS":
-      return { ...state, loading: false, error: null, success: true };
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        success: action.payload,
+      };
     case "AUTH_FAIL":
       return {
         ...state,
