@@ -14,6 +14,7 @@ function DoctorList({ doctors }) {
           name={doctor.fullName}
           specialization={doctor.specialization}
           experience={doctor.registrationYear}
+          initials={doctor.initials}
         />
       </div>
     ));

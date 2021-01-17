@@ -11,6 +11,7 @@ function Nav({ auth, profile }) {
   let firstName = "";
   let email = "";
   let username = "";
+  let initials = "";
   let loggedIn = false;
   let history = useHistory();
 
@@ -24,6 +25,7 @@ function Nav({ auth, profile }) {
     firstName = profile.firstName;
     email = profile.email;
     username = profile.fullName;
+    initials = profile.initials;
   }
 
   const onClickSignIn = () => {
@@ -74,6 +76,7 @@ function Nav({ auth, profile }) {
         toggle={setDropDownVisible}
         username={username}
         email={email}
+        initials={initials}
       />
     </>
   );
