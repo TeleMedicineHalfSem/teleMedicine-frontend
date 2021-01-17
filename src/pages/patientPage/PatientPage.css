@@ -1,3 +1,12 @@
 .patient-page-body {
-  height: calc(100vh - var(--height-navbar));
+  min-height: calc(100vh - var(--height-navbar));
+}
+.patient-page-search {
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.patient-page-card-container {
+  width: 90%;
 }
