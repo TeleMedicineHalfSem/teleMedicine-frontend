@@ -40,10 +40,7 @@ function Nav({ auth }) {
   );
 
   const profileView = (
-    <button
-      onClick={() => setDropDownVisible(!dropDownVisible)}
-      className="navbar-profile"
-    >
+    <button onClick={() => setDropDownVisible(true)} className="navbar-profile">
       <b>{username}</b>
       <img
         src="/images/arrow-down.svg"
@@ -61,13 +58,17 @@ function Nav({ auth }) {
         </div>
         <div className="navbar-head">{loggedIn ? profileView : loginView}</div>
       </div>
-      {dropDownVisible ? <Dropdown username={username} email={email} /> : null}
+      <Dropdown
+        isVisible={dropDownVisible}
+        toggle={setDropDownVisible}
+        username={username}
+        email={email}
+      />
     </>
   );
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     auth: state.firebase.auth,
   };
