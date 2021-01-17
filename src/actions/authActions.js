@@ -61,18 +61,22 @@ export const signUp = ({
   return (dispatch, getState, { getFirestore, getFirebase }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
+
+    // Deriving first name, last name and initials....
+    const name = fullName.split(" ");
+    const firstName = name[0];
+    let lastName = "";
+    if (name[1]) {
+      lastName = name[1];
+    }
+    const initials = name[0][0];
+    let uid = null;
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((resp) => {
-        // Deriving first name, last name and initials....
-        const name = fullName.split(" ");
-        const firstName = name[0];
-        let lastName = "";
-        if (name[1]) {
-          lastName = name[1];
-        }
-        const initials = name[0][0];
+        uid = resp.user.uid;
 
         // Setting all user data...
         return firestore.collection("users").doc(resp.user.uid).set({
@@ -83,8 +87,31 @@ export const signUp = ({
           isDoctor: isDoctor,
           email: email,
         });
-
-        // TODO: Have to put doctors and patient data separately...
+      })
+      .then(() => {
+        if (uid !== null) {
+          if (isDoctor) {
+            return firestore.collection("doctors").doc(uid).set({
+              fullName: fullName,
+              firstName: firstName,
+              lastName: lastName,
+              initials: initials,
+              email: email,
+              specialization: specialization,
+              registrationCouncil: registrationCouncil,
+              registrationNumber: registrationNumber,
+              registrationYear: registrationYear,
+            });
+          } else {
+            return firestore.collection("patients").doc(uid).set({
+              fullName: fullName,
+              firstName: firstName,
+              lastName: lastName,
+              initials: initials,
+              email: email,
+            });
+          }
+        }
       })
       .then(() => {
         dispatch(authSuccess("Successfully Signed up"));
