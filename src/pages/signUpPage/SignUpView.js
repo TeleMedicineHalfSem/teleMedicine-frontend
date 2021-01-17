@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SignUpPage.css";
 import Button from "../../components/button/Button";
 import TextInput from "../../components/input/TextInput";
@@ -40,21 +40,27 @@ function SignUpView({ signUp, authData }) {
   let history = useHistory();
 
   // Destructuring data...
-  let { alertMessage, alertVisible, alertColor } = alertState;
+  const { alertMessage, alertVisible, alertColor } = alertState;
 
-  // Checking if signing up gave an error...
-  if (authData.error) {
-    alertVisible = true;
-    alertMessage = authData.error;
-    alertColor = "danger";
-  }
+  useEffect(() => {
+    // Checking if signing up gave an error...
+    if (authData.error) {
+      setAlertState({
+        alertColor: "danger",
+        alertMessage: authData.error,
+        alertVisible: true,
+      });
+    }
 
-  // Checking if signed up successfully...
-  if (authData.success) {
-    alertVisible = true;
-    alertMessage = authData.success;
-    alertColor = "success";
-  }
+    // Checking if signed up successfully...
+    if (authData.success) {
+      setAlertState({
+        alertColor: "success",
+        alertMessage: authData.success,
+        alertVisible: true,
+      });
+    }
+  }, [authData.error, authData.success]);
 
   // Validations...
   const validations = () => {
