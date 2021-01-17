@@ -4,7 +4,9 @@ import { connect } from "react-redux";
 import { signOut } from "../../actions/authActions";
 
 function Dropdown({ username, email, isVisible, toggle, signOut }) {
-  const onClickLogOut = () => {};
+  const onClickLogOut = () => {
+    signOut();
+  };
   return (
     <>
       {isVisible ? (
