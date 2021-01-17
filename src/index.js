@@ -27,11 +27,11 @@ const store = createStore(
 
 store.firebaseAuthIsReady.then(() => {
   ReactDOM.render(
-    <Provider store={store}>
-      <React.Fragment>
+    <React.Fragment>
+      <Provider store={store}>
         <App />
-      </React.Fragment>
-    </Provider>,
+      </Provider>
+    </React.Fragment>,
     document.getElementById("root")
   );
   reportWebVitals();

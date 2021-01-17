@@ -9,4 +9,12 @@
 }
 .patient-page-card-container {
   width: 90%;
+  margin-left: 8%;
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+.patient-page-text {
+  font-family: var(--secondary-font);
+  font-size: 110%;
+  margin-left: 5%;
 }

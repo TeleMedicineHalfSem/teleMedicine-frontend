@@ -3,6 +3,7 @@ import "./PatientPage.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import { SearchBar } from "../../components/input/inputs";
+import DoctorList from "./DoctorList";
 function PatientPage() {
   return (
     <div className="patient-page">
@@ -13,7 +14,12 @@ function PatientPage() {
         <div className="patient-page-search">
           <SearchBar placeholder="Search for a specialization..." />
         </div>
-        <div className="patient-page-card-container"></div>
+        <p className="patient-page-text">Select a doctor to chat</p>
+        <div className="patient-page-card-container">
+          <DoctorList />
+        </div>
+        <br />
+        <br />
       </div>
       <div className="patient-page-footer">
         <Footer />

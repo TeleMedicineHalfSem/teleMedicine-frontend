@@ -4,7 +4,7 @@ import Button from "../button/Button";
 import Divider from "../divider/Divider";
 
 function DoctorCard({ name, src, specialization, experience }) {
-  const expString = `${experience} years experience overall`;
+  const expString = `In practice since ${experience}`;
   const nameString = `Dr. ${name}`;
 
   const onClickChat = () => {
