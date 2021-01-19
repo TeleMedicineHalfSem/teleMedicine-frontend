@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SignInPage.css";
 import TextInput from "../../components/input/TextInput";
 import Button from "../../components/button/Button";
@@ -6,23 +6,64 @@ import CustomLink from "../../components/link/CustomLink";
 import { Alert } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { validateEmail, validatePassword } from "../../utils/validations";
+import { connect } from "react-redux";
+import { signIn } from "../../actions/authActions";
 
-function SignInView() {
+function SignInView({ signIn, authData }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertState, setAlertState] = useState({
+    alertMessage: "",
+    alertVisible: false,
+    alertColor: "danger",
+  });
   let history = useHistory();
-  let alertMessage = "Required input not satisfied.";
+
+  // Destructuring data...
+  const { alertMessage, alertVisible, alertColor } = alertState;
+
+  useEffect(() => {
+    // Checking if signing up gave an error...
+    if (authData.error) {
+      setAlertState({
+        alertColor: "danger",
+        alertMessage: authData.error,
+        alertVisible: true,
+      });
+    }
+
+    // Checking if signed up successfully...
+    if (authData.success) {
+      setAlertState({
+        alertColor: "success",
+        alertMessage: authData.success,
+        alertVisible: true,
+      });
+    }
+  }, [authData.error, authData.success]);
+
+  // Validations...
+  const validations = () => {
+    const validated =
+      validateEmail(email).valid && validatePassword(password).valid;
+    return validated;
+  };
 
   const onClickSignIn = (event) => {
     event.preventDefault();
-    const validated =
-      validateEmail(email).valid && validatePassword(password).valid;
-    if (!validated) {
-      setAlertVisible(true);
+
+    // Checking validations...
+    if (!validations()) {
+      setAlertState({
+        alertMessage: "Please fulfill all input criteria.",
+        alertVisible: true,
+        alertColor: "danger",
+      });
       return;
     }
-    // TODO: Write from here...
+
+    // Signing in...
+    signIn({ email, password });
   };
 
   const onClickSignup = () => {
@@ -32,9 +73,9 @@ function SignInView() {
   return (
     <div>
       <Alert
-        color="danger"
+        color={alertColor}
         isOpen={alertVisible}
-        toggle={() => setAlertVisible(false)}
+        toggle={() => setAlertState({ ...alertState, alertVisible: false })}
       >
         {alertMessage}
       </Alert>
@@ -71,4 +112,10 @@ function SignInView() {
   );
 }
 
-export default SignInView;
+const mapStateToProps = (state) => {
+  return {
+    authData: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, { signIn })(SignInView);

@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import "./PatientPage.css";
-import DocList from "../../components/docList/DoctorCard";
+import Navbar from "../../components/navbar/Navbar";
+import Footer from "../../components/footer/Footer";
+import { SearchBar } from "../../components/input/inputs";
+import DoctorList from "./DoctorList";
 function PatientPage() {
+  const [searchText, setSearchText] = useState("");
+
   return (
-    <div>
-      <DocList
-        src="/images/card-img1.jpg"
-        name="Mayur"
-        specialization="Dentist"
-        experience="5"
-      />
+    <div className="patient-page">
+      <div className="patient-page-header">
+        <Navbar />
+      </div>
+      <div className="patient-page-body">
+        <div className="patient-page-search">
+          <SearchBar
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder="Search for a specialization..."
+          />
+        </div>
+        <p className="patient-page-text">Select a doctor to chat</p>
+        <div className="patient-page-card-container">
+          <DoctorList searchText={searchText} />
+        </div>
+        <br />
+        <br />
+      </div>
+      <div className="patient-page-footer">
+        <Footer />
+      </div>
     </div>
   );
 }

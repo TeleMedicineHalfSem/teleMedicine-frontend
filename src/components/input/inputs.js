@@ -1,3 +1,4 @@
 import RadioInput from "./RadioInput";
 import TextInput from "./TextInput";
-export { RadioInput, TextInput };
+import SearchBar from "./SearchBar";
+export { RadioInput, TextInput, SearchBar };

@@ -4,14 +4,29 @@ import CustomLink from "../link/CustomLink";
 import "./Navbar.css";
 import { useHistory } from "react-router-dom";
 import Dropdown from "./Dropdown";
+import { connect } from "react-redux";
 
-function Nav() {
+function Nav({ auth, profile }) {
   const [dropDownVisible, setDropDownVisible] = useState(false);
-  const username = "Slokha"; // Get these data from database...
-  const email = "slokhaiyer@gmail.com"; // Get these data from database...
-  const loggedIn = false; // Get this from cookie...
-
+  let firstName = "";
+  let email = "";
+  let username = "";
+  let initials = "";
+  let loggedIn = false;
   let history = useHistory();
+
+  // Checking if user is signed in or not...
+  if (auth !== undefined && auth.uid) {
+    loggedIn = true;
+  }
+
+  // Getting data from database...
+  if (!profile.isEmpty) {
+    firstName = profile.firstName;
+    email = profile.email;
+    username = profile.fullName;
+    initials = profile.initials;
+  }
 
   const onClickSignIn = () => {
     history.push("/signin");
@@ -39,7 +54,7 @@ function Nav() {
       onClick={() => setDropDownVisible(!dropDownVisible)}
       className="navbar-profile"
     >
-      <b>{username}</b>
+      <b>{firstName}</b>
       <img
         src="/images/arrow-down.svg"
         alt=""
@@ -56,9 +71,22 @@ function Nav() {
         </div>
         <div className="navbar-head">{loggedIn ? profileView : loginView}</div>
       </div>
-      {dropDownVisible ? <Dropdown username={username} email={email} /> : null}
+      <Dropdown
+        isVisible={dropDownVisible}
+        toggle={setDropDownVisible}
+        username={username}
+        email={email}
+        initials={initials}
+      />
     </>
   );
 }
 
-export default Nav;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    profile: state.firebase.profile,
+  };
+};
+
+export default connect(mapStateToProps)(Nav);
