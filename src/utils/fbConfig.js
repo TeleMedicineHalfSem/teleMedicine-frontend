@@ -3,13 +3,12 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC3CNX-bkOGtjkWbMyiuzu1zqgp-s1mzJU",
-  authDomain: "halfsemtelemedecine.firebaseapp.com",
-  projectId: "halfsemtelemedecine",
-  storageBucket: "halfsemtelemedecine.appspot.com",
-  messagingSenderId: "894837473511",
-  appId: "1:894837473511:web:298fd6002702544dace242",
-  measurementId: "G-P5HDC7VQ67",
+  apiKey: "AIzaSyCFBS40KjT4zBIc6bS2YD-gQOavWlz2aRk",
+  authDomain: "easycare-bd7a4.firebaseapp.com",
+  projectId: "easycare-bd7a4",
+  storageBucket: "easycare-bd7a4.appspot.com",
+  messagingSenderId: "485695445000",
+  appId: "1:485695445000:web:16ec065a6997973275d9bd"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

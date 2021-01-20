@@ -22,6 +22,13 @@ const authReducer = (state = initialState, action) => {
         error: action.payload,
         success: false,
       };
+      case "AUTH_RESET":
+        return{
+          ...state,
+          loading: false,
+          error: null,
+          success: false,
+        }
     default:
       return state;
   }

@@ -7,9 +7,9 @@ import { Alert } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { validateEmail, validatePassword } from "../../utils/validations";
 import { connect } from "react-redux";
-import { signIn } from "../../actions/authActions";
+import { signIn,authReset } from "../../actions/authActions";
 
-function SignInView({ signIn, authData }) {
+function SignInView({ signIn, authData, authReset }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alertState, setAlertState] = useState({
@@ -70,12 +70,17 @@ function SignInView({ signIn, authData }) {
     history.push("/signup");
   };
 
+  const removeAlert = () => {
+    authReset()
+    setAlertState({ ...alertState, alertVisible: false })
+  }
+
   return (
     <div>
       <Alert
         color={alertColor}
         isOpen={alertVisible}
-        toggle={() => setAlertState({ ...alertState, alertVisible: false })}
+        toggle={removeAlert}
       >
         {alertMessage}
       </Alert>
@@ -118,4 +123,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { signIn })(SignInView);
+export default connect(mapStateToProps, { signIn,authReset })(SignInView);
