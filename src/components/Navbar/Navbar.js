@@ -3,7 +3,7 @@ import Button from "../button/Button";
 import CustomLink from "../link/CustomLink";
 import "./Navbar.css";
 import { useHistory } from "react-router-dom";
-import Dropdown from "./Dropdown";
+import Dropdown from "./dropdown";
 import { connect } from "react-redux";
 
 function Nav({ auth, profile }) {

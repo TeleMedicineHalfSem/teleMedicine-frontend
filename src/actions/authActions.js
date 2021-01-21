@@ -15,6 +15,11 @@ const authFailure = (error) => {
     payload: error,
   };
 };
+export const authReset = () => {
+  return {
+    type: "AUTH_RESET",
+  };
+};
 
 export const signIn = ({ email, password }) => {
   return (dispatch, getState, { getFirebase }) => {
@@ -29,6 +34,7 @@ export const signIn = ({ email, password }) => {
       .catch((error) => {
         dispatch(authFailure("Login Failed"));
       });
+      dispatch(authReset());
   };
 };
 
@@ -45,6 +51,7 @@ export const signOut = () => {
       .catch((error) => {
         dispatch(authFailure("Logging out failed"));
       });
+      dispatch(authReset());
   };
 };
 
@@ -119,5 +126,6 @@ export const signUp = ({
       .catch((error) => {
         dispatch(authFailure("Signing up failed"));
       });
+      dispatch(authReset());
   };
 };

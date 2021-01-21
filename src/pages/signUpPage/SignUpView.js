@@ -15,7 +15,7 @@ import {
   validateText,
 } from "../../utils/validations";
 import { connect } from "react-redux";
-import { signUp } from "../../actions/authActions";
+import { signUp,authReset } from "../../actions/authActions";
 
 function SignUpView({ signUp, authData }) {
   // Constants...
@@ -111,6 +111,11 @@ function SignUpView({ signUp, authData }) {
     history.push("/signin");
   };
 
+  const removeAlert = () => {
+    authReset()
+    setAlertState({ ...alertState, alertVisible: false })
+  }
+
   // Doctor's details view....
   const doctorDetailView = (
     <div>
@@ -152,7 +157,7 @@ function SignUpView({ signUp, authData }) {
         <Alert
           color={alertColor}
           isOpen={alertVisible}
-          toggle={() => setAlertState({ ...alertState, alertVisible: false })}
+          toggle={removeAlert}
         >
           {alertMessage}
         </Alert>
@@ -229,4 +234,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { signUp })(SignUpView);
+export default connect(mapStateToProps, { signUp,authReset })(SignUpView);
