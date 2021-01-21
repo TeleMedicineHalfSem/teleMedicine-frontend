@@ -3,9 +3,9 @@
 }
 .doctor-card-main {
   display: flex;
-  height: 23vh;
+  height: 20vh;
 }
-.doctor-card-image-container {
+.doctor-card-display-pic {
   width: 20%;
   height: 100%;
   text-align: center;

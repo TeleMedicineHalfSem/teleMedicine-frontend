@@ -2,9 +2,10 @@ import React from "react";
 import "./DoctorCard.css";
 import Button from "../button/Button";
 import Divider from "../divider/Divider";
+import DisplayPicture from "../displayPicture/DisplayPicture";
 
-function DoctorCard({ name, src, specialization, experience }) {
-  const expString = `${experience} years experience overall`;
+function DoctorCard({ name, src, specialization, experience, initials }) {
+  const expString = `In practice since ${experience}`;
   const nameString = `Dr. ${name}`;
 
   const onClickChat = () => {
@@ -14,8 +15,8 @@ function DoctorCard({ name, src, specialization, experience }) {
   return (
     <div className="doctor-card">
       <div className="doctor-card-main">
-        <div className="doctor-card-image-container">
-          <img className="doctor-card-image" src={src} alt="" />
+        <div className="doctor-card-display-pic">
+          <DisplayPicture height="130px" width="130px" initials={initials} />
         </div>
         <div className="doctor-card-specs">
           <div>

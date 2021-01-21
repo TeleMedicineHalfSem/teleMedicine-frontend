@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SignUpPage.css";
 import Button from "../../components/button/Button";
 import TextInput from "../../components/input/TextInput";
@@ -14,8 +14,10 @@ import {
   validateYear,
   validateText,
 } from "../../utils/validations";
+import { connect } from "react-redux";
+import { signUp, authReset } from "../../actions/authActions";
 
-function SignUpView() {
+function SignUpView({ signUp, authData, authReset }) {
   // Constants...
   const PATIENT = "patient";
   const DOCTOR = "doctor";
@@ -30,13 +32,38 @@ function SignUpView() {
   const [registrationNumber, handleRegistrationNumber] = useState("");
   const [registrationCouncil, handleRegistrationCouncil] = useState("");
   const [registrationYear, handleRegistrationYear] = useState("");
-  const [alertVisible, setAlertVisible] = useState(false);
-  let alertMessage = "Please fulfill all input conditions.";
+  const [alertState, setAlertState] = useState({
+    alertMessage: "",
+    alertVisible: false,
+    alertColor: "danger",
+  });
   let history = useHistory();
 
-  // onClick Submit button...
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // Destructuring data...
+  const { alertMessage, alertVisible, alertColor } = alertState;
+
+  useEffect(() => {
+    // Checking if signing up gave an error...
+    if (authData.error) {
+      setAlertState({
+        alertColor: "danger",
+        alertMessage: authData.error,
+        alertVisible: true,
+      });
+    }
+
+    // Checking if signed up successfully...
+    if (authData.success) {
+      setAlertState({
+        alertColor: "success",
+        alertMessage: authData.success,
+        alertVisible: true,
+      });
+    }
+  }, [authData.error, authData.success]);
+
+  // Validations...
+  const validations = () => {
     let validated =
       validateName(fullName).valid &&
       validateEmail(email).valid &&
@@ -48,17 +75,45 @@ function SignUpView() {
         validateText(specialization).valid &&
         validateYear(registrationYear).valid;
     }
-    if (!validated) {
-      setAlertVisible(true);
+    return validated;
+  };
+
+  // onClick Submit button...
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Checking validations...
+    if (!validations()) {
+      setAlertState({
+        alertMessage: "Please fulfill all input criteria.",
+        alertVisible: true,
+        alertColor: "danger",
+      });
       return;
     }
-    console.log(registrationCouncil, registrationNumber);
-    // TODO: Do the works here...
+
+    // Signing up...
+    const isDoctor = selectedOption === DOCTOR;
+    signUp({
+      fullName,
+      email,
+      password,
+      isDoctor,
+      specialization,
+      registrationCouncil,
+      registrationNumber,
+      registrationYear,
+    });
   };
 
   // onClick sign in link...
   const handleSignInLink = () => {
     history.push("/signin");
+  };
+
+  const removeAlert = () => {
+    authReset();
+    setAlertState({ ...alertState, alertVisible: false });
   };
 
   // Doctor's details view....
@@ -99,11 +154,7 @@ function SignUpView() {
   return (
     <div className="sign-up-view">
       <div>
-        <Alert
-          color="danger"
-          isOpen={alertVisible}
-          toggle={() => setAlertVisible(false)}
-        >
+        <Alert color={alertColor} isOpen={alertVisible} toggle={removeAlert}>
           {alertMessage}
         </Alert>
         <h3 className="sign-up-view-head">Sign Up</h3>
@@ -173,4 +224,10 @@ function SignUpView() {
   );
 }
 
-export default SignUpView;
+const mapStateToProps = (state) => {
+  return {
+    authData: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, { signUp, authReset })(SignUpView);
