@@ -21,6 +21,8 @@ function SignUpView({ signUp, authData, authReset }) {
   // Constants...
   const PATIENT = "patient";
   const DOCTOR = "doctor";
+  const MALE = "male";
+  const FEMALE = "female";
 
   // Initializations...
   const [fullName, handleFullName] = useState("");
@@ -32,12 +34,16 @@ function SignUpView({ signUp, authData, authReset }) {
   const [registrationNumber, handleRegistrationNumber] = useState("");
   const [registrationCouncil, handleRegistrationCouncil] = useState("");
   const [registrationYear, handleRegistrationYear] = useState("");
+  const [selectedGender, handleGender] = useState(MALE);
+  const [dob, handleDob] = useState("");
   const [alertState, setAlertState] = useState({
     alertMessage: "",
     alertVisible: false,
     alertColor: "danger",
   });
   let history = useHistory();
+
+  console.log(dob);
 
   // Destructuring data...
   const { alertMessage, alertVisible, alertColor } = alertState;
@@ -167,6 +173,30 @@ function SignUpView({ signUp, authData, authReset }) {
               type={"name"}
             />
           </div>
+          <div>
+            <TextInput
+              type="date"
+              onChange={(e) => handleDob(e.target.value)}
+              value={dob}
+            />
+          </div>
+          <div>
+            <RadioInput
+              checked={selectedGender === MALE}
+              onChange={(e) => handleGender(e.target.value)}
+              value={MALE}
+            >
+              Male
+            </RadioInput>
+            <RadioInput
+              checked={selectedGender === FEMALE}
+              onChange={(e) => handleGender(e.target.value)}
+              value={FEMALE}
+            >
+              Female
+            </RadioInput>
+          </div>
+
           <div>
             <TextInput
               placeholder={"Email"}

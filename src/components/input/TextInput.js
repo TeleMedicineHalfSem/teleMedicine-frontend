@@ -20,6 +20,9 @@ function TextInput({ placeholder, size, onChange, type, confirm }) {
 
   // Type...
   switch (type) {
+    case "date":
+      inputType = "date";
+      break;
     case "name":
       inputType = "text";
       break;
