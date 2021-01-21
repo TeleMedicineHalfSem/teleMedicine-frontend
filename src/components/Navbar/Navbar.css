@@ -15,6 +15,7 @@
   font-family: var(--secondary-font);
   margin-left: 60px;
   font-size: xx-large;
+  cursor: pointer;
 }
 .navbar-head {
   display: flex;

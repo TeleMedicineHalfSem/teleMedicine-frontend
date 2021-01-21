@@ -36,6 +36,10 @@ function Nav({ auth, profile }) {
     history.push("/signup");
   };
 
+  const onClickLogo = () => {
+    history.push("/");
+  };
+
   const loginView = (
     <>
       <div className="navbar-signIn">
@@ -66,7 +70,7 @@ function Nav({ auth, profile }) {
   return (
     <>
       <div className="navbar">
-        <div className="navbar-logo">
+        <div onClick={onClickLogo} className="navbar-logo">
           <b>EasyCare</b>
         </div>
         <div className="navbar-head">{loggedIn ? profileView : loginView}</div>
