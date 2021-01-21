@@ -43,8 +43,6 @@ function SignUpView({ signUp, authData, authReset }) {
   });
   let history = useHistory();
 
-  console.log(dob);
-
   // Destructuring data...
   const { alertMessage, alertVisible, alertColor } = alertState;
 
@@ -74,7 +72,8 @@ function SignUpView({ signUp, authData, authReset }) {
       validateName(fullName).valid &&
       validateEmail(email).valid &&
       validatePassword(password).valid &&
-      validateConfirmPassword(password, confirmPassword).valid;
+      validateConfirmPassword(password, confirmPassword).valid &&
+      validateText(dob).valid;
     if (selectedOption === DOCTOR) {
       validated =
         validated &&
