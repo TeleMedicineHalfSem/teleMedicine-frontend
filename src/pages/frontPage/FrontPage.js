@@ -21,11 +21,7 @@ function FrontPage({ auth }) {
 
   // Sign in button clicked...
   const onClickSignIn = () => {
-    if (!loggedIn) {
-      history.push("/signin");
-    } else {
-      history.push("/patient");
-    }
+    history.push("/signin");
   };
 
   // Sign up button clicked...
