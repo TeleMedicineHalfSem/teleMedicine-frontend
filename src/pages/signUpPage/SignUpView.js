@@ -99,8 +99,12 @@ function SignUpView({ signUp, authData, authReset }) {
 
     // Signing up...
     const isDoctor = selectedOption === DOCTOR;
+    const gender = selectedGender;
+
     signUp({
       fullName,
+      gender,
+      dob,
       email,
       password,
       isDoctor,
