@@ -34,7 +34,7 @@ export const signIn = ({ email, password }) => {
       .catch((error) => {
         dispatch(authFailure("Login Failed"));
       });
-      dispatch(authReset());
+    dispatch(authReset());
   };
 };
 
@@ -51,12 +51,14 @@ export const signOut = () => {
       .catch((error) => {
         dispatch(authFailure("Logging out failed"));
       });
-      dispatch(authReset());
+    dispatch(authReset());
   };
 };
 
 export const signUp = ({
   fullName,
+  gender,
+  dob,
   email,
   password,
   isDoctor,
@@ -93,6 +95,8 @@ export const signUp = ({
           initials: initials,
           isDoctor: isDoctor,
           email: email,
+          gender: gender,
+          dob: dob,
         });
       })
       .then(() => {
@@ -104,6 +108,8 @@ export const signUp = ({
               lastName: lastName,
               initials: initials,
               email: email,
+              gender: gender,
+              dob: dob,
               specialization: specialization,
               registrationCouncil: registrationCouncil,
               registrationNumber: registrationNumber,
@@ -116,6 +122,8 @@ export const signUp = ({
               lastName: lastName,
               initials: initials,
               email: email,
+              gender: gender,
+              dob: dob,
             });
           }
         }
@@ -126,6 +134,6 @@ export const signUp = ({
       .catch((error) => {
         dispatch(authFailure("Signing up failed"));
       });
-      dispatch(authReset());
+    dispatch(authReset());
   };
 };

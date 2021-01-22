@@ -8,9 +8,16 @@ import reviews from "../../utils/reviews";
 import Footer from "../../components/footer/Footer";
 import Divider from "../../components/divider/Divider";
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
-function FrontPage() {
+function FrontPage({ auth }) {
   let history = useHistory();
+  let loggedIn = false;
+
+  // Checking if user is signed in or not...
+  if (auth !== undefined && auth.uid) {
+    loggedIn = true;
+  }
 
   // Sign in button clicked...
   const onClickSignIn = () => {
@@ -21,6 +28,15 @@ function FrontPage() {
   const onClickSignUp = () => {
     history.push("/signup");
   };
+
+  const loginView = (
+    <div style={{ display: "flex", float: "right" }}>
+      <CustomLink onClick={onClickSignIn}>Sign in</CustomLink>
+      <Button b_style="custom" onClick={onClickSignUp}>
+        Sign up
+      </Button>
+    </div>
+  );
 
   return (
     <div className="front-page">
@@ -37,12 +53,7 @@ function FrontPage() {
             </h1>
           </div>
           <div className="front-page-header-right">
-            <div style={{ display: "flex", float: "right" }}>
-              <CustomLink onClick={onClickSignIn}>Sign in</CustomLink>
-              <Button b_style="custom" onClick={onClickSignUp}>
-                Sign up
-              </Button>
-            </div>
+            {!loggedIn ? loginView : null}
           </div>
         </div>
         <div className="front-page-body">
@@ -102,4 +113,10 @@ function FrontPage() {
   );
 }
 
-export default FrontPage;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+export default connect(mapStateToProps)(FrontPage);
