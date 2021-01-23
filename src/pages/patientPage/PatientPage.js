@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./PatientPage.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import { SearchBar } from "../../components/input/inputs";
+import { getDoctors, searchDoctor } from "../../actions/doctorActions";
+import { connect } from "react-redux";
 
-function PatientPage() {
+function PatientPage({ doctors, getDoctors, searchDoctor }) {
   const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    if (searchText === "") {
+      getDoctors();
+    } else {
+      searchDoctor({ searchText });
+    }
+  }, [searchText, getDoctors, searchDoctor]);
+
   return (
     <div className="patient-page">
       <div className="patient-page-header">
@@ -31,4 +42,12 @@ function PatientPage() {
   );
 }
 
-export default PatientPage;
+const mapStateToProps = (state) => {
+  return {
+    doctors: state.doctors,
+  };
+};
+
+export default connect(mapStateToProps, { getDoctors, searchDoctor })(
+  PatientPage
+);

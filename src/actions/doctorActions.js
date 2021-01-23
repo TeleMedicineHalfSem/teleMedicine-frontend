@@ -1,3 +1,5 @@
+import { FireSQL } from "firesql";
+
 const doctorRequest = () => {
   return {
     type: "DOCTOR_LOADING",
@@ -46,15 +48,17 @@ export const searchDoctor = ({ searchText }) => {
   return (dispatch, getState, { getFirestore }) => {
     dispatch(doctorRequest());
     const firestore = getFirestore();
+    const fireSQL = new FireSQL(firestore);
     let doctors = [];
-    firestore
-      .collection("doctors")
-      .startAt(searchText)
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          doctors.push(doc.data());
-        });
+
+    const doctorQuery = fireSQL.query(
+      `SELECT * FROM doctors WHERE specialization LIKE '${searchText}%' 
+      OR fullName LIKE '${searchText}%' 
+      OR gender LIKE '${searchText}%'`
+    );
+    doctorQuery
+      .then((doctorList) => {
+        doctors = doctorList;
         dispatch(doctorSuccess(doctors));
       })
       .catch((error) => {
