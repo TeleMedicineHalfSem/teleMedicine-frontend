@@ -41,3 +41,24 @@ export const getDoctors = () => {
       });
   };
 };
+
+export const searchDoctor = ({ searchText }) => {
+  return (dispatch, getState, { getFirestore }) => {
+    dispatch(doctorRequest());
+    const firestore = getFirestore();
+    let doctors = [];
+    firestore
+      .collection("doctors")
+      .startAt(searchText)
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          doctors.push(doc.data());
+        });
+        dispatch(doctorSuccess(doctors));
+      })
+      .catch((error) => {
+        dispatch(doctorFailure("Unable to retrieve data"));
+      });
+  };
+};
