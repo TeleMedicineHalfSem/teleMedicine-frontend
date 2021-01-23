@@ -49,12 +49,14 @@ export const searchDoctor = ({ searchText }) => {
     dispatch(doctorRequest());
     const firestore = getFirestore();
     const fireSQL = new FireSQL(firestore);
+    searchText = searchText.toLowerCase();
     let doctors = [];
 
     const doctorQuery = fireSQL.query(
-      `SELECT * FROM doctors WHERE specialization LIKE '${searchText}%' 
-      OR fullName LIKE '${searchText}%' 
-      OR gender LIKE '${searchText}%'`
+      `SELECT * FROM doctors WHERE 
+      specialization LIKE '${searchText}%' OR 
+      fullName LIKE '${searchText}%' OR 
+      gender LIKE '${searchText}%'`
     );
     doctorQuery
       .then((doctorList) => {

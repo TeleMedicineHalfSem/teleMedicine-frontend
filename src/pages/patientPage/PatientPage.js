@@ -5,10 +5,13 @@ import Footer from "../../components/footer/Footer";
 import { SearchBar } from "../../components/input/inputs";
 import { getDoctors, searchDoctor } from "../../actions/doctorActions";
 import { connect } from "react-redux";
+import DoctorCard from "../../components/doctorCard/DoctorCard";
 
 function PatientPage({ doctors, getDoctors, searchDoctor }) {
   const [searchText, setSearchText] = useState("");
+  let doctorListView = null;
 
+  // Retrieving data from database...
   useEffect(() => {
     if (searchText === "") {
       getDoctors();
@@ -16,6 +19,18 @@ function PatientPage({ doctors, getDoctors, searchDoctor }) {
       searchDoctor({ searchText });
     }
   }, [searchText, getDoctors, searchDoctor]);
+
+  if (doctors && doctors.success) {
+    doctorListView = doctors.success.map((doctor) => (
+      <DoctorCard
+        key={doctor.email}
+        name={doctor.fullName}
+        specialization={doctor.specialization}
+        experience={doctor.registrationYear}
+        initials={doctor.initials}
+      />
+    ));
+  }
 
   return (
     <div className="patient-page">
@@ -31,7 +46,7 @@ function PatientPage({ doctors, getDoctors, searchDoctor }) {
           />
         </div>
         <p className="patient-page-text">Select a doctor to chat</p>
-        <div className="patient-page-card-container"></div>
+        <div className="patient-page-card-container">{doctorListView}</div>
         <br />
         <br />
       </div>
