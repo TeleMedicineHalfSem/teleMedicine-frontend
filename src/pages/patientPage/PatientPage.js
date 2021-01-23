@@ -6,7 +6,7 @@ import { SearchBar } from "../../components/input/inputs";
 import DoctorList from "./DoctorList";
 import {connect} from "react-redux";
 import {getDoctor} from "../../actions/doctorAction";
-function PatientPage({getDoctor}) {
+function PatientPage({getDoctor,doctors}) {
   const [searchText, setSearchText] = useState("");
   getDoctor()
   return (
@@ -34,5 +34,9 @@ function PatientPage({getDoctor}) {
     </div>
   );
 }
-
-export default connect(null,{getDoctor}) (PatientPage);
+const mapStateToProps= (state) =>{
+  return {
+    doctors:state.doctors
+  }
+}
+export default connect(mapStateToProps,{getDoctor}) (PatientPage);

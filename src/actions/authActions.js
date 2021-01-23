@@ -34,7 +34,6 @@ export const signIn = ({ email, password }) => {
       .catch((error) => {
         dispatch(authFailure("Login Failed"));
       });
-    dispatch(authReset());
   };
 };
 
@@ -51,7 +50,7 @@ export const signOut = () => {
       .catch((error) => {
         dispatch(authFailure("Logging out failed"));
       });
-    dispatch(authReset());
+    
   };
 };
 
@@ -134,6 +133,6 @@ export const signUp = ({
       .catch((error) => {
         dispatch(authFailure("Signing up failed"));
       });
-    dispatch(authReset());
+    
   };
 };
