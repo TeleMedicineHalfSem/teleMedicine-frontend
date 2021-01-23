@@ -1,10 +1,8 @@
 import React from "react";
 import "./DisplayPicture.css";
-import getRandomColor from "../../utils/getRandomColor";
 
 function DisplayPicture({ initials, height, width, fontSize }) {
-  const color = getRandomColor();
-  let style = { background: color };
+  let style = {};
   if (height) {
     style["height"] = height;
   }
