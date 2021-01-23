@@ -40,7 +40,6 @@ export const getDoctors = (limit) => {
           // Making first letter of all the text as capital...
           document.fullName = camelCaseText(document.fullName);
           document.specialization = camelCaseText(document.specialization);
-          document.email = camelCaseText(document.email);
           doctors.push(document);
         });
         dispatch(doctorSuccess(doctors));
@@ -72,7 +71,6 @@ export const searchDoctor = ({ searchText }) => {
           // Making first letter of all the text as capital...
           document.fullName = camelCaseText(document.fullName);
           document.specialization = camelCaseText(document.specialization);
-          document.email = camelCaseText(document.email);
           doctors.push(document);
         });
         dispatch(doctorSuccess(doctors));

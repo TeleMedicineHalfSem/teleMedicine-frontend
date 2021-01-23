@@ -5,6 +5,7 @@ import "./Navbar.css";
 import { useHistory } from "react-router-dom";
 import Dropdown from "./dropdown";
 import { connect } from "react-redux";
+import camelCaseText from "../../utils/camelCaseText";
 
 function Nav({ auth, profile }) {
   const [dropDownVisible, setDropDownVisible] = useState(false);
@@ -24,7 +25,7 @@ function Nav({ auth, profile }) {
   if (!profile.isEmpty) {
     firstName = profile.firstName;
     email = profile.email;
-    username = profile.fullName;
+    username = camelCaseText(profile.fullName);
     initials = profile.initials;
   }
 
