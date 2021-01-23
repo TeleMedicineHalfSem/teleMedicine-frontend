@@ -4,9 +4,11 @@ import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import { SearchBar } from "../../components/input/inputs";
 import DoctorList from "./DoctorList";
-function PatientPage() {
+import {connect} from "react-redux";
+import {getDoctor} from "../../actions/doctorAction";
+function PatientPage({getDoctor}) {
   const [searchText, setSearchText] = useState("");
-
+  getDoctor()
   return (
     <div className="patient-page">
       <div className="patient-page-header">
@@ -33,4 +35,4 @@ function PatientPage() {
   );
 }
 
-export default PatientPage;
+export default connect(null,{getDoctor}) (PatientPage);

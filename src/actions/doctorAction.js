@@ -21,16 +21,19 @@ const authRequest = () => {
     };
   };
   
-  export const doctorList = () => {
+  export const getDoctor = () => {
     return (dispatch, getState, { getFirestore }) => {
       dispatch(authRequest());
       const db = getFirestore();
-      db.collection("doctor")
+      let list=[]
+      db.collection("doctors")
         .get()
         .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
-              
-            });    
+              list.push(doc.data())
+              console.log(doc);
+            });   
+            console.log(list); 
         })
         .catch((error) => {
           dispatch(authFailure("Login Failed"));
