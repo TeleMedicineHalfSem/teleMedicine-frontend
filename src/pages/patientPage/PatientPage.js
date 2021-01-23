@@ -4,11 +4,9 @@ import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import { SearchBar } from "../../components/input/inputs";
 import DoctorList from "./DoctorList";
-import {connect} from "react-redux";
-import {getDoctor} from "../../actions/doctorAction";
-function PatientPage({getDoctor,doctors}) {
+
+function PatientPage() {
   const [searchText, setSearchText] = useState("");
-  getDoctor()
   return (
     <div className="patient-page">
       <div className="patient-page-header">
@@ -34,9 +32,5 @@ function PatientPage({getDoctor,doctors}) {
     </div>
   );
 }
-const mapStateToProps= (state) =>{
-  return {
-    doctors:state.doctors
-  }
-}
-export default connect(mapStateToProps,{getDoctor}) (PatientPage);
+
+export default PatientPage;
