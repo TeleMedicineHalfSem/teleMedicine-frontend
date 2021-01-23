@@ -15,7 +15,7 @@ const doctorFailure = (error) => {
     payload: error,
   };
 };
-export const dotorReset = () => {
+export const doctorReset = () => {
   return {
     type: "DOCTOR_RESET",
   };
