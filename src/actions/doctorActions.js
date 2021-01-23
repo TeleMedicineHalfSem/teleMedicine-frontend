@@ -24,15 +24,17 @@ export const dotorReset = () => {
 export const getDoctors = () => {
   return (dispatch, getState, { getFirestore }) => {
     dispatch(doctorRequest());
-    const db = getFirestore();
-    let list = [];
-    db.collection("doctors")
+    const firestore = getFirestore();
+    let doctors = [];
+    firestore
+      .collection("doctors")
+      .limit(10)
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
-          list.push(doc.data());
+          doctors.push(doc.data());
         });
-        dispatch(doctorSuccess(list));
+        dispatch(doctorSuccess(doctors));
       })
       .catch((error) => {
         dispatch(doctorFailure("Unable to retrieve data"));
