@@ -69,11 +69,6 @@ export const signUp = ({
     const firebase = getFirebase();
     const firestore = getFirestore();
 
-    // Making all text to lower case....
-    specialization = specialization.toLowerCase();
-    fullName = fullName.toLowerCase();
-    email = email.toLowerCase();
-
     // Deriving first name, last name and initials....
     const name = fullName.split(" ");
     const firstName = name[0];
@@ -82,6 +77,11 @@ export const signUp = ({
       lastName = name[1];
     }
     const initials = name[0][0];
+
+    // Making all text to lower case....
+    specialization = specialization.toLowerCase();
+    fullName = fullName.toLowerCase();
+    email = email.toLowerCase();
 
     let uid = null;
 

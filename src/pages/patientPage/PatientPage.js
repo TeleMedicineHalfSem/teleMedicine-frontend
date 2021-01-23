@@ -14,7 +14,7 @@ function PatientPage({ doctors, getDoctors, searchDoctor }) {
   // Retrieving data from database...
   useEffect(() => {
     if (searchText === "") {
-      getDoctors();
+      getDoctors(5);
     } else {
       searchDoctor({ searchText });
     }
@@ -41,7 +41,7 @@ function PatientPage({ doctors, getDoctors, searchDoctor }) {
         <div className="patient-page-search">
           <SearchBar
             onChange={(e) => setSearchText(e.target.value)}
-            placeholder="Search for a specialization..."
+            placeholder="Search by name, specialization, email..."
             value={searchText}
           />
         </div>

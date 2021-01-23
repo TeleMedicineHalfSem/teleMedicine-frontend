@@ -1,4 +1,5 @@
 import { FireSQL } from "firesql";
+import camelCaseText from "../utils/camelCaseText";
 
 const doctorRequest = () => {
   return {
@@ -23,18 +24,24 @@ export const doctorReset = () => {
   };
 };
 
-export const getDoctors = () => {
+export const getDoctors = (limit) => {
   return (dispatch, getState, { getFirestore }) => {
     dispatch(doctorRequest());
     const firestore = getFirestore();
     let doctors = [];
     firestore
       .collection("doctors")
-      .limit(10)
+      .limit(limit)
       .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          doctors.push(doc.data());
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          const document = doc.data();
+
+          // Making first letter of all the text as capital...
+          document.fullName = camelCaseText(document.fullName);
+          document.specialization = camelCaseText(document.specialization);
+          document.email = camelCaseText(document.email);
+          doctors.push(document);
         });
         dispatch(doctorSuccess(doctors));
       })
@@ -56,11 +63,18 @@ export const searchDoctor = ({ searchText }) => {
       `SELECT * FROM doctors WHERE 
       specialization LIKE '${searchText}%' OR 
       fullName LIKE '${searchText}%' OR 
-      gender LIKE '${searchText}%'`
+      gender LIKE '${searchText}%' OR
+      email LIKE '${searchText}%'`
     );
     doctorQuery
-      .then((doctorList) => {
-        doctors = doctorList;
+      .then((snapshot) => {
+        snapshot.forEach((document) => {
+          // Making first letter of all the text as capital...
+          document.fullName = camelCaseText(document.fullName);
+          document.specialization = camelCaseText(document.specialization);
+          document.email = camelCaseText(document.email);
+          doctors.push(document);
+        });
         dispatch(doctorSuccess(doctors));
       })
       .catch((error) => {
