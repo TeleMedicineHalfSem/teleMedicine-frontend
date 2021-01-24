@@ -1,0 +1,25 @@
+.profile-card {
+  width: 18%;
+  text-align: center;
+}
+.profile-card-dp {
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-card-text-name {
+  font-family: var(--secondary-font);
+  font-size: 160%;
+}
+.profile-card-text-spec {
+  font-size: 110%;
+  font-family: var(--secondary-font);
+}
+.profile-card-text-age {
+  margin-top: 20px;
+  font-size: 95%;
+}
+.profile-card-text-exp {
+  font-size: 95%;
+}
