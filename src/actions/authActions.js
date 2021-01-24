@@ -50,7 +50,6 @@ export const signOut = () => {
       .catch((error) => {
         dispatch(authFailure("Logging out failed"));
       });
-    
   };
 };
 
@@ -78,6 +77,12 @@ export const signUp = ({
       lastName = name[1];
     }
     const initials = name[0][0];
+
+    // Making all text to lower case....
+    specialization = specialization.toLowerCase();
+    fullName = fullName.toLowerCase();
+    email = email.toLowerCase();
+
     let uid = null;
 
     firebase
@@ -133,6 +138,5 @@ export const signUp = ({
       .catch((error) => {
         dispatch(authFailure("Signing up failed"));
       });
-    
   };
 };

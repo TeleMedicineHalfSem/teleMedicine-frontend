@@ -4,7 +4,7 @@ import Button from "../button/Button";
 import Divider from "../divider/Divider";
 import DisplayPicture from "../displayPicture/DisplayPicture";
 
-function DoctorCard({ name, src, specialization, experience, initials }) {
+function DoctorCard({ name, specialization, experience, initials }) {
   const expString = `In practice since ${experience}`;
   const nameString = `Dr. ${name}`;
 
