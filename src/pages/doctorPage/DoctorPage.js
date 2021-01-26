@@ -1,11 +1,12 @@
 import React from "react";
 import "./DoctorPage.css";
+import Requestnotif from "../../components/requestNotif/Requestnotif";
 
 function DoctorPage() {
   return (
     <div>
       {
-        // Test your codes here... Anugya & Slokha
+        <Requestnotif />
       }
     </div>
   );
