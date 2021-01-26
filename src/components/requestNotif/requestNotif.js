@@ -11,17 +11,9 @@ const requestNotif = ({patientName}) => {
         <div className="request-patient-name">
             <span>{patientName}</span>
         </div>
-        <div className="request-button">
-            <button>Accept</button>
+        <div>
+            <button className ="request-button">Accept</button>
         </div>
-        <Divider
-            margin={{
-            top: "0px",
-            bottom: "10px",
-            left: "0px",
-            right: "5px",
-            }}
-        />
     </div>
     );
 

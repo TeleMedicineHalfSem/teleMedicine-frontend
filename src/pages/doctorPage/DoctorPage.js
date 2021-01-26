@@ -5,9 +5,9 @@ import requestNotif from "../../components/requestNotif/requestNotif";
 function DoctorPage() {
   return (
     <div>
-      
+       hiii
       {
-        <requestnotif />
+        <requestNotif />
       }
     </div>
   );
