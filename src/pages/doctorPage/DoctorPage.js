@@ -13,10 +13,12 @@ function DoctorPage() {
       <div className="doctor-page-body">
         <div className="doctor-page-profile">
           <ProfileCard
-            name="Sawarni Swaroop"
+            name="Anugya Ram"
             specialization="Dentist"
             experience="2019"
             dob="2000-10-22"
+            gender="female"
+            initials="A"
           />
         </div>
       </div>
