@@ -1,6 +1,7 @@
 import React from "react";
 import "./ProfileCard.css";
 import DisplayPicture from "../displayPicture/DisplayPicture";
+import camelCaseText from "../../utils/camelCaseText";
 
 function ProfileCard({
   name,
@@ -14,6 +15,7 @@ function ProfileCard({
   const age = currentYear - parseInt(dob.split("-")[0]);
   name = "Dr. " + name;
   experience = currentYear - experience;
+  gender = camelCaseText(gender);
 
   return (
     <div className="profile-card">
