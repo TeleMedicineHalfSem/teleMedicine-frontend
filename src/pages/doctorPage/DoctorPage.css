@@ -5,7 +5,7 @@
   justify-content: center;
 }
 .doctor-page-body {
-  width: 85%;
+  width: 75%;
 }
 .doctor-page-profile {
   margin-top: 30px;
@@ -33,7 +33,7 @@
   box-shadow: 0 1px 9px 0 rgba(0, 0, 0, 0.4);
   background: white;
   border-radius: 20px;
-  padding: 10px;
+  padding: 10px 10px 30px 10px;
 }
 .doctor-page-heading {
   font-size: 115%;

@@ -2,8 +2,12 @@ import React from "react";
 import "./RecordCard.css";
 
 const doctorRecord = ({ patientName, patientProblem }) => {
+  const onClickRecord = () => {
+    console.log("Medical record...");
+  };
+
   return (
-    <div className="record-card">
+    <div onClick={onClickRecord} className="record-card">
       <div className="record-card-body-heading">
         <span>{patientName}</span>
       </div>
