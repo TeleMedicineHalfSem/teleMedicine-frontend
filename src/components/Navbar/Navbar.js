@@ -23,7 +23,7 @@ function Nav({ auth, profile }) {
 
   // Getting data from database...
   if (!profile.isEmpty) {
-    firstName = profile.firstName;
+    firstName = camelCaseText(profile.firstName);
     email = profile.email;
     username = camelCaseText(profile.fullName);
     initials = profile.initials;
