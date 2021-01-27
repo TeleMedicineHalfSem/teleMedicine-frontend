@@ -4,6 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import ProfileCard from "../../components/profileCard/ProfileCard";
 import ChatRequestCard from "../../components/chatRequest/ChatRequestCard";
+import RecordCard from "../../components/recordCard/RecordCard";
 
 function DoctorPage() {
   return (
@@ -24,13 +25,20 @@ function DoctorPage() {
             />
           </div>
           <div className="doctor-page-contents">
-            <div className="doctor-page-contents-left"></div>
-            <div className="doctor-page-contents-right">
-              <p className="doctor-page-heading">
-                <u>Chat Requests</u>
-              </p>
-              <ChatRequestCard patientName="mayur" />
-              <ChatRequestCard patientName="mayur" />
+            <div className="doctor-page-contents-left-container">
+              <div className="doctor-page-contents-left">
+                <p className="doctor-page-heading">Medical Record</p>
+                <RecordCard patientName="Mayur" patientProblem="Cough" />
+                <RecordCard patientName="Mayur" patientProblem="Cough" />
+                <RecordCard patientName="Mayur" patientProblem="Cough" />
+              </div>
+            </div>
+            <div className="doctor-page-contents-right-container">
+              <div className="doctor-page-contents-right">
+                <p className="doctor-page-heading">Chat Requests</p>
+                <ChatRequestCard patientName="Mayur" />
+                <ChatRequestCard patientName="Mayur" />
+              </div>
             </div>
           </div>
         </div>

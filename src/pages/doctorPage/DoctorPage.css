@@ -15,18 +15,28 @@
   margin-bottom: 30px;
   display: flex;
 }
-.doctor-page-contents-left {
+.doctor-page-contents-left-container {
   flex: 2;
+  padding: 10px;
 }
-.doctor-page-contents-right {
-  padding: 20px;
-  flex: 1;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+.doctor-page-contents-left {
+  box-shadow: 0 1px 9px 0 rgba(0, 0, 0, 0.4);
   background: white;
   border-radius: 20px;
+  padding: 10px;
+}
+.doctor-page-contents-right-container {
+  padding: 10px;
+  flex: 1;
+}
+.doctor-page-contents-right {
+  box-shadow: 0 1px 9px 0 rgba(0, 0, 0, 0.4);
+  background: white;
+  border-radius: 20px;
+  padding: 10px;
 }
 .doctor-page-heading {
   font-size: 115%;
   font-family: var(--primary-font);
-  margin-left: 15px;
+  margin: 15px;
 }
