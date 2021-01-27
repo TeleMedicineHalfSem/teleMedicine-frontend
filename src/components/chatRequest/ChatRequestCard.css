@@ -3,15 +3,15 @@
   background: white;
 }
 
-.chat-req-pName {
-  font-weight: bold;
-  margin-right: 15px;
-  margin-top: 3px;
-  font-size: 120%;
-}
-
 .chat-req-block {
   display: flex;
-  justify-content: space-evenly;
   padding: 10px;
+}
+
+.chat-req-pName {
+  font-weight: bold;
+  margin-top: 3px;
+  font-size: 120%;
+  margin-left: 20px;
+  width: 80%;
 }
