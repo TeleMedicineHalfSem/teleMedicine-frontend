@@ -8,6 +8,6 @@
   font-size: 400%;
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
   color: var(--primary-color);
-  background: var(--secondary-color);
+  background: #77f0ea;
   font-family: var(--primary-font);
 }

@@ -1,7 +1,7 @@
 .profile-card {
   position: relative;
   text-align: center;
-  height: 430px;
+  height: 450px;
   display: flex;
   flex-wrap: wrap;
   width: 80%;
@@ -25,12 +25,12 @@
   font-family: var(--secondary-font);
   width: 100%;
   display: flex;
-  margin-top: 65px;
+  margin-top: 6%;
 }
 .profile-card-details-left {
   width: 100%;
   text-align: left;
-  padding-left: 9%;
+  padding-left: 10%;
   font-size: 120%;
 }
 .profile-card-details-right {
