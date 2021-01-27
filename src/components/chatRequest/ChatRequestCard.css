@@ -1,0 +1,15 @@
+.chat-req {
+  width: 15%;
+}
+
+.chat-req-pName {
+  font-weight: bold;
+  margin-right: 15px;
+  margin-top: 3px;
+  font-size: 120%;
+}
+
+.chat-req-block {
+  display: flex;
+  justify-content: space-evenly;
+}

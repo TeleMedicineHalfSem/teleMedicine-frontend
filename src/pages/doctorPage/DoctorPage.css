@@ -1,0 +1,9 @@
+.doctor-page-body {
+  min-height: calc(100vh - var(--height-navbar));
+}
+.doctor-page-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}

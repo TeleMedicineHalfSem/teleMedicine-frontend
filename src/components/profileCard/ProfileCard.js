@@ -10,13 +10,12 @@ function ProfileCard({ name, specialization, experience, dob, initials }) {
 
   return (
     <div className="profile-card">
-      <div className="profile-card-dp">
-        <DisplayPicture initials={initials} width="145px" height="145px" />
-      </div>
-      <div className="profile-card-text-name">{name}</div>
-      <div className="profile-card-text-spec">{specialization}</div>
-      <div className="profile-card-text-age">Age: {age}</div>
-      <div className="profile-card-text-exp">{experience} year experience</div>
+      <img
+        className="profile-card-back-image"
+        src="./images/blue-background.jpg"
+        alt=""
+      />
+      <div></div>
     </div>
   );
 }

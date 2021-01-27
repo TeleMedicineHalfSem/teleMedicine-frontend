@@ -1,25 +1,15 @@
 .profile-card {
-  width: 18%;
   text-align: center;
-}
-.profile-card-dp {
-  height: 160px;
+  height: 450px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  width: 80%;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 1px 9px 0 rgba(0, 0, 0, 0.4);
 }
-.profile-card-text-name {
-  font-family: var(--secondary-font);
-  font-size: 160%;
-}
-.profile-card-text-spec {
-  font-size: 110%;
-  font-family: var(--secondary-font);
-}
-.profile-card-text-age {
-  margin-top: 20px;
-  font-size: 95%;
-}
-.profile-card-text-exp {
-  font-size: 95%;
+.profile-card-back-image {
+  height: 60%;
+  width: 100%;
+  border-radius: 30px 30px 0 0;
 }
