@@ -1,5 +1,6 @@
 .chat-req {
-  width: 15%;
+  width: 100%;
+  background: white;
 }
 
 .chat-req-pName {
@@ -12,4 +13,5 @@
 .chat-req-block {
   display: flex;
   justify-content: space-evenly;
+  padding: 10px;
 }

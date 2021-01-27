@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "../button/Button";
-import Divider from "../divider/Divider";
 import "./ChatRequestCard.css";
 
 const requestAccepted = () => {
@@ -16,14 +15,6 @@ const ChatRequest = ({ patientName }) => {
           Accept
         </Button>
       </div>
-      <Divider
-        margin={{
-          top: "10px",
-          bottom: "20px",
-          left: "10px",
-          right: "10px",
-        }}
-      />
     </div>
   );
 };

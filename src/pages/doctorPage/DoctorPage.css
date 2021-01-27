@@ -1,9 +1,32 @@
-.doctor-page-body {
+.doctor-page-body-container {
   min-height: calc(100vh - var(--height-navbar));
-}
-.doctor-page-profile {
+  width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 20px;
+}
+.doctor-page-body {
+  width: 85%;
+}
+.doctor-page-profile {
+  margin-top: 30px;
+}
+.doctor-page-contents {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+}
+.doctor-page-contents-left {
+  flex: 2;
+}
+.doctor-page-contents-right {
+  padding: 20px;
+  flex: 1;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  background: white;
+  border-radius: 20px;
+}
+.doctor-page-heading {
+  font-size: 115%;
+  font-family: var(--primary-font);
+  margin-left: 15px;
 }
