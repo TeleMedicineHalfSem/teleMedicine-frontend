@@ -7,7 +7,7 @@ import { Alert } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { validateEmail, validatePassword } from "../../utils/validations";
 import { connect } from "react-redux";
-import { signIn,authReset } from "../../actions/authActions";
+import { signIn, authReset } from "../../actions/authActions";
 
 function SignInView({ signIn, authData, authReset }) {
   const [email, setEmail] = useState("");
@@ -71,17 +71,13 @@ function SignInView({ signIn, authData, authReset }) {
   };
 
   const removeAlert = () => {
-    authReset()
-    setAlertState({ ...alertState, alertVisible: false })
-  }
+    authReset();
+    setAlertState({ ...alertState, alertVisible: false });
+  };
 
   return (
     <div>
-      <Alert
-        color={alertColor}
-        isOpen={alertVisible}
-        toggle={removeAlert}
-      >
+      <Alert color={alertColor} isOpen={alertVisible} toggle={removeAlert}>
         {alertMessage}
       </Alert>
       <div className="sign-in-heading">Sign in to EasyCare</div>
@@ -123,4 +119,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { signIn,authReset })(SignInView);
+export default connect(mapStateToProps, { signIn, authReset })(SignInView);
