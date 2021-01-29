@@ -3,7 +3,7 @@ import camelCaseText from "../utils/camelCaseText";
 
 const doctorRequest = () => {
   return {
-    type: "DOCTOR_LOADING",
+    type: "DOCTOR_REQUEST",
   };
 };
 const doctorSuccess = (data) => {

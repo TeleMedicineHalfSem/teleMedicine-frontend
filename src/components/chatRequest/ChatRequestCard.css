@@ -1,0 +1,17 @@
+.chat-req {
+  width: 100%;
+  background: white;
+}
+
+.chat-req-block {
+  display: flex;
+  padding: 10px;
+}
+
+.chat-req-pName {
+  font-weight: bold;
+  margin-top: 3px;
+  font-size: 120%;
+  margin-left: 20px;
+  width: 80%;
+}

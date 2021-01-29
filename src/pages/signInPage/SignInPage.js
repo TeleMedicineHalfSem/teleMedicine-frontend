@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SignInPage.css";
+import { connect } from "react-redux";
 import NavBar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import SignInView from "./signinView";
+import LoadingBar from "../../components/loadingBar/LoadingBar";
 
-function SignInPage() {
+function SignInPage({ authData }) {
+  let loading = false;
+
+  if (authData && authData.loading) {
+    loading = true;
+  } else {
+    loading = false;
+  }
+
   return (
     <div className="sign-in">
       <div className="sign-in-header">
@@ -25,8 +35,15 @@ function SignInPage() {
       <div className="sign-in-footer">
         <Footer />
       </div>
+      <LoadingBar visible={loading} />
     </div>
   );
 }
 
-export default SignInPage;
+const mapStateToProps = (state) => {
+  return {
+    authData: state.auth,
+  };
+};
+
+export default connect(mapStateToProps)(SignInPage);

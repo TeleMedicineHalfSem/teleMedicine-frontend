@@ -1,6 +1,6 @@
 const authRequest = () => {
   return {
-    type: "AUTH_LOADING",
+    type: "AUTH_REQUEST",
   };
 };
 const authSuccess = (data) => {

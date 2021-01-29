@@ -7,6 +7,10 @@ function Dropdown({ username, email, initials, isVisible, toggle, signOut }) {
   const onClickLogOut = () => {
     signOut();
   };
+
+  const onClickProfile = () => {
+    // Redirect to profile page...
+  };
   return (
     <>
       {isVisible ? (
@@ -18,6 +22,9 @@ function Dropdown({ username, email, initials, isVisible, toggle, signOut }) {
               </div>
               <div className="dropdown-email">{email}</div>
             </div>
+          </div>
+          <div onClick={onClickProfile} className="dropdown-button">
+            Profile
           </div>
           <div onClick={onClickLogOut} className="dropdown-button">
             Log Out
