@@ -1,0 +1,26 @@
+.chat-input {
+  width: 100%;
+  display: flex;
+}
+.chat-input input {
+  border: solid 1px rgb(117, 117, 117);
+  border-radius: 50px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+.chat-input div {
+  background: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  height: 42px;
+  width: 42px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}

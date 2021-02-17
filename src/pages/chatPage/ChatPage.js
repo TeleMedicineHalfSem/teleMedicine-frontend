@@ -2,6 +2,7 @@ import React from "react";
 import "./ChatPage.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
+import { ChatInput } from "../../components/input/inputs";
 
 function ChatRoom() {
   return (
@@ -14,11 +15,13 @@ function ChatRoom() {
           <div className="chat-page-box-header">
             <div className="chat-page-box-header-left">Dr. Mayur</div>
             <div className="chat-page-box-header-right">
-              <img src="/images/video-call.png" alt="" height="30px" />
+              <img src="/images/video-call.png" alt="" height="25px" />
             </div>
           </div>
           <div className="chat-page-box-body"></div>
-          <div className="chat-page-box-input"></div>
+          <div className="chat-page-box-input">
+            <ChatInput placeholder="Type a message..." />
+          </div>
         </div>
       </div>
       <div className="chat-page-footer">

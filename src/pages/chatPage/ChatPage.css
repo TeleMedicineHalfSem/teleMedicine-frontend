@@ -41,7 +41,14 @@
 
 .chat-page-box-body {
   flex: 5;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 .chat-page-box-input {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 30px;
+  padding-right: 30px;
 }
