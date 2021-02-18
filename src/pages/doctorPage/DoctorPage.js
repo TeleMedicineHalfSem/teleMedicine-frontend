@@ -17,6 +17,16 @@ function DoctorPage({ getProfileDoctor, profileData }) {
     getProfileDoctor();
   }, [getProfileDoctor]);
 
+  // Chat requests...
+  let listReq = [];
+  if (profileData.requests) {
+    let i = 0;
+    for (let request of profileData.requests) {
+      listReq.push({ key: i, patientName: request });
+      i++;
+    }
+  }
+
   if (profileData) {
     name = profileData.fullName;
     specialization = profileData.specialization;
@@ -25,9 +35,6 @@ function DoctorPage({ getProfileDoctor, profileData }) {
     dob = profileData.dob;
     initials = profileData.initials;
   }
-
-  // Sample data for chat requests...
-  const listReq = [];
 
   // Sample data for medical records...
   const listRecord = [
