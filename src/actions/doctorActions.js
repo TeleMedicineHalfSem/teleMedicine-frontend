@@ -80,3 +80,40 @@ export const searchDoctor = ({ searchText }) => {
       });
   };
 };
+
+export const requestDoctor = ({ email }) => {
+  return (dispatch, getState, { getFirestore, getFirebase }) => {
+    const firestore = getFirestore();
+    const patientEmail = getFirebase().auth().currentUser.email;
+    let uid = null;
+    let oldRequests = [];
+    firestore
+      .collection("doctors")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          if (doc.data().email === email) {
+            uid = doc.id;
+            if (doc.data().requests) {
+              oldRequests = doc.data().requests;
+            }
+          }
+        });
+      })
+      .then(() => {
+        if (!oldRequests.includes(patientEmail)) {
+          oldRequests.push(patientEmail);
+          firestore.collection("doctors").doc(uid).update({
+            requests: oldRequests,
+          });
+        }
+      })
+      .then(() => {
+        console.log("Request sent..");
+      })
+      .catch((error) => {
+        console.log("Request not Sent..");
+        dispatch(doctorFailure("Request sending failed"));
+      });
+  };
+};

@@ -3,13 +3,23 @@ import "./DoctorCard.css";
 import Button from "../button/Button";
 import Divider from "../divider/Divider";
 import DisplayPicture from "../displayPicture/DisplayPicture";
+import { requestDoctor } from "../../actions/doctorActions";
+import { connect } from "react-redux";
 
-function DoctorCard({ name, specialization, experience, initials }) {
+function DoctorCard({
+  name,
+  specialization,
+  experience,
+  initials,
+  requestDoctor,
+  email,
+}) {
   const expString = `In practice since ${experience}`;
   const nameString = `Dr. ${name}`;
 
   const onClickChat = () => {
     // Write code to redirect to chatRoom...
+    requestDoctor({ email });
   };
 
   return (
@@ -41,4 +51,4 @@ function DoctorCard({ name, specialization, experience, initials }) {
   );
 }
 
-export default DoctorCard;
+export default connect(null, { requestDoctor })(DoctorCard);

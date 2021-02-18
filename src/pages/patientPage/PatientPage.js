@@ -24,6 +24,7 @@ function PatientPage({ doctors, getDoctors, searchDoctor }) {
     doctorListView = doctors.success.map((doctor) => (
       <DoctorCard
         key={doctor.email}
+        email={doctor.email}
         name={doctor.fullName}
         specialization={doctor.specialization}
         experience={doctor.registrationYear}

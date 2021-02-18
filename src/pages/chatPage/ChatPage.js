@@ -9,12 +9,12 @@ import { connectSocket } from "../../actions/socketActions";
 import { connect } from "react-redux";
 
 function ChatRoom({ connectSocket }) {
-  const ENDPOINT = "http://192.168.29.112:2500";
+  // const ENDPOINT = "http://192.168.29.112:2500";
 
-  // Connect to socket...
-  useEffect(() => {
-    connectSocket({ ENDPOINT });
-  }, [ENDPOINT, connectSocket]);
+  // // Connect to socket...
+  // useEffect(() => {
+  //   connectSocket({ ENDPOINT });
+  // }, [ENDPOINT, connectSocket]);
 
   // Function to scroll down...
   const scrollToBottom = () => {
