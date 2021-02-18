@@ -83,6 +83,7 @@ export const searchDoctor = ({ searchText }) => {
 
 export const requestDoctor = ({ email }) => {
   return (dispatch, getState, { getFirestore, getFirebase }) => {
+    dispatch(doctorRequest());
     const firestore = getFirestore();
     const patientEmail = getFirebase().auth().currentUser.email;
     let uid = null;

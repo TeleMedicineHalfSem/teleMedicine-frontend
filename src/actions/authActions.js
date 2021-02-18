@@ -140,3 +140,21 @@ export const signUp = ({
       });
   };
 };
+
+export const getProfileDoctor = () => {
+  return (dispatch, getState, { getFirestore, getFirebase }) => {
+    dispatch(authRequest());
+    const firestore = getFirestore();
+    const uid = getFirebase().auth().currentUser.uid;
+    firestore
+      .collection("doctors")
+      .doc(uid)
+      .get()
+      .then((snapshot) => {
+        dispatch(authSuccess(snapshot.data()));
+      })
+      .catch(() => {
+        dispatch(authFailure("Can't retrieve data..."));
+      });
+  };
+};

@@ -11,11 +11,22 @@ function ProfileCard({
   initials,
   gender,
 }) {
-  const currentYear = new Date().getFullYear();
-  const age = currentYear - parseInt(dob.split("-")[0]);
-  name = "Dr. " + name;
-  experience = currentYear - experience;
-  gender = camelCaseText(gender);
+  let age, currentYear;
+  if (
+    name !== undefined &&
+    specialization !== undefined &&
+    experience !== undefined &&
+    dob !== undefined &&
+    initials !== undefined &&
+    gender !== undefined
+  ) {
+    currentYear = new Date().getFullYear();
+    age = currentYear - parseInt(dob.split("-")[0]);
+    name = "Dr. " + camelCaseText(name);
+    experience = currentYear - experience;
+    gender = camelCaseText(gender);
+    specialization = camelCaseText(specialization);
+  }
 
   return (
     <div className="profile-card">
