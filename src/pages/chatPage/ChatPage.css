@@ -37,6 +37,7 @@
 }
 .chat-page-box-header-right img {
   cursor: pointer;
+  margin-left: 20px;
 }
 
 .chat-page-box-body {

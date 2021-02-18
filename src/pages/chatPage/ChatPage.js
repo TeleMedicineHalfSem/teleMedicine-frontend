@@ -72,6 +72,7 @@ function ChatRoom() {
             <div className="chat-page-box-header-left">Dr. Mayur</div>
             <div className="chat-page-box-header-right">
               <img src="/images/video-call.png" alt="" height="25px" />
+              <img src="/images/cross.png" alt="" height="25px" />
             </div>
           </div>
           <div id="chat-page-box" className="chat-page-box-body">
