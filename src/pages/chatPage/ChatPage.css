@@ -45,6 +45,17 @@
   padding-right: 30px;
   overflow: auto;
 }
+.chat-page-box-body::-webkit-scrollbar {
+  width: 7px;
+}
+.chat-page-box-body::-webkit-scrollbar-track {
+  background: var(--primary-background);
+}
+.chat-page-box-body::-webkit-scrollbar-thumb {
+  background: rgba(148, 148, 148, 0.466);
+  border-radius: 5px;
+}
+
 .chat-page-box-input {
   flex: 1;
   display: flex;

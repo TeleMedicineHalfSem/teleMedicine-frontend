@@ -11,7 +11,7 @@ function ChatRoom() {
   const scrollToBottom = () => {
     animateScroll.scrollToBottom({
       containerId: "chat-page-box",
-      duration: 1500,
+      duration: 500,
     });
   };
 
