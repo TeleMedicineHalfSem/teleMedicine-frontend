@@ -6,10 +6,27 @@ import { SearchBar } from "../../components/input/inputs";
 import { getDoctors, searchDoctor } from "../../actions/doctorActions";
 import { connect } from "react-redux";
 import DoctorCard from "../../components/doctorCard/DoctorCard";
+import { connectSocket } from "../../actions/socketActions";
 
-function PatientPage({ doctors, getDoctors, searchDoctor }) {
+function PatientPage({
+  doctors,
+  getDoctors,
+  searchDoctor,
+  connectSocket,
+  profile,
+}) {
+  const ENDPOINT = "http://127.0.0.1:2500";
   const [searchText, setSearchText] = useState("");
   let doctorListView = null;
+
+  // Connect to socket...
+  useEffect(() => {
+    if (!profile.isEmpty && !profile.Doctor) {
+      connectSocket({ ENDPOINT });
+    } else {
+      console.log("Not a Patient..");
+    }
+  }, [ENDPOINT, connectSocket, profile]);
 
   // Retrieving data from database...
   useEffect(() => {
@@ -61,9 +78,12 @@ function PatientPage({ doctors, getDoctors, searchDoctor }) {
 const mapStateToProps = (state) => {
   return {
     doctors: state.doctors,
+    profile: state.firebase.profile,
   };
 };
 
-export default connect(mapStateToProps, { getDoctors, searchDoctor })(
-  PatientPage
-);
+export default connect(mapStateToProps, {
+  getDoctors,
+  searchDoctor,
+  connectSocket,
+})(PatientPage);

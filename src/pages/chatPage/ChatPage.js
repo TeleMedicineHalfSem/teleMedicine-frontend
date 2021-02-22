@@ -5,17 +5,8 @@ import Footer from "../../components/footer/Footer";
 import { ChatInput } from "../../components/input/inputs";
 import ChatMessage from "../../components/chatMessage/ChatMessage";
 import { animateScroll } from "react-scroll";
-import { connectSocket } from "../../actions/socketActions";
-import { connect } from "react-redux";
 
-function ChatRoom({ connectSocket }) {
-  // const ENDPOINT = "http://192.168.29.112:2500";
-
-  // // Connect to socket...
-  // useEffect(() => {
-  //   connectSocket({ ENDPOINT });
-  // }, [ENDPOINT, connectSocket]);
-
+function ChatRoom() {
   // Function to scroll down...
   const scrollToBottom = () => {
     animateScroll.scrollToBottom({
@@ -99,4 +90,4 @@ function ChatRoom({ connectSocket }) {
   );
 }
 
-export default connect(null, { connectSocket })(ChatRoom);
+export default ChatRoom;

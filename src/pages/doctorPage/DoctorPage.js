@@ -8,9 +8,19 @@ import RecordCard from "../../components/recordCard/RecordCard";
 import { connect } from "react-redux";
 import { getProfileDoctor } from "../../actions/authActions";
 
-function DoctorPage({ getProfileDoctor, profileData }) {
+function DoctorPage({ getProfileDoctor, profileData, connectSocket, profile }) {
   //initialization...
   let name, specialization, gender, experience, dob, initials;
+  const ENDPOINT = "http://127.0.0.1:2500";
+
+  // Connect to socket...
+  useEffect(() => {
+    if (!profile.isEmpty && profile.Doctor) {
+      connectSocket({ ENDPOINT });
+    } else {
+      console.log("Not a Doctor..");
+    }
+  }, [ENDPOINT, connectSocket, profile]);
 
   //getting profile data...
   useEffect(() => {
@@ -19,7 +29,7 @@ function DoctorPage({ getProfileDoctor, profileData }) {
 
   // Chat requests...
   let listReq = [];
-  if (profileData.requests) {
+  if (profileData !== undefined && profileData.requests) {
     let i = 0;
     for (let request of profileData.requests) {
       listReq.push({ key: i, patientName: request });
@@ -97,6 +107,7 @@ function DoctorPage({ getProfileDoctor, profileData }) {
 const mapStateToProps = (state) => {
   return {
     profileData: state.auth.success,
+    profile: state.firebase.profile,
   };
 };
 
