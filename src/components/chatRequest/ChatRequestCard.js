@@ -1,12 +1,13 @@
 import React from "react";
 import Button from "../button/Button";
 import "./ChatRequestCard.css";
-
-const requestAccepted = () => {
-  console.log("Connected");
-};
+import { useHistory } from "react-router-dom";
 
 const ChatRequest = ({ patientName }) => {
+  const history = useHistory();
+  const requestAccepted = () => {
+    history.push("/chat");
+  };
   return (
     <div className="chat-req">
       <div className="chat-req-block">
