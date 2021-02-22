@@ -12,6 +12,12 @@ const doctorSuccess = (data) => {
     payload: data,
   };
 };
+const doctorMessage = (success) => {
+  return {
+    type: "DOCTOR_MESSAGE",
+    success: success,
+  };
+};
 const doctorFailure = (error) => {
   return {
     type: "DOCTOR_FAIL",
@@ -43,6 +49,7 @@ export const getDoctors = (limit) => {
           doctors.push(document);
         });
         dispatch(doctorSuccess(doctors));
+        dispatch(doctorMessage("GET_DOCTOR"));
       })
       .catch((error) => {
         dispatch(doctorFailure("Unable to retrieve data"));
@@ -74,6 +81,7 @@ export const searchDoctor = ({ searchText }) => {
           doctors.push(document);
         });
         dispatch(doctorSuccess(doctors));
+        dispatch(doctorMessage("SEARCH_DOCTOR"));
       })
       .catch((error) => {
         dispatch(doctorFailure("Unable to retrieve data"));
@@ -86,13 +94,24 @@ export const requestDoctor = ({ email }) => {
     dispatch(doctorRequest());
     const firestore = getFirestore();
     const patientEmail = getFirebase().auth().currentUser.email;
+    const patientUid = getFirebase().auth().currentUser.uid;
     let uid = null;
     let oldRequests = [];
+    let alreadyRequested = false;
     firestore
       .collection("doctors")
       .get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
+          if (
+            doc.data().requests &&
+            doc.data().requests.includes(patientEmail)
+          ) {
+            alreadyRequested = true;
+            console.log(
+              alreadyRequested ? "Already Requested" : "Not Requested"
+            );
+          }
           if (doc.data().email === email) {
             uid = doc.id;
             if (doc.data().requests) {
@@ -102,6 +121,7 @@ export const requestDoctor = ({ email }) => {
         });
       })
       .then(() => {
+        // Updating doctor data...
         if (!oldRequests.includes(patientEmail)) {
           oldRequests.push(patientEmail);
           firestore.collection("doctors").doc(uid).update({
@@ -110,7 +130,14 @@ export const requestDoctor = ({ email }) => {
         }
       })
       .then(() => {
+        // Updating patient data...
+        firestore.collection("patients").doc(patientUid).update({
+          requested: email,
+        });
+      })
+      .then(() => {
         console.log("Request sent..");
+        dispatch(doctorMessage("REQUEST_DOCTOR"));
       })
       .catch((error) => {
         console.log("Request not Sent..");

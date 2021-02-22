@@ -37,8 +37,8 @@ function PatientPage({
     }
   }, [searchText, getDoctors, searchDoctor]);
 
-  if (doctors && doctors.success) {
-    doctorListView = doctors.success.map((doctor) => (
+  if (doctors && doctors.data) {
+    doctorListView = doctors.data.map((doctor) => (
       <DoctorCard
         key={doctor.email}
         email={doctor.email}

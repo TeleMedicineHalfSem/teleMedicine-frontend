@@ -5,6 +5,7 @@ import Divider from "../divider/Divider";
 import DisplayPicture from "../displayPicture/DisplayPicture";
 import { requestDoctor } from "../../actions/doctorActions";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 function DoctorCard({
   name,
@@ -13,14 +14,20 @@ function DoctorCard({
   initials,
   requestDoctor,
   email,
+  doctorData,
 }) {
   const expString = `In practice since ${experience}`;
   const nameString = `Dr. ${name}`;
+  const history = useHistory();
 
   const onClickChat = () => {
-    // Write code to redirect to chatRoom...
     requestDoctor({ email });
   };
+
+  // Navigating to chat page...
+  if (doctorData.success && doctorData.success === "REQUEST_DOCTOR") {
+    history.push("/chat");
+  }
 
   return (
     <div className="doctor-card">
@@ -51,4 +58,10 @@ function DoctorCard({
   );
 }
 
-export default connect(null, { requestDoctor })(DoctorCard);
+const mapStateToProps = (state) => {
+  return {
+    doctorData: state.doctors,
+  };
+};
+
+export default connect(mapStateToProps, { requestDoctor })(DoctorCard);

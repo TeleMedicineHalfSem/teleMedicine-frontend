@@ -2,6 +2,7 @@ const initialState = {
   loading: false,
   error: null,
   success: false,
+  data: false,
 };
 
 const doctorReducer = (state = initialState, action) => {
@@ -13,7 +14,13 @@ const doctorReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: false,
-        success: action.payload,
+        data: action.payload,
+        success: action.success,
+      };
+    case "DOCTOR_MESSAGE":
+      return {
+        ...state,
+        success: action.success,
       };
     case "DOCTOR_FAIL":
       return {
@@ -21,6 +28,7 @@ const doctorReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
         success: false,
+        data: false,
       };
     case "DOCTOR_RESET":
       return {
