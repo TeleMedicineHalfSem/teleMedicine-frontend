@@ -5,8 +5,24 @@ import Footer from "../../components/footer/Footer";
 import { ChatInput } from "../../components/input/inputs";
 import ChatMessage from "../../components/chatMessage/ChatMessage";
 import { animateScroll } from "react-scroll";
+import { connect } from "react-redux";
+import { joinRoom } from "../../actions/roomActions";
+import { getProfile } from "../../actions/authActions";
+import { useLocation } from "react-router-dom";
 
-function ChatRoom() {
+function ChatRoom({ socketData, joinRoom, profile }) {
+  const socket = socketData.socket;
+  const location = useLocation();
+  const roomName = location.state.patientEmail;
+  const userEmail = profile.email;
+
+  // Joining room...
+  useEffect(() => {
+    if (socket) {
+      joinRoom(socket, { room: roomName, name: userEmail });
+    }
+  }, [socket, joinRoom, roomName, userEmail]);
+
   // Function to scroll down...
   const scrollToBottom = () => {
     animateScroll.scrollToBottom({
@@ -90,4 +106,11 @@ function ChatRoom() {
   );
 }
 
-export default ChatRoom;
+const mapStateToProps = (state) => {
+  return {
+    socketData: state.socketData,
+    profile: state.firebase.profile,
+  };
+};
+
+export default connect(mapStateToProps, { joinRoom, getProfile })(ChatRoom);

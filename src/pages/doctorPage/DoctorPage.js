@@ -7,6 +7,7 @@ import ChatRequestCard from "../../components/chatRequest/ChatRequestCard";
 import RecordCard from "../../components/recordCard/RecordCard";
 import { connect } from "react-redux";
 import { getProfileDoctor } from "../../actions/authActions";
+import { connectSocket } from "../../actions/socketActions";
 
 function DoctorPage({ getProfileDoctor, profileData, connectSocket, profile }) {
   //initialization...
@@ -15,7 +16,7 @@ function DoctorPage({ getProfileDoctor, profileData, connectSocket, profile }) {
 
   // Connect to socket...
   useEffect(() => {
-    if (!profile.isEmpty && profile.Doctor) {
+    if (!profile.isEmpty && profile.isDoctor) {
       connectSocket({ ENDPOINT });
     } else {
       console.log("Not a Doctor..");
@@ -111,4 +112,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getProfileDoctor })(DoctorPage);
+export default connect(mapStateToProps, { getProfileDoctor, connectSocket })(
+  DoctorPage
+);

@@ -21,7 +21,7 @@ function PatientPage({
 
   // Connect to socket...
   useEffect(() => {
-    if (!profile.isEmpty && !profile.Doctor) {
+    if (!profile.isEmpty && !profile.isDoctor) {
       connectSocket({ ENDPOINT });
     } else {
       console.log("Not a Patient..");

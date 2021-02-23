@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 const ChatRequest = ({ patientName }) => {
   const history = useHistory();
   const requestAccepted = () => {
-    history.push("/chat");
+    history.push("/chat", { patientEmail: patientName });
   };
   return (
     <div className="chat-req">

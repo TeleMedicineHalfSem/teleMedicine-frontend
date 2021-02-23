@@ -15,6 +15,7 @@ function DoctorCard({
   requestDoctor,
   email,
   doctorData,
+  profile,
 }) {
   const expString = `In practice since ${experience}`;
   const nameString = `Dr. ${name}`;
@@ -26,7 +27,7 @@ function DoctorCard({
 
   // Navigating to chat page...
   if (doctorData.success && doctorData.success === "REQUEST_DOCTOR") {
-    history.push("/chat");
+    history.push({ pathname: "/chat", state: { patientEmail: profile.email } });
   }
 
   return (
@@ -61,6 +62,7 @@ function DoctorCard({
 const mapStateToProps = (state) => {
   return {
     doctorData: state.doctors,
+    profile: state.firebase.profile,
   };
 };
 
