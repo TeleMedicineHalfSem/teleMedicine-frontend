@@ -1,4 +1,5 @@
 import io from "socket.io-client";
+import { chatReceived } from "./chatActions";
 
 const socketRequest = () => {
   return {
@@ -19,6 +20,10 @@ export const connectSocket = ({ ENDPOINT }) => {
     socket.on("CONNECTION_ACK", () => {
       console.log("CONNECTION_ACK");
       dispatch(socketSuccess(socket));
+    });
+
+    socket.on("RCV_MSG", ({ msg }) => {
+      dispatch(chatReceived("Chat Received", { msg }));
     });
   };
 };

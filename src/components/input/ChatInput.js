@@ -3,7 +3,7 @@ import "./ChatInput.css";
 
 function ChatInput({ placeholder, value, onChange, onSubmit }) {
   return (
-    <div className="chat-input">
+    <form onSubmit={onSubmit} className="chat-input">
       <input
         type="text"
         placeholder={placeholder}
@@ -13,7 +13,7 @@ function ChatInput({ placeholder, value, onChange, onSubmit }) {
       <div onClick={onSubmit}>
         <img src="/images/send.png" alt="" height="20px" />
       </div>
-    </div>
+    </form>
   );
 }
 
