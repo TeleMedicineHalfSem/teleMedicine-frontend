@@ -34,3 +34,17 @@ export const joinRoom = (socket, { name, room }) => {
     }
   };
 };
+
+export const leaveRoom = (socket, { name }) => {
+  return (dispatch, getState) => {
+    dispatch(roomRequest());
+    if (socket) {
+      socket.emit("LEAVE_ROOM", { name }, (data) => {
+        dispatch(roomSuccess());
+        console.log(data);
+      });
+    } else {
+      dispatch(roomFailure("No socket"));
+    }
+  };
+};

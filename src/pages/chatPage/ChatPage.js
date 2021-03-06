@@ -6,12 +6,19 @@ import { ChatInput } from "../../components/input/inputs";
 import ChatMessage from "../../components/chatMessage/ChatMessage";
 import { animateScroll } from "react-scroll";
 import { connect } from "react-redux";
-import { joinRoom } from "../../actions/roomActions";
+import { joinRoom, leaveRoom } from "../../actions/roomActions";
 import { getProfile } from "../../actions/authActions";
 import { useLocation } from "react-router-dom";
 import { sendMsg } from "../../actions/chatActions";
 
-function ChatRoom({ socketData, joinRoom, profile, sendMsg, chatData }) {
+function ChatRoom({
+  socketData,
+  joinRoom,
+  profile,
+  sendMsg,
+  chatData,
+  leaveRoom,
+}) {
   const [chatInput, setChatInput] = useState("");
   const socket = socketData.socket;
   const location = useLocation();
@@ -46,6 +53,11 @@ function ChatRoom({ socketData, joinRoom, profile, sendMsg, chatData }) {
     setChatInput("");
   };
 
+  // On clicking close chat..
+  const onClickCloseChat = () => {
+    leaveRoom(socket, { name: userEmail });
+  };
+
   // Showing chat messages...
   const chatMessageView = chatList.map((data) => (
     <ChatMessage key={data.key} message={data.message} sender={data.sender} />
@@ -62,7 +74,12 @@ function ChatRoom({ socketData, joinRoom, profile, sendMsg, chatData }) {
             <div className="chat-page-box-header-left">Dr. Mayur</div>
             <div className="chat-page-box-header-right">
               <img src="/images/video-call.png" alt="" height="25px" />
-              <img src="/images/cross.png" alt="" height="25px" />
+              <img
+                onClick={onClickCloseChat}
+                src="/images/cross.png"
+                alt=""
+                height="25px"
+              />
             </div>
           </div>
           <div id="chat-page-box" className="chat-page-box-body">
@@ -94,6 +111,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { joinRoom, getProfile, sendMsg })(
-  ChatRoom
-);
+export default connect(mapStateToProps, {
+  joinRoom,
+  getProfile,
+  sendMsg,
+  leaveRoom,
+})(ChatRoom);
