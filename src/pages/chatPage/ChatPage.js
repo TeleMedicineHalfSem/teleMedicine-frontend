@@ -8,7 +8,7 @@ import { animateScroll } from "react-scroll";
 import { connect } from "react-redux";
 import { joinRoom, leaveRoom } from "../../actions/roomActions";
 import { getProfile } from "../../actions/authActions";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { sendMsg } from "../../actions/chatActions";
 
 function ChatRoom({
@@ -22,9 +22,23 @@ function ChatRoom({
   const [chatInput, setChatInput] = useState("");
   const socket = socketData.socket;
   const location = useLocation();
-  const roomName = location.state.patientEmail;
+  let roomName;
+  let history = useHistory();
   const userEmail = profile.email;
   const chatList = chatData.chats;
+
+  // Checking if socket is connected...
+  if (!socket && !profile.isEmpty) {
+    if (profile.isDoctor) {
+      history.push("/doctor");
+    } else {
+      history.push("/patient");
+    }
+  }
+
+  if (location.state) {
+    roomName = location.state.patientEmail;
+  }
 
   // Joining room...
   useEffect(() => {
@@ -71,7 +85,7 @@ function ChatRoom({
       <div className="chat-page-body">
         <div className="chat-page-box">
           <div className="chat-page-box-header">
-            <div className="chat-page-box-header-left">Dr. Mayur</div>
+            <div className="chat-page-box-header-left"></div>
             <div className="chat-page-box-header-right">
               <img src="/images/video-call.png" alt="" height="25px" />
               <img
@@ -103,7 +117,6 @@ function ChatRoom({
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.chatData);
   return {
     socketData: state.socketData,
     profile: state.firebase.profile,
