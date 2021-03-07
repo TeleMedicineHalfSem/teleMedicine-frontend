@@ -27,7 +27,7 @@ const PatientDetail = ({pName, gender, dob, age}) => {
                         </tr>
                         <tr>
                             <td><label>Disease:</label></td>
-                            <td><BoderInput type="text" /></td>
+                            <td><BoderInput type="text" size="large" /></td>
                         </tr>
                         <tr>
                             <td><label>Medication:</label></td>

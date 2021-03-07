@@ -1,12 +1,24 @@
 import React from "react";
 import "./BoderInput.css";
 
-function BoderInput({type}){
+function BoderInput({type,size}){
     let inputType = "";
+    let width = "";
+    let style = {};
 
-
+    switch (size) {
+      case "medium":
+        width = "250px";
+        break;
+      case "large":
+        width = "350px";
+        break;
+      default:
+        width = "250px";
+    }
   
-      // Type...
+    style = { width: width };
+
   switch (type) {
     case "text":
       inputType = "text";
@@ -24,6 +36,7 @@ function BoderInput({type}){
           <input 
           className="boder-text-input" 
           type={inputType}
+          style = {style}
           /> 
         </div>
       );
