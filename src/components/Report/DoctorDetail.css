@@ -1,0 +1,5 @@
+.doctor-detail-heading{
+    font-family: var(--primary-font);
+    color: var(--primary-color);
+    font-size: 120%;
+}
