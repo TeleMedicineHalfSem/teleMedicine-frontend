@@ -6,11 +6,15 @@ import SignUpPage from "./pages/signUpPage/SignUpPage";
 import SignInPage from "./pages/signInPage/SignInPage";
 import PatientPage from "./pages/patientPage/PatientPage";
 import DoctorPage from "./pages/doctorPage/DoctorPage";
+import DoctorReportPage from "./pages/doctorReportPage/DoctorReportPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/doctorReport">
+          <DoctorReportPage />
+        </Route>
         <Route path="/doctor">
           <DoctorPage />
         </Route>
