@@ -7,10 +7,14 @@ import SignInPage from "./pages/signInPage/SignInPage";
 import PatientPage from "./pages/patientPage/PatientPage";
 import DoctorPage from "./pages/doctorPage/DoctorPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import MedicalRecord from "./pages/medicalRecordPage/MedicalRecordPage";
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/medicalRecord">
+          <MedicalRecord />
+        </Route>
         <Route path="/doctor">
           <DoctorPage />
         </Route>

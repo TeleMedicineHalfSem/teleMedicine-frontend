@@ -1,0 +1,9 @@
+.medical-record-body{
+    margin: 20px;
+}
+
+.medical-record-heading{
+    background-color: var(--secondary-color);
+    font: var(--primary-font);
+    color: #fff;
+}
