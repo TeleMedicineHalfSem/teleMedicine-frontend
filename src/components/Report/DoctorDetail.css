@@ -1,0 +1,29 @@
+.doctor-detail-heading{
+    font-family: var(--primary-font);
+    color: var(--primary-color);
+    font-size: 120%;
+    padding-left: 10px;
+}
+
+.doctor-card{
+    box-shadow:  0 1px 9px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 20px; 
+    background-color: #fff;
+}
+
+.doctor-card-content{
+    padding: 10px 10px;
+}
+
+td{
+    padding-left: 30px;
+}
+
+label{
+    font-weight: bold;
+}
+
+.doctor-phone{
+    border-radius: 5px;
+    border-color: var(--font-color);
+}
