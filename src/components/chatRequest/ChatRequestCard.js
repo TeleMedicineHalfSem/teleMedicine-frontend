@@ -2,10 +2,13 @@ import React from "react";
 import Button from "../button/Button";
 import "./ChatRequestCard.css";
 import { useHistory } from "react-router-dom";
+import { delRequestedDoctor } from "../../actions/doctorActions";
+import { connect } from "react-redux";
 
-const ChatRequest = ({ patientName }) => {
+const ChatRequest = ({ patientName, delRequestedDoctor }) => {
   const history = useHistory();
   const requestAccepted = () => {
+    delRequestedDoctor(patientName);
     history.push("/chat", { patientEmail: patientName });
   };
   return (
@@ -20,4 +23,4 @@ const ChatRequest = ({ patientName }) => {
   );
 };
 
-export default ChatRequest;
+export default connect(null, { delRequestedDoctor })(ChatRequest);
