@@ -1,0 +1,21 @@
+.doctor-report-heading{
+    font-family: var(--primary-font);
+    color: var(--primary-color);
+    font-size: 180%;
+    text-align: center;
+    margin: auto;
+    padding: 20px 0px;
+}
+
+.doctor-details{
+    margin: 20px 150px;
+
+}
+
+.patient-details{
+    margin: 20px 150px;
+}
+.submit-btn{
+    text-align: center;
+    margin: 30px;
+}
