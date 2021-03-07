@@ -1,17 +1,17 @@
-.doctor-detail-heading{
+.patient-detail-heading{
     font-family: var(--primary-font);
     color: var(--primary-color);
     font-size: 120%;
     padding-left: 10px;
 }
 
-.doctor-card{
+.patient-card{
     box-shadow:  0 1px 9px 0 rgba(0, 0, 0, 0.4);
     border-radius: 20px; 
     background-color: #fff;
 }
 
-.doctor-card-content{
+.patient-card-content{
     padding: 10px 10px;
 }
 
@@ -21,4 +21,10 @@ td{
 
 label{
     font-weight: bold;
+}
+
+.doctor-text{
+   height: 100px;
+   width: 250px;
+    border-radius: 10px;
 }

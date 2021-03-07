@@ -1,0 +1,6 @@
+.boder-text-input{
+    border-color: #c5c5c5;
+    color: var(--font-color);
+    border-radius: 8px;
+    padding: 0px 10px;
+}

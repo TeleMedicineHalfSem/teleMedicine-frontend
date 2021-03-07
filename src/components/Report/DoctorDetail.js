@@ -1,5 +1,6 @@
 import React from "react";
 import "./DoctorDetail.css";
+import BoderInput from "../input/BoderInput";
 
 const DoctorDetail = ({docName, specilization, email}) => {
     return(
@@ -21,7 +22,7 @@ const DoctorDetail = ({docName, specilization, email}) => {
                             <td>{email}</td>
                         </tr>
                         <td><label>Phone:</label></td>
-                        <td><input type="number" name="phone" className="doctor-phone" /></td>
+                        <td><BoderInput type="number" /></td>
                     </table>
                 </div>
             </div>
