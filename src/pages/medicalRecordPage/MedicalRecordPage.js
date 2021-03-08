@@ -5,6 +5,7 @@ import Footer from "../../components/footer/Footer";
 import Banner from "../../components/banner/Banner";
 import Label from "../../components/label/Label";
 import FormField from "../../components/formField/FormField";
+import Button from "../../components/button/Button";
 
 function MedicalRecord(){
     return(
@@ -57,6 +58,9 @@ function MedicalRecord(){
                     content4=""
                     />
                 </div>
+            </div>
+            <div className="print-btn">
+                <Button color={"secondary"} size={"small"}>Print</Button>
             </div>
             <div className="medical-record-footer">
                 <Footer />
