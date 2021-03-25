@@ -6,7 +6,11 @@ import SignUpPage from "./pages/signUpPage/SignUpPage";
 import SignInPage from "./pages/signInPage/SignInPage";
 import PatientPage from "./pages/patientPage/PatientPage";
 import DoctorPage from "./pages/doctorPage/DoctorPage";
+
+import DoctorReportPage from "./pages/doctorReportPage/DoctorReportPage"; 
+
 import ChatPage from "./pages/chatPage/ChatPage";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MedicalRecord from "./pages/medicalRecordPage/MedicalRecordPage";
 function App() {
@@ -14,11 +18,15 @@ function App() {
     <Router>
       <Switch>
 
+        <Route path="/doctorReport">
+          <DoctorReportPage />
+
         <Route path="/medicalRecord">
           <MedicalRecord />
 
         <Route path="/chat">
           <ChatPage />
+
 
         </Route>
         <Route path="/doctor">
