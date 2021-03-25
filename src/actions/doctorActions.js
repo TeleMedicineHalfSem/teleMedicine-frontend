@@ -12,6 +12,12 @@ const doctorSuccess = (data) => {
     payload: data,
   };
 };
+const doctorMessage = (success) => {
+  return {
+    type: "DOCTOR_MESSAGE",
+    success: success,
+  };
+};
 const doctorFailure = (error) => {
   return {
     type: "DOCTOR_FAIL",
@@ -43,6 +49,7 @@ export const getDoctors = (limit) => {
           doctors.push(document);
         });
         dispatch(doctorSuccess(doctors));
+        dispatch(doctorMessage("GET_DOCTOR"));
       })
       .catch((error) => {
         dispatch(doctorFailure("Unable to retrieve data"));
@@ -74,9 +81,87 @@ export const searchDoctor = ({ searchText }) => {
           doctors.push(document);
         });
         dispatch(doctorSuccess(doctors));
+        dispatch(doctorMessage("SEARCH_DOCTOR"));
       })
       .catch((error) => {
         dispatch(doctorFailure("Unable to retrieve data"));
+      });
+  };
+};
+
+export const requestDoctor = ({ email }) => {
+  return (dispatch, getState, { getFirestore, getFirebase }) => {
+    dispatch(doctorRequest());
+    const firestore = getFirestore();
+    const patientEmail = getFirebase().auth().currentUser.email;
+    let uid = null;
+    let oldRequests = [];
+    let alreadyRequested = false;
+    firestore
+      .collection("doctors")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          if (
+            doc.data().requests &&
+            doc.data().requests.includes(patientEmail)
+          ) {
+            alreadyRequested = true;
+            console.log(
+              alreadyRequested ? "Already Requested" : "Not Requested"
+            );
+          }
+          if (doc.data().email === email) {
+            uid = doc.id;
+            if (doc.data().requests) {
+              oldRequests = doc.data().requests;
+            }
+          }
+        });
+      })
+      .then(() => {
+        // Updating doctor data...
+        if (!oldRequests.includes(patientEmail)) {
+          oldRequests.push(patientEmail);
+          firestore.collection("doctors").doc(uid).update({
+            requests: oldRequests,
+          });
+        }
+      })
+      .then(() => {
+        console.log("Request sent..");
+        dispatch(doctorMessage("REQUEST_DOCTOR"));
+      })
+      .catch((error) => {
+        console.log("Request not Sent..");
+        dispatch(doctorFailure("Request sending failed"));
+      });
+  };
+};
+
+export const delRequestedDoctor = (patientEmail) => {
+  return (dispatch, getState, { getFirestore, getFirebase }) => {
+    //const doctorEmail = getFirebase().auth().currentUser.email;
+    const doctorUid = getFirebase().auth().currentUser.uid;
+    const firestore = getFirestore();
+    let oldRequests = [];
+    firestore
+      .collection("doctors")
+      .doc(doctorUid)
+      .get()
+      .then((snapshot) => {
+        oldRequests = snapshot.data().requests;
+        if (oldRequests.length !== 0) {
+          const index = oldRequests.indexOf(patientEmail);
+          if (index > -1) {
+            oldRequests.splice(index, 1);
+          }
+        }
+      })
+      .then(() => {
+        firestore.collection("doctors").doc(doctorUid).update({
+          requests: oldRequests,
+        });
       });
   };
 };
