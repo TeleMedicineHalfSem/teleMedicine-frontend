@@ -8,12 +8,18 @@ import PatientPage from "./pages/patientPage/PatientPage";
 import DoctorPage from "./pages/doctorPage/DoctorPage";
 import ChatPage from "./pages/chatPage/ChatPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import MedicalRecord from "./pages/medicalRecordPage/MedicalRecordPage";
 function App() {
   return (
     <Router>
       <Switch>
+
+        <Route path="/medicalRecord">
+          <MedicalRecord />
+
         <Route path="/chat">
           <ChatPage />
+
         </Route>
         <Route path="/doctor">
           <DoctorPage />

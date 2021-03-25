@@ -1,0 +1,18 @@
+.medical-record{
+    background-color: #fff;
+}
+
+.medical-record-body{
+    margin: 40px;
+}
+
+.blue-line{
+    margin-top: 0px;
+    border-color: var(--primary-color);
+    border-width: 5px;
+}
+
+.print-btn{
+    text-align: center;
+    margin: 30px;
+}
