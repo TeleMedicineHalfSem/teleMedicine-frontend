@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SignInPage.css";
 import { connect } from "react-redux";
 import NavBar from "../../components/navbar/Navbar";

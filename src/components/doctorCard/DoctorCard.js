@@ -3,14 +3,32 @@ import "./DoctorCard.css";
 import Button from "../button/Button";
 import Divider from "../divider/Divider";
 import DisplayPicture from "../displayPicture/DisplayPicture";
+import { requestDoctor } from "../../actions/doctorActions";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-function DoctorCard({ name, specialization, experience, initials }) {
+function DoctorCard({
+  name,
+  specialization,
+  experience,
+  initials,
+  requestDoctor,
+  email,
+  doctorData,
+  profile,
+}) {
   const expString = `In practice since ${experience}`;
   const nameString = `Dr. ${name}`;
+  const history = useHistory();
 
   const onClickChat = () => {
-    // Write code to redirect to chatRoom...
+    requestDoctor({ email });
   };
+
+  // Navigating to chat page...
+  if (doctorData.success && doctorData.success === "REQUEST_DOCTOR") {
+    history.push({ pathname: "/chat", state: { patientEmail: profile.email } });
+  }
 
   return (
     <div className="doctor-card">
@@ -41,4 +59,11 @@ function DoctorCard({ name, specialization, experience, initials }) {
   );
 }
 
-export default DoctorCard;
+const mapStateToProps = (state) => {
+  return {
+    doctorData: state.doctors,
+    profile: state.firebase.profile,
+  };
+};
+
+export default connect(mapStateToProps, { requestDoctor })(DoctorCard);
