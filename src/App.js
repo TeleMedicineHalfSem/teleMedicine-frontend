@@ -7,7 +7,7 @@ import SignInPage from "./pages/signInPage/SignInPage";
 import PatientPage from "./pages/patientPage/PatientPage";
 import DoctorPage from "./pages/doctorPage/DoctorPage";
 
-import DoctorReportPage from "./pages/doctorReportPage/DoctorReportPage"; 
+import DoctorReportPage from "./pages/doctorReportPage/DoctorReportPage";
 
 import ChatPage from "./pages/chatPage/ChatPage";
 
@@ -17,17 +17,14 @@ function App() {
   return (
     <Router>
       <Switch>
-
         <Route path="/doctorReport">
           <DoctorReportPage />
-
+        </Route>
         <Route path="/medicalRecord">
           <MedicalRecord />
-
+        </Route>
         <Route path="/chat">
           <ChatPage />
-
-
         </Route>
         <Route path="/doctor">
           <DoctorPage />
