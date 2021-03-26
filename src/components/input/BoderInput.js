@@ -7,6 +7,9 @@ function BoderInput({type,size}){
     let style = {};
 
     switch (size) {
+      case "small":
+        width="50px";
+        break;
       case "medium":
         width = "250px";
         break;
@@ -20,6 +23,9 @@ function BoderInput({type,size}){
     style = { width: width };
 
   switch (type) {
+    case "date":
+      inputType = "date";
+      break;
     case "text":
       inputType = "text";
       break;

@@ -1,6 +1,7 @@
 import React from "react";
 import "./PatientDetail.css";
 import BoderInput from "../input/BoderInput";
+import RadioInput from "../input/RadioInput";
 
 const PatientDetail = ({pName, gender, dob, age}) => {
     return(
@@ -11,19 +12,24 @@ const PatientDetail = ({pName, gender, dob, age}) => {
                     <table>
                         <tr>
                             <td><label>Name:</label></td>
-                            <td>{pName}</td>
+                            <td><BoderInput type="text" size="medium" /></td>
                         </tr>
                         <tr>
                             <td><label>Gender:</label></td>
-                            <td>{gender}</td>
+                            <td>
+                                <RadioInput type="radio" value="male">Male</RadioInput>
+                                <RadioInput type="radio" value="female">Female</RadioInput>
+                            </td>
                         </tr>
                         <tr>
                             <td><label>Date of birth:</label></td>
-                            <td>{dob}</td>
+                            <td>
+                                <BoderInput type="date" value="dob" />
+                            </td>
                         </tr>
                         <tr>
                             <td><label>Age:</label></td>
-                            <td>{age}</td>
+                            <td><BoderInput type="number" size="small" /></td>
                         </tr>
                         <tr>
                             <td><label>Disease:</label></td>
