@@ -2,7 +2,7 @@ import React from "react";
 import "./DoctorDetail.css";
 import BoderInput from "../input/BoderInput";
 
-const DoctorDetail = ({docName, specilization, email}) => {
+const DoctorDetail = () => {
     return(
         <div>
             <p className="doctor-detail-heading">Doctor's Details</p>
@@ -11,15 +11,15 @@ const DoctorDetail = ({docName, specilization, email}) => {
                     <table>
                         <tr>
                             <td><label>Name:</label></td>
-                            <td>{docName}</td>
+                            <td><BoderInput type="text" /></td>
                         </tr>
                         <tr>
                             <td><label>Specialization:</label></td>
-                            <td>{specilization}</td>
+                            <td><BoderInput type="text" /></td>
                         </tr>
                         <tr>
                             <td><label>Email:</label></td>
-                            <td>{email}</td>
+                            <td><BoderInput type="email" /></td>
                         </tr>
                         <td><label>Phone:</label></td>
                         <td><BoderInput type="number" /></td>

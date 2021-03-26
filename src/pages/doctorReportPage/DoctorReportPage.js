@@ -16,7 +16,7 @@ function DoctorReportPage() {
         <p>Medical Information</p>
       </div>
       <div className="doctor-details">
-        <DoctorDetail docName="Anugya" specilization="dentist" email="abc@mail.com"/>
+        <DoctorDetail />
       </div>
       <div className="patient-details">
         <PatientDetail pName="Mayur" gender="male" dob="22-10-2000" age="21" />
