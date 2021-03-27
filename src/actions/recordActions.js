@@ -95,11 +95,33 @@ export const getRecordsByEmail = () => {
       doctorEmail = '${email}' OR 
       patientEmail = '${email}'`
     );
-    query.then((snapshot) => {
-      snapshot.forEach((data) => {
-        records.push(data);
+    query
+      .then((snapshot) => {
+        snapshot.forEach((data) => {
+          records.push(data);
+        });
+        dispatch(recordSuccess(records));
+      })
+      .catch(() => {
+        dispatch(recordFailure("Medical Records failed to get data"));
       });
-      dispatch(recordSuccess(records));
-    });
+  };
+};
+
+export const getRecordById = (id) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    dispatch(recordRequest());
+    const firestore = getFirestore();
+    firestore
+      .collection("records")
+      .doc(id)
+      .get()
+      .then((snap) => {
+        const data = snap.data();
+        dispatch(recordSuccess(data));
+      })
+      .catch(() => {
+        dispatch(recordFailure("Medical Records failed to get data"));
+      });
   };
 };
