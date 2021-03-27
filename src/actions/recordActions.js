@@ -66,6 +66,12 @@ export const setRecord = ({
     firestore
       .collection("records")
       .add(data)
+      .then((resp) => {
+        const uid = resp.id;
+        return firestore.collection("records").doc(uid).update({
+          id: uid,
+        });
+      })
       .then(() => {
         console.log("Success");
         dispatch(recordSuccess(data));

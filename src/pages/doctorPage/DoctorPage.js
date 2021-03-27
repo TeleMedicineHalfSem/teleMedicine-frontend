@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { getProfileDoctor } from "../../actions/authActions";
 import { connectSocket } from "../../actions/socketActions";
 import { getRecordsByEmail } from "../../actions/recordActions";
+import { useHistory } from "react-router-dom";
 
 function DoctorPage({
   getProfileDoctor,
@@ -21,6 +22,7 @@ function DoctorPage({
   //initialization...
   let name, specialization, gender, experience, dob, initials;
   const ENDPOINT = "http://127.0.0.1:2500";
+  const history = useHistory();
 
   // Connect to socket...
   useEffect(() => {
@@ -47,6 +49,12 @@ function DoctorPage({
     }
   }
 
+  // On Click record card...
+  const onClickRecord = (event) => {
+    const id = event.target.id;
+    history.push("/medicalRecord", { id: id });
+  };
+
   if (profileData) {
     name = profileData.fullName;
     specialization = profileData.specialization;
@@ -64,12 +72,13 @@ function DoctorPage({
       listRecord[i].key = i + 1;
     }
   }
-  console.log(listRecord);
   const recordView = listRecord.map((record) => (
     <RecordCard
       key={record.key}
       patientName={record.patientDetails.name}
       patientProblem={record.medicalInfo.disease}
+      id={record.id}
+      onClick={onClickRecord}
     />
   ));
 
@@ -117,7 +126,6 @@ function DoctorPage({
   );
 }
 const mapStateToProps = (state) => {
-  console.log(state.recordData);
   return {
     profileData: state.auth.success,
     profile: state.firebase.profile,
