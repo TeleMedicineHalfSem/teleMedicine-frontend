@@ -6,6 +6,7 @@ import doctorReducer from "./doctorReducer";
 import socketReducer from "./socketReducer";
 import roomReducer from "./roomReducer";
 import chatReducer from "./chatReducer";
+import recordReducer from "./recordReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   socketData: socketReducer,
   roomData: roomReducer,
   chatData: chatReducer,
+  recordData: recordReducer,
   firebase: firebaseReducer,
   firestore: firestoreReducer,
 });
