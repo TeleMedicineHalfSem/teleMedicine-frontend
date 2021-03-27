@@ -14,6 +14,7 @@ function DoctorReportPage({ setRecord }) {
   const [doctorEmail, setDoctorEmail] = useState("");
   const [doctorPhone, setDoctorPhone] = useState("");
   const [patientName, setPatientName] = useState("");
+  const [patientEmail, setPatientEmail] = useState("");
   const [patientGender, setPatientGender] = useState("");
   const [patientDob, setPatientDob] = useState("");
   const [patientAge, setPatientAge] = useState("");
@@ -28,6 +29,7 @@ function DoctorReportPage({ setRecord }) {
       doctorEmail,
       doctorPhone,
       patientName,
+      patientEmail,
       patientGender,
       patientDob,
       patientAge,
@@ -116,6 +118,19 @@ function DoctorReportPage({ setRecord }) {
                     <BoderInput
                       value={patientName}
                       onChange={(e) => setPatientName(e.target.value)}
+                      type="text"
+                      size="medium"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Email:</label>
+                  </td>
+                  <td>
+                    <BoderInput
+                      value={patientEmail}
+                      onChange={(e) => setPatientEmail(e.target.value)}
                       type="text"
                       size="medium"
                     />

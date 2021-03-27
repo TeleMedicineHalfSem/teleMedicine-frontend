@@ -1,4 +1,5 @@
 import { dateToday } from "../utils/currentDate";
+import { FireSQL } from "firesql";
 
 const recordRequest = () => {
   return {
@@ -29,6 +30,7 @@ export const setRecord = ({
   doctorEmail,
   doctorPhone,
   patientName,
+  patientEmail,
   patientGender,
   patientDob,
   patientAge,
@@ -41,10 +43,11 @@ export const setRecord = ({
     const firestore = getFirestore();
     const date = dateToday();
     const data = {
+      doctorEmail: doctorEmail,
+      patientEmail: patientEmail,
       doctorDetails: {
         name: doctorName,
         specialization: doctorSpecialization,
-        email: doctorEmail,
         phone: doctorPhone,
       },
       patientDetails: {
@@ -71,5 +74,26 @@ export const setRecord = ({
         console.log("Failed");
         dispatch(recordFailure("Medical Records failed to set data"));
       });
+  };
+};
+
+export const getRecordsByEmail = () => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    dispatch(recordRequest());
+    const records = [];
+    const email = getFirebase().auth().currentUser.email;
+    const firestore = getFirestore();
+    const fireSQL = new FireSQL(firestore);
+    const query = fireSQL.query(
+      `SELECT * FROM records WHERE 
+      doctorEmail = '${email}' OR 
+      patientEmail = '${email}'`
+    );
+    query.then((snapshot) => {
+      snapshot.forEach((data) => {
+        records.push(data);
+      });
+      dispatch(recordSuccess(records));
+    });
   };
 };
