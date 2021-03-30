@@ -1,0 +1,11 @@
+.mr-doc{
+    font: var(--secondary-font);
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 130%;
+    margin-bottom: 0px;
+}
+
+.mr-date{
+    color: #afafaf;
+}

@@ -1,0 +1,18 @@
+.mr-page-contents{
+    margin: 20px 250px 10px 200px;
+}
+
+.mr-page-heading{
+    font: var(--secondary-font);
+    font-weight: bolder;
+    font-size: 150%;
+}
+
+.patient-mr-card {
+    box-shadow:  0px 2px 8px 0px rgba(0, 0, 0, 0.4);
+    padding: 30px;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    border-radius: 5px;
+  }
