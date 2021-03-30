@@ -8,16 +8,26 @@ import RecordCard from "../../components/recordCard/RecordCard";
 import { connect } from "react-redux";
 import { getProfileDoctor } from "../../actions/authActions";
 import { connectSocket } from "../../actions/socketActions";
+import { getRecordsByEmail } from "../../actions/recordActions";
+import { useHistory } from "react-router-dom";
 
-function DoctorPage({ getProfileDoctor, profileData, connectSocket, profile }) {
+function DoctorPage({
+  getProfileDoctor,
+  profileData,
+  connectSocket,
+  profile,
+  getRecordsByEmail,
+  recordData,
+}) {
   //initialization...
   let name, specialization, gender, experience, dob, initials;
   const ENDPOINT = "http://127.0.0.1:2500";
+  const history = useHistory();
 
   // Connect to socket...
   useEffect(() => {
     if (!profile.isEmpty && profile.isDoctor) {
-      connectSocket({ ENDPOINT });
+      connectSocket({ ENDPOINT, name: profile.email });
     } else {
       console.log("Not a Doctor..");
     }
@@ -25,8 +35,9 @@ function DoctorPage({ getProfileDoctor, profileData, connectSocket, profile }) {
 
   //getting profile data...
   useEffect(() => {
+    getRecordsByEmail();
     getProfileDoctor();
-  }, [getProfileDoctor]);
+  }, [getProfileDoctor, getRecordsByEmail]);
 
   // Chat requests...
   let listReq = [];
@@ -38,6 +49,12 @@ function DoctorPage({ getProfileDoctor, profileData, connectSocket, profile }) {
     }
   }
 
+  // On Click record card...
+  const onClickRecord = (event) => {
+    const id = event.target.id;
+    history.push("/medicalRecord", { id: id });
+  };
+
   if (profileData) {
     name = profileData.fullName;
     specialization = profileData.specialization;
@@ -47,18 +64,21 @@ function DoctorPage({ getProfileDoctor, profileData, connectSocket, profile }) {
     initials = profileData.initials;
   }
 
-  // Sample data for medical records...
-  const listRecord = [
-    { key: "1", patientName: "Slokha Iyer", patientProblem: "Fever" },
-    { key: "2", patientName: "Abhishek Ranjan", patientProblem: "Cough" },
-    { key: "3", patientName: "Mayur", patientProblem: "Headache" },
-  ];
-
+  // Medical Records from firebase....
+  let listRecord = [];
+  if (recordData.success && Array.isArray(recordData.success)) {
+    listRecord = recordData.success;
+    for (let i = 0; i < listRecord.length; i++) {
+      listRecord[i].key = i + 1;
+    }
+  }
   const recordView = listRecord.map((record) => (
     <RecordCard
       key={record.key}
-      patientName={record.patientName}
-      patientProblem={record.patientProblem}
+      patientName={record.patientDetails.name}
+      patientProblem={record.medicalInfo.disease}
+      id={record.id}
+      onClick={onClickRecord}
     />
   ));
 
@@ -109,9 +129,12 @@ const mapStateToProps = (state) => {
   return {
     profileData: state.auth.success,
     profile: state.firebase.profile,
+    recordData: state.recordData,
   };
 };
 
-export default connect(mapStateToProps, { getProfileDoctor, connectSocket })(
-  DoctorPage
-);
+export default connect(mapStateToProps, {
+  getProfileDoctor,
+  connectSocket,
+  getRecordsByEmail,
+})(DoctorPage);

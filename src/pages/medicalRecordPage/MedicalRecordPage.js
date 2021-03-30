@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MedicalRecordPage.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
@@ -6,67 +6,117 @@ import Banner from "../../components/banner/Banner";
 import Label from "../../components/label/Label";
 import FormField from "../../components/formField/FormField";
 import Button from "../../components/button/Button";
+import { useLocation } from "react-router-dom";
+import { connect } from "react-redux";
+import { getRecordById } from "../../actions/recordActions";
 
-function MedicalRecord(){
-    return(
-        <div className="medical-record">
-            <div className="medical-record-header">
-                <Navbar />
-            </div>
-            <div className="medical-record-body">
-                <Banner />
-                <hr className="blue-line"></hr>
-                <div className="doctor-info">
-                    <Label labelName="DOCTOR INFORMATION" />
-                    <FormField 
-                    label1="Name" 
-                    label2="Email"
-                    label3="Specilization"
-                    label4="Phone"   
+function MedicalRecord({ getRecordById, recordData }) {
+  const location = useLocation();
+  let id = null;
+  let record;
+  let doctorName,
+    doctorEmail,
+    specialization,
+    doctorPhone,
+    patientName,
+    patientDob,
+    patientGender,
+    patientAge,
+    disease,
+    medication,
+    extraPoints,
+    date;
 
-                    content1="Slokha Iyer"
-                    content2="abc@gmail.com"
-                    content3="Dentist"
-                    content4="123456789"
-                    />
-                </div> 
-                <div className="patient-info">
-                <Label labelName="PATIENT INFORMATION" />
-                    <FormField 
-                    label1="Name" 
-                    label2="Date of Birth"
-                    label3="Gender"
-                    label4="Age"   
+  if (location.state) {
+    id = location.state.id;
+  }
 
-                    content1="Anugya Ram"
-                    content2="08-02-1999"
-                    content3="Female"
-                    content4="22"
-                    />
-                </div>
-                <div className="Medication">
-                <Label labelName="MEDICAL INFORMATION" />
-                    <FormField 
-                    label1="Disease" 
-                    label2="Medication"
-                    label3="Extra Points"
-                    label4=""   
+  useEffect(() => {
+    if (id) {
+      getRecordById(id);
+    }
+  }, [id, getRecordById]);
 
-                    content1="Cough"
-                    content2="Cough Syrup"
-                    content3="Eat healthy food"
-                    content4=""
-                    />
-                </div>
-            </div>
-            <div className="print-btn">
-                <Button color={"secondary"} size={"small"}>Print</Button>
-            </div>
-            <div className="medical-record-footer">
-                <Footer />
-            </div>
+  if (recordData.success && !Array.isArray(recordData.success)) {
+    record = recordData.success;
+    doctorName = record.doctorDetails.name;
+    doctorEmail = record.doctorEmail;
+    specialization = record.doctorDetails.specialization;
+    doctorPhone = record.doctorDetails.phone;
+    patientName = record.patientDetails.name;
+    patientDob = record.patientDetails.dob;
+    patientAge = record.patientDetails.age;
+    patientGender = record.patientDetails.gender;
+    disease = record.medicalInfo.disease;
+    medication = record.medicalInfo.medication;
+    extraPoints = record.medicalInfo.extraPoints;
+    date = record.date;
+  }
+
+  return (
+    <div className="medical-record">
+      <div className="medical-record-header">
+        <Navbar />
+      </div>
+      <div className="medical-record-body">
+        <Banner date={date} />
+        <hr className="blue-line"></hr>
+        <div className="doctor-info">
+          <Label labelName="DOCTOR INFORMATION" />
+          <FormField
+            label1="Name"
+            label2="Email"
+            label3="Specialization"
+            label4="Phone"
+            content1={doctorName}
+            content2={doctorEmail}
+            content3={specialization}
+            content4={doctorPhone}
+          />
         </div>
-    )
+        <div className="patient-info">
+          <Label labelName="PATIENT INFORMATION" />
+          <FormField
+            label1="Name"
+            label2="Date of Birth"
+            label3="Gender"
+            label4="Age"
+            content1={patientName}
+            content2={patientDob}
+            content3={patientGender}
+            content4={patientAge}
+          />
+        </div>
+        <div className="Medication">
+          <Label labelName="MEDICAL INFORMATION" />
+          <FormField
+            label1="Disease"
+            label2="Medication"
+            label3="Extra Points"
+            label4=""
+            content1={disease}
+            content2={medication}
+            content3={extraPoints}
+            content4=""
+          />
+        </div>
+      </div>
+      <div className="print-btn">
+        <Button color={"secondary"} size={"small"}>
+          Print
+        </Button>
+      </div>
+      <div className="medical-record-footer">
+        <Footer />
+      </div>
+    </div>
+  );
 }
 
-export default MedicalRecord;
+const mapStateToProps = (state) => {
+  return {
+    recordData: state.recordData,
+  };
+};
+
+export default connect(mapStateToProps, { getRecordById })(MedicalRecord);
