@@ -10,6 +10,7 @@ import { joinRoom, leaveRoom } from "../../actions/roomActions";
 import { getProfile } from "../../actions/authActions";
 import { useLocation, useHistory } from "react-router-dom";
 import { sendMsg } from "../../actions/chatActions";
+import { doctorReset } from "../../actions/doctorActions";
 
 function ChatRoom({
   socketData,
@@ -18,6 +19,7 @@ function ChatRoom({
   sendMsg,
   chatData,
   leaveRoom,
+  doctorReset,
 }) {
   const [chatInput, setChatInput] = useState("");
   const socket = socketData.socket;
@@ -42,10 +44,11 @@ function ChatRoom({
 
   // Joining room...
   useEffect(() => {
-    if (socket) {
+    doctorReset();
+    if (typeof socket === "object") {
       joinRoom(socket, { room: roomName, name: userEmail });
     }
-  }, [socket, joinRoom, roomName, userEmail]);
+  }, [socket, joinRoom, roomName, userEmail, doctorReset]);
 
   // Function to scroll down...
   const scrollToBottom = () => {
@@ -70,7 +73,21 @@ function ChatRoom({
   // On clicking close chat..
   const onClickCloseChat = () => {
     leaveRoom(socket, { name: userEmail });
+    if (profile.isDoctor) {
+      history.push("/doctorReport");
+    } else {
+      history.push("/patient");
+    }
   };
+
+  // On Leaving the room...
+  if (socket === "LEFT_ROOM") {
+    if (profile.isDoctor) {
+      history.push("/doctorReport");
+    } else {
+      history.push("/patient");
+    }
+  }
 
   // Showing chat messages...
   const chatMessageView = chatList.map((data) => (
@@ -129,4 +146,5 @@ export default connect(mapStateToProps, {
   getProfile,
   sendMsg,
   leaveRoom,
+  doctorReset,
 })(ChatRoom);

@@ -1,5 +1,6 @@
 import io from "socket.io-client";
 import { chatReceived } from "./chatActions";
+import { leaveRoom } from "./roomActions";
 
 const socketRequest = () => {
   return {
@@ -13,7 +14,7 @@ const socketSuccess = (data) => {
   };
 };
 
-export const connectSocket = ({ ENDPOINT }) => {
+export const connectSocket = ({ ENDPOINT, name }) => {
   return (dispatch, getState) => {
     dispatch(socketRequest());
     const socket = io.connect(ENDPOINT);
@@ -24,6 +25,11 @@ export const connectSocket = ({ ENDPOINT }) => {
 
     socket.on("RCV_MSG", ({ msg }) => {
       dispatch(chatReceived("Chat Received", { msg }));
+    });
+
+    socket.on("LEFT_ROOM", () => {
+      dispatch(leaveRoom(socket, { name }));
+      dispatch(socketSuccess("LEFT_ROOM"));
     });
   };
 };

@@ -22,7 +22,7 @@ function PatientPage({
   // Connect to socket...
   useEffect(() => {
     if (!profile.isEmpty && !profile.isDoctor) {
-      connectSocket({ ENDPOINT });
+      connectSocket({ ENDPOINT, name: profile.email });
     } else {
       console.log("Not a Patient..");
     }
