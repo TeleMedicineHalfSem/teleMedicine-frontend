@@ -53,6 +53,10 @@ function MedicalRecord({ getRecordById, recordData }) {
     date = record.date;
   }
 
+  const onClickPrint = () => {
+    window.print();
+  };
+
   return (
     <div className="medical-record">
       <div className="medical-record-header">
@@ -102,7 +106,7 @@ function MedicalRecord({ getRecordById, recordData }) {
         </div>
       </div>
       <div className="print-btn">
-        <Button color={"secondary"} size={"small"}>
+        <Button onClick={onClickPrint} color={"secondary"} size={"small"}>
           Print
         </Button>
       </div>
