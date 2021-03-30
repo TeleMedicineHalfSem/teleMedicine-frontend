@@ -9,7 +9,7 @@ import { setRecord } from "../../actions/recordActions";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-function DoctorReportPage({ setRecord, profile }) {
+function DoctorReportPage({ setRecord, profile, recordData }) {
   const [doctorName, setDoctorName] = useState("");
   const [doctorSpecialization, setDoctorSpecialization] = useState("");
   const [doctorEmail, setDoctorEmail] = useState("");
@@ -43,6 +43,7 @@ function DoctorReportPage({ setRecord, profile }) {
       medication,
       extraPoints,
     });
+    history.push("/");
   };
 
   return (
@@ -254,6 +255,7 @@ function DoctorReportPage({ setRecord, profile }) {
 const mapStateToProps = (state) => {
   return {
     profile: state.firebase.profile,
+    recordData: state.recordData,
   };
 };
 
