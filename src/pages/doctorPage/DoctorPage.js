@@ -26,6 +26,11 @@ function DoctorPage({
   const ENDPOINT = "http://127.0.0.1:2500";
   const history = useHistory();
 
+  // If not doctor then go to patient page...
+  if (!profile.isDoctor) {
+    history.push("/patient");
+  }
+
   // Connect to socket...
   useEffect(() => {
     if (!profile.isEmpty && profile.isDoctor) {

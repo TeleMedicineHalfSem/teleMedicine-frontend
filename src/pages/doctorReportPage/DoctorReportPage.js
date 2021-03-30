@@ -7,8 +7,9 @@ import BoderInput from "../../components/input/BoderInput";
 import RadioInput from "../../components/input/RadioInput";
 import { setRecord } from "../../actions/recordActions";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-function DoctorReportPage({ setRecord }) {
+function DoctorReportPage({ setRecord, profile }) {
   const [doctorName, setDoctorName] = useState("");
   const [doctorSpecialization, setDoctorSpecialization] = useState("");
   const [doctorEmail, setDoctorEmail] = useState("");
@@ -21,6 +22,11 @@ function DoctorReportPage({ setRecord }) {
   const [disease, setDisease] = useState("");
   const [medication, setMedication] = useState("");
   const [extraPoints, setExtraPoints] = useState("");
+  const history = useHistory();
+
+  if (!profile.isDoctor) {
+    history.push("/patient");
+  }
 
   const onClickSubmit = () => {
     setRecord({
@@ -245,4 +251,10 @@ function DoctorReportPage({ setRecord }) {
   );
 }
 
-export default connect(null, { setRecord })(DoctorReportPage);
+const mapStateToProps = (state) => {
+  return {
+    profile: state.firebase.profile,
+  };
+};
+
+export default connect(mapStateToProps, { setRecord })(DoctorReportPage);

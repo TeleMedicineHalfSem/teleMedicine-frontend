@@ -9,26 +9,27 @@ import Button from "../../components/button/Button";
 import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { getRecordById } from "../../actions/recordActions";
+import { useHistory } from "react-router-dom";
 
-function MedicalRecord({ getRecordById, recordData }) {
+function MedicalRecord({ getRecordById, recordData, profile }) {
   const location = useLocation();
   let id = null;
   let record;
-  let doctorName,
-    doctorEmail,
-    specialization,
-    doctorPhone,
-    patientName,
-    patientDob,
-    patientGender,
-    patientAge,
-    disease,
-    medication,
-    extraPoints,
-    date;
+  let doctorName, doctorEmail, specialization, doctorPhone;
+  let patientName, patientDob, patientGender, patientAge;
+  let disease, medication, extraPoints, date;
+  const history = useHistory();
 
   if (location.state) {
     id = location.state.id;
+  } else {
+    if (!profile.isEmpty) {
+      if (profile.isDoctor) {
+        history.push("/doctor");
+      } else {
+        history.push("/patient");
+      }
+    }
   }
 
   useEffect(() => {
@@ -120,6 +121,7 @@ function MedicalRecord({ getRecordById, recordData }) {
 const mapStateToProps = (state) => {
   return {
     recordData: state.recordData,
+    profile: state.firebase.profile,
   };
 };
 

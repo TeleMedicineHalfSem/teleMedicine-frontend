@@ -27,6 +27,11 @@ function PatientPage({
   let doctorListView = null;
   const history = useHistory();
 
+  // Checking if the user is not a patient....
+  if (profile.isDoctor) {
+    history.push("/doctor");
+  }
+
   // Connect to socket...
   useEffect(() => {
     if (!profile.isEmpty && !profile.isDoctor) {
