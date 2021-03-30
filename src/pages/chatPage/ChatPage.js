@@ -107,7 +107,6 @@ function ChatRoom({
           <div className="chat-page-box-header">
             <div className="chat-page-box-header-left">{chatName}</div>
             <div className="chat-page-box-header-right">
-              <img src="/images/video-call.png" alt="" height="25px" />
               <img
                 onClick={onClickCloseChat}
                 src="/images/cross.png"

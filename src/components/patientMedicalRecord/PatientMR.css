@@ -1,11 +1,24 @@
-.mr-doc{
-    font: var(--secondary-font);
-    color: var(--primary-color);
-    font-weight: bold;
-    font-size: 130%;
-    margin-bottom: 0px;
+.patient-mr {
+  cursor: pointer;
+  padding: 15px;
+  transition: 0.3s;
 }
 
-.mr-date{
-    color: #afafaf;
+.patient-mr:hover {
+  box-shadow: 0 0 2px 3px rgba(0, 0, 0, 0.24);
+}
+.patient-mr:active {
+  box-shadow: none;
+}
+
+.mr-doc {
+  font: var(--secondary-font);
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 130%;
+  margin-bottom: 0px;
+}
+
+.mr-date {
+  color: #afafaf;
 }
