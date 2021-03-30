@@ -1,7 +1,7 @@
 import React from "react";
 import "./Button.css";
 
-function Button({ size, onClick, children, b_style, color,type }) {
+function Button({ size, onClick, children, b_style, color, type, id }) {
   let width = "";
   if (b_style === "custom") {
     b_style = "custom-button";
@@ -30,7 +30,13 @@ function Button({ size, onClick, children, b_style, color,type }) {
   }
   return (
     <div>
-      <button style={{ width: width }} onClick={onClick} className={b_style} type={type}>
+      <button
+        style={{ width: width }}
+        onClick={onClick}
+        className={b_style}
+        type={type}
+        id={id}
+      >
         {children}
       </button>
     </div>

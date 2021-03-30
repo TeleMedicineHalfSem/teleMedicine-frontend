@@ -1,14 +1,17 @@
 .doctor-card {
   width: 65%;
+  margin-bottom: 10px;
 }
 .doctor-card-main {
   display: flex;
-  height: 20vh;
+  height: 25vh;
 }
 .doctor-card-display-pic {
   width: 20%;
   height: 100%;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   opacity: 0.85;
 }
 .doctor-card-image {

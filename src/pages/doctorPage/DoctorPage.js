@@ -7,6 +7,7 @@ import ChatRequestCard from "../../components/chatRequest/ChatRequestCard";
 import RecordCard from "../../components/recordCard/RecordCard";
 import { connect } from "react-redux";
 import { getProfileDoctor } from "../../actions/authActions";
+import { delRequestedDoctor } from "../../actions/doctorActions";
 import { connectSocket } from "../../actions/socketActions";
 import { getRecordsByEmail } from "../../actions/recordActions";
 import { useHistory } from "react-router-dom";
@@ -18,6 +19,7 @@ function DoctorPage({
   profile,
   getRecordsByEmail,
   recordData,
+  delRequestedDoctor,
 }) {
   //initialization...
   let name, specialization, gender, experience, dob, initials;
@@ -48,6 +50,11 @@ function DoctorPage({
       i++;
     }
   }
+
+  const requestAccepted = (event) => {
+    delRequestedDoctor(event.target.id);
+    history.push("/chat", { patientEmail: event.target.id });
+  };
 
   // On Click record card...
   const onClickRecord = (event) => {
@@ -83,7 +90,12 @@ function DoctorPage({
   ));
 
   const requestView = listReq.map((request) => (
-    <ChatRequestCard key={request.key} patientName={request.patientName} />
+    <ChatRequestCard
+      id={request.patientName}
+      key={request.key}
+      patientName={request.patientName}
+      onClick={requestAccepted}
+    />
   ));
 
   return (
@@ -137,4 +149,5 @@ export default connect(mapStateToProps, {
   getProfileDoctor,
   connectSocket,
   getRecordsByEmail,
+  delRequestedDoctor,
 })(DoctorPage);

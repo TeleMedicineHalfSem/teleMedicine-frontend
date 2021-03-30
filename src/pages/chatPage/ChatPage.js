@@ -24,7 +24,7 @@ function ChatRoom({
   const [chatInput, setChatInput] = useState("");
   const socket = socketData.socket;
   const location = useLocation();
-  let roomName;
+  let roomName, doctorEmail, chatName;
   let history = useHistory();
   const userEmail = profile.email;
   const chatList = chatData.chats;
@@ -40,6 +40,13 @@ function ChatRoom({
 
   if (location.state) {
     roomName = location.state.patientEmail;
+    doctorEmail = location.state.doctorEmail;
+  }
+
+  if (profile.isDoctor) {
+    chatName = roomName;
+  } else {
+    chatName = doctorEmail;
   }
 
   // Joining room...
@@ -102,7 +109,7 @@ function ChatRoom({
       <div className="chat-page-body">
         <div className="chat-page-box">
           <div className="chat-page-box-header">
-            <div className="chat-page-box-header-left"></div>
+            <div className="chat-page-box-header-left">{chatName}</div>
             <div className="chat-page-box-header-right">
               <img src="/images/video-call.png" alt="" height="25px" />
               <img
