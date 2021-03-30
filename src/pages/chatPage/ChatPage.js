@@ -30,12 +30,8 @@ function ChatRoom({
   const chatList = chatData.chats;
 
   // Checking if socket is connected...
-  if (!socket && !profile.isEmpty) {
-    if (profile.isDoctor) {
-      history.push("/doctor");
-    } else {
-      history.push("/patient");
-    }
+  if (!socket) {
+    history.push("/signin");
   }
 
   if (location.state) {

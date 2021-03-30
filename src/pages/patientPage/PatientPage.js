@@ -28,8 +28,8 @@ function PatientPage({
   const history = useHistory();
 
   // Checking if the user is not a patient....
-  if (profile.isDoctor) {
-    history.push("/doctor");
+  if (profile.isDoctor || profile.isEmpty) {
+    history.push("/signin");
   }
 
   // Connect to socket...

@@ -27,8 +27,8 @@ function DoctorPage({
   const history = useHistory();
 
   // If not doctor then go to patient page...
-  if (!profile.isDoctor) {
-    history.push("/patient");
+  if (!profile.isDoctor || profile.isEmpty) {
+    history.push("/signin");
   }
 
   // Connect to socket...
@@ -42,9 +42,11 @@ function DoctorPage({
 
   //getting profile data...
   useEffect(() => {
-    getRecordsByEmail();
-    getProfileDoctor();
-  }, [getProfileDoctor, getRecordsByEmail]);
+    if (!profile.isEmpty) {
+      getRecordsByEmail();
+      getProfileDoctor();
+    }
+  }, [getProfileDoctor, getRecordsByEmail, profile]);
 
   // Chat requests...
   let listReq = [];

@@ -8,8 +8,8 @@ import { useHistory } from "react-router-dom";
 
 function PatientMRPage({ profile }) {
   const history = useHistory();
-  if (profile.isDoctor) {
-    history.push("/doctor");
+  if (profile.isDoctor || profile.isEmpty) {
+    history.push("/signin");
   }
 
   return (

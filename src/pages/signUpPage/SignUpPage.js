@@ -3,8 +3,20 @@ import "./SignUpPage.css";
 import NavBar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import SignUpView from "./SignUpView";
+import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
-function SignUpPage() {
+function SignUpPage({ profile }) {
+  const history = useHistory();
+
+  // if user is logged in....
+  if (!profile.isEmpty) {
+    if (profile.isDoctor) {
+      history.push("/doctor");
+    } else {
+      history.push("/patient");
+    }
+  }
   return (
     <div className="sign-up">
       <div className="sign-up-header">
@@ -29,4 +41,9 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+const mapStateToProps = (state) => {
+  return {
+    profile: state.firebase.profile,
+  };
+};
+export default connect(mapStateToProps)(SignUpPage);

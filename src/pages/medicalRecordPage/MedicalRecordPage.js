@@ -23,12 +23,8 @@ function MedicalRecord({ getRecordById, recordData, profile }) {
   if (location.state) {
     id = location.state.id;
   } else {
-    if (!profile.isEmpty) {
-      if (profile.isDoctor) {
-        history.push("/doctor");
-      } else {
-        history.push("/patient");
-      }
+    if (profile.isDoctor || profile.isEmpty) {
+      history.push("/signin");
     }
   }
 

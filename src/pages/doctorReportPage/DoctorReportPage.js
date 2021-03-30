@@ -24,8 +24,8 @@ function DoctorReportPage({ setRecord, profile }) {
   const [extraPoints, setExtraPoints] = useState("");
   const history = useHistory();
 
-  if (!profile.isDoctor) {
-    history.push("/patient");
+  if (!profile.isDoctor || profile.isEmpty) {
+    history.push("/signin");
   }
 
   const onClickSubmit = () => {
