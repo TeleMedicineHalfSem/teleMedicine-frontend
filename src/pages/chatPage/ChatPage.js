@@ -77,7 +77,7 @@ function ChatRoom({
   const onClickCloseChat = () => {
     leaveRoom(socket, { name: userEmail });
     if (profile.isDoctor) {
-      history.push("/doctorReport");
+      history.push("/doctorReport", { patientEmail: roomName });
     } else {
       history.push("/patient");
     }
