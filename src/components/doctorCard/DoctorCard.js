@@ -1,11 +1,9 @@
 import React from "react";
 import "./DoctorCard.css";
 import Button from "../button/Button";
-import Divider from "../divider/Divider";
 import DisplayPicture from "../displayPicture/DisplayPicture";
 import { requestDoctor } from "../../actions/doctorActions";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
 
 function DoctorCard({
   name,
@@ -16,22 +14,14 @@ function DoctorCard({
   email,
   doctorData,
   profile,
+  id,
+  onClick,
 }) {
   const expString = `In practice since ${experience}`;
   const nameString = `Dr. ${name}`;
-  const history = useHistory();
-
-  const onClickChat = () => {
-    requestDoctor({ email });
-  };
-
-  // Navigating to chat page...
-  if (doctorData.success && doctorData.success === "REQUEST_DOCTOR") {
-    history.push({ pathname: "/chat", state: { patientEmail: profile.email } });
-  }
 
   return (
-    <div className="doctor-card">
+    <div className="doctor-card" id={id}>
       <div className="doctor-card-main">
         <div className="doctor-card-display-pic">
           <DisplayPicture height="130px" width="130px" initials={initials} />
@@ -47,14 +37,11 @@ function DoctorCard({
           </div>
         </div>
         <div className="doctor-card-button">
-          <Button color="secondary" onClick={onClickChat}>
+          <Button color="secondary" id={id} onClick={onClick}>
             Chat
           </Button>
         </div>
       </div>
-      <Divider
-        margin={{ top: "20px", bottom: "10px", left: "10px", right: "10px" }}
-      />
     </div>
   );
 }

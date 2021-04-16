@@ -9,26 +9,23 @@ import Button from "../../components/button/Button";
 import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { getRecordById } from "../../actions/recordActions";
+import { useHistory } from "react-router-dom";
 
-function MedicalRecord({ getRecordById, recordData }) {
+function MedicalRecord({ getRecordById, recordData, profile }) {
   const location = useLocation();
   let id = null;
   let record;
-  let doctorName,
-    doctorEmail,
-    specialization,
-    doctorPhone,
-    patientName,
-    patientDob,
-    patientGender,
-    patientAge,
-    disease,
-    medication,
-    extraPoints,
-    date;
+  let doctorName, doctorEmail, specialization, doctorPhone;
+  let patientName, patientDob, patientGender, patientAge;
+  let disease, medication, extraPoints, date;
+  const history = useHistory();
 
   if (location.state) {
     id = location.state.id;
+  } else {
+    if (profile.isDoctor || profile.isEmpty) {
+      history.push("/signin");
+    }
   }
 
   useEffect(() => {
@@ -52,6 +49,10 @@ function MedicalRecord({ getRecordById, recordData }) {
     extraPoints = record.medicalInfo.extraPoints;
     date = record.date;
   }
+
+  const onClickPrint = () => {
+    window.print();
+  };
 
   return (
     <div className="medical-record">
@@ -102,7 +103,7 @@ function MedicalRecord({ getRecordById, recordData }) {
         </div>
       </div>
       <div className="print-btn">
-        <Button color={"secondary"} size={"small"}>
+        <Button onClick={onClickPrint} color={"secondary"} size={"small"}>
           Print
         </Button>
       </div>
@@ -116,6 +117,7 @@ function MedicalRecord({ getRecordById, recordData }) {
 const mapStateToProps = (state) => {
   return {
     recordData: state.recordData,
+    profile: state.firebase.profile,
   };
 };
 

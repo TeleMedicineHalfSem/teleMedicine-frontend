@@ -176,3 +176,25 @@ export const getProfile = () => {
       });
   };
 };
+
+export const getProfileByEmail = (email) => {
+  return (dispatch, getState, { getFirestore, getFirebase }) => {
+    dispatch(authRequest());
+    const firestore = getFirestore();
+    if (email) {
+      firestore
+        .collection("users")
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            if (doc.data().email === email) {
+              dispatch(authSuccess(doc.data()));
+            }
+          });
+        })
+        .catch(() => {
+          dispatch(authFailure("Can't retrieve data..."));
+        });
+    }
+  };
+};

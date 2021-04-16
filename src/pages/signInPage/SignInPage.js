@@ -5,9 +5,20 @@ import NavBar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import SignInView from "./signinView";
 import LoadingBar from "../../components/loadingBar/LoadingBar";
+import { useHistory } from "react-router-dom";
 
-function SignInPage({ authData }) {
+function SignInPage({ authData, profile }) {
   let loading = false;
+  const history = useHistory();
+
+  // if user is logged in....
+  if (!profile.isEmpty) {
+    if (profile.isDoctor) {
+      history.push("/doctor");
+    } else {
+      history.push("/patient");
+    }
+  }
 
   if (authData && authData.loading) {
     loading = true;
@@ -43,6 +54,7 @@ function SignInPage({ authData }) {
 const mapStateToProps = (state) => {
   return {
     authData: state.auth,
+    profile: state.firebase.profile,
   };
 };
 

@@ -7,6 +7,7 @@ import ChatRequestCard from "../../components/chatRequest/ChatRequestCard";
 import RecordCard from "../../components/recordCard/RecordCard";
 import { connect } from "react-redux";
 import { getProfileDoctor } from "../../actions/authActions";
+import { delRequestedDoctor } from "../../actions/doctorActions";
 import { connectSocket } from "../../actions/socketActions";
 import { getRecordsByEmail } from "../../actions/recordActions";
 import { useHistory } from "react-router-dom";
@@ -18,11 +19,17 @@ function DoctorPage({
   profile,
   getRecordsByEmail,
   recordData,
+  delRequestedDoctor,
 }) {
   //initialization...
   let name, specialization, gender, experience, dob, initials;
   const ENDPOINT = "http://127.0.0.1:2500";
   const history = useHistory();
+
+  // If not doctor then go to patient page...
+  if (!profile.isDoctor || profile.isEmpty) {
+    history.push("/signin");
+  }
 
   // Connect to socket...
   useEffect(() => {
@@ -35,9 +42,11 @@ function DoctorPage({
 
   //getting profile data...
   useEffect(() => {
-    getRecordsByEmail();
-    getProfileDoctor();
-  }, [getProfileDoctor, getRecordsByEmail]);
+    if (!profile.isEmpty) {
+      getRecordsByEmail();
+      getProfileDoctor();
+    }
+  }, [getProfileDoctor, getRecordsByEmail, profile]);
 
   // Chat requests...
   let listReq = [];
@@ -48,6 +57,11 @@ function DoctorPage({
       i++;
     }
   }
+
+  const requestAccepted = (event) => {
+    delRequestedDoctor(event.target.id);
+    history.push("/chat", { patientEmail: event.target.id });
+  };
 
   // On Click record card...
   const onClickRecord = (event) => {
@@ -83,7 +97,12 @@ function DoctorPage({
   ));
 
   const requestView = listReq.map((request) => (
-    <ChatRequestCard key={request.key} patientName={request.patientName} />
+    <ChatRequestCard
+      id={request.patientName}
+      key={request.key}
+      patientName={request.patientName}
+      onClick={requestAccepted}
+    />
   ));
 
   return (
@@ -137,4 +156,5 @@ export default connect(mapStateToProps, {
   getProfileDoctor,
   connectSocket,
   getRecordsByEmail,
+  delRequestedDoctor,
 })(DoctorPage);

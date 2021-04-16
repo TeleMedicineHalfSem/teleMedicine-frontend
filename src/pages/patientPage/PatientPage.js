@@ -3,10 +3,15 @@ import "./PatientPage.css";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import { SearchBar } from "../../components/input/inputs";
-import { getDoctors, searchDoctor } from "../../actions/doctorActions";
+import {
+  getDoctors,
+  searchDoctor,
+  requestDoctor,
+} from "../../actions/doctorActions";
 import { connect } from "react-redux";
 import DoctorCard from "../../components/doctorCard/DoctorCard";
 import { connectSocket } from "../../actions/socketActions";
+import { useHistory } from "react-router-dom";
 
 function PatientPage({
   doctors,
@@ -14,10 +19,18 @@ function PatientPage({
   searchDoctor,
   connectSocket,
   profile,
+  requestDoctor,
 }) {
   const ENDPOINT = "http://127.0.0.1:2500";
   const [searchText, setSearchText] = useState("");
+  const [doctorEmail, setDoctorEmail] = useState(null);
   let doctorListView = null;
+  const history = useHistory();
+
+  // Checking if the user is not a patient....
+  if (profile.isDoctor || profile.isEmpty) {
+    history.push("/signin");
+  }
 
   // Connect to socket...
   useEffect(() => {
@@ -37,15 +50,31 @@ function PatientPage({
     }
   }, [searchText, getDoctors, searchDoctor]);
 
+  // Navigating to chat page...
+  if (doctors.success && doctors.success === "REQUEST_DOCTOR" && doctorEmail) {
+    history.push({
+      pathname: "/chat",
+      state: { patientEmail: profile.email, doctorEmail: doctorEmail },
+    });
+  }
+
+  // On click chat button....
+  const onClickChat = (event) => {
+    requestDoctor({ email: event.target.id });
+    setDoctorEmail(event.target.id);
+  };
+
   if (doctors && doctors.data) {
     doctorListView = doctors.data.map((doctor) => (
       <DoctorCard
+        id={doctor.email}
         key={doctor.email}
         email={doctor.email}
         name={doctor.fullName}
         specialization={doctor.specialization}
         experience={doctor.registrationYear}
         initials={doctor.initials}
+        onClick={onClickChat}
       />
     ));
   }
@@ -86,4 +115,5 @@ export default connect(mapStateToProps, {
   getDoctors,
   searchDoctor,
   connectSocket,
+  requestDoctor,
 })(PatientPage);

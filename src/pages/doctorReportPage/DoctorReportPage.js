@@ -1,26 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./DoctorReportPage.css";
 import Button from "../../components/button/Button";
 import NavBar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import BoderInput from "../../components/input/BoderInput";
-import RadioInput from "../../components/input/RadioInput";
 import { setRecord } from "../../actions/recordActions";
 import { connect } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
+import camelCaseText from "../../utils/camelCaseText";
+import { getProfileByEmail } from "../../actions/authActions";
 
-function DoctorReportPage({ setRecord }) {
-  const [doctorName, setDoctorName] = useState("");
+function DoctorReportPage({ setRecord, profile, getProfileByEmail, authData }) {
+  const location = useLocation();
+  let doctorName,
+    doctorEmail,
+    patientEmail,
+    patientGender,
+    patientDob,
+    patientAge,
+    patientName;
   const [doctorSpecialization, setDoctorSpecialization] = useState("");
-  const [doctorEmail, setDoctorEmail] = useState("");
   const [doctorPhone, setDoctorPhone] = useState("");
-  const [patientName, setPatientName] = useState("");
-  const [patientEmail, setPatientEmail] = useState("");
-  const [patientGender, setPatientGender] = useState("");
-  const [patientDob, setPatientDob] = useState("");
-  const [patientAge, setPatientAge] = useState("");
+
   const [disease, setDisease] = useState("");
   const [medication, setMedication] = useState("");
   const [extraPoints, setExtraPoints] = useState("");
+  const history = useHistory();
+
+  useEffect(() => {
+    if (location.state) {
+      getProfileByEmail(location.state.patientEmail);
+    }
+  }, [getProfileByEmail, location]);
+
+  if (!profile.isDoctor && !profile.isEmpty) {
+    history.push("/signin");
+  }
+
+  if (!profile.isEmpty) {
+    doctorName = camelCaseText(profile.fullName);
+    doctorEmail = profile.email;
+  }
+
+  if (authData.success) {
+    patientEmail = authData.success.email;
+    patientName = camelCaseText(authData.success.fullName);
+    patientGender = camelCaseText(authData.success.gender);
+    patientDob = authData.success.dob;
+    patientAge = new Date().getFullYear() - parseInt(patientDob.split("-")[0]);
+  }
 
   const onClickSubmit = () => {
     setRecord({
@@ -37,6 +65,7 @@ function DoctorReportPage({ setRecord }) {
       medication,
       extraPoints,
     });
+    history.push("/");
   };
 
   return (
@@ -57,13 +86,13 @@ function DoctorReportPage({ setRecord }) {
                   <td>
                     <label>Name:</label>
                   </td>
+                  <td>{doctorName}</td>
+                </tr>
+                <tr>
                   <td>
-                    <BoderInput
-                      value={doctorName}
-                      onChange={(e) => setDoctorName(e.target.value)}
-                      type="text"
-                    />
+                    <label>Email:</label>
                   </td>
+                  <td>{doctorEmail}</td>
                 </tr>
                 <tr>
                   <td>
@@ -74,18 +103,6 @@ function DoctorReportPage({ setRecord }) {
                       value={doctorSpecialization}
                       onChange={(e) => setDoctorSpecialization(e.target.value)}
                       type="text"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label>Email:</label>
-                  </td>
-                  <td>
-                    <BoderInput
-                      value={doctorEmail}
-                      onChange={(e) => setDoctorEmail(e.target.value)}
-                      type="email"
                     />
                   </td>
                 </tr>
@@ -114,75 +131,31 @@ function DoctorReportPage({ setRecord }) {
                   <td>
                     <label>Name:</label>
                   </td>
-                  <td>
-                    <BoderInput
-                      value={patientName}
-                      onChange={(e) => setPatientName(e.target.value)}
-                      type="text"
-                      size="medium"
-                    />
-                  </td>
+                  <td>{patientName}</td>
                 </tr>
                 <tr>
                   <td>
                     <label>Email:</label>
                   </td>
-                  <td>
-                    <BoderInput
-                      value={patientEmail}
-                      onChange={(e) => setPatientEmail(e.target.value)}
-                      type="text"
-                      size="medium"
-                    />
-                  </td>
+                  <td>{patientEmail}</td>
                 </tr>
                 <tr>
                   <td>
                     <label>Gender:</label>
                   </td>
-                  <td>
-                    <RadioInput
-                      checked={patientGender === "male"}
-                      onChange={(e) => setPatientGender(e.target.value)}
-                      type="radio"
-                      value="male"
-                    >
-                      Male
-                    </RadioInput>
-                    <RadioInput
-                      checked={patientGender === "female"}
-                      onChange={(e) => setPatientGender(e.target.value)}
-                      type="radio"
-                      value="female"
-                    >
-                      Female
-                    </RadioInput>
-                  </td>
+                  <td>{patientGender}</td>
                 </tr>
                 <tr>
                   <td>
                     <label>Date of birth:</label>
                   </td>
-                  <td>
-                    <BoderInput
-                      value={patientDob}
-                      onChange={(e) => setPatientDob(e.target.value)}
-                      type="date"
-                    />
-                  </td>
+                  <td>{patientDob}</td>
                 </tr>
                 <tr>
                   <td>
                     <label>Age:</label>
                   </td>
-                  <td>
-                    <BoderInput
-                      value={patientAge}
-                      onChange={(e) => setPatientAge(e.target.value)}
-                      type="number"
-                      size="small"
-                    />
-                  </td>
+                  <td>{patientAge}</td>
                 </tr>
                 <tr>
                   <td>
@@ -245,4 +218,15 @@ function DoctorReportPage({ setRecord }) {
   );
 }
 
-export default connect(null, { setRecord })(DoctorReportPage);
+const mapStateToProps = (state) => {
+  console.log(state.auth);
+  return {
+    profile: state.firebase.profile,
+    recordData: state.recordData,
+    authData: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, { setRecord, getProfileByEmail })(
+  DoctorReportPage
+);
