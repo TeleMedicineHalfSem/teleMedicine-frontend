@@ -3,13 +3,13 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyC3CNX-bkOGtjkWbMyiuzu1zqgp-s1mzJU",
+  authDomain: "halfsemtelemedecine.firebaseapp.com",
+  projectId: "halfsemtelemedecine",
+  storageBucket: "halfsemtelemedecine.appspot.com",
+  messagingSenderId: "894837473511",
+  appId: "1:894837473511:web:298fd6002702544dace242",
+  measurementId: "G-P5HDC7VQ67",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
