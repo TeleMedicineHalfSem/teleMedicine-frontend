@@ -21,7 +21,7 @@ function PatientPage({
   profile,
   requestDoctor,
 }) {
-  const ENDPOINT = "http://127.0.0.1:2500";
+  const ENDPOINT = "https://easy-care-server.herokuapp.com/";
   const [searchText, setSearchText] = useState("");
   const [doctorEmail, setDoctorEmail] = useState(null);
   let doctorListView = null;

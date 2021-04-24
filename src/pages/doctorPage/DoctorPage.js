@@ -23,7 +23,7 @@ function DoctorPage({
 }) {
   //initialization...
   let name, specialization, gender, experience, dob, initials;
-  const ENDPOINT = "http://127.0.0.1:2500";
+  const ENDPOINT = "https://easy-care-server.herokuapp.com/";
   const history = useHistory();
 
   // If not doctor then go to patient page...
